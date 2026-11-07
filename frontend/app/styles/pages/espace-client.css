@@ -313,3 +313,37 @@
 /* Avertissement « démonstration » de l'espace client */
 .plog__demo{margin-bottom:16px;padding:12px 14px;border-radius:var(--r-s);background:#fff8e1;border:1px solid #f5c400;color:#5c4400;font-size:13.5px;line-height:1.55}
 .plog__demo b{color:#3d2d00}
+
+/* ── écran de connexion : thème clair (par défaut) ────────────────────────
+   Toutes les couleurs passent par des jetons --pl-* : il suffira de les
+   redéfinir pour ajouter le thème sombre plus tard. */
+.plog{
+  --pl-bg:#FBFBFD;--pl-ink:#0F1115;--pl-body:#4A5260;--pl-mute:#7A8494;--pl-line:#E4E7EC;
+  --pl-tile:#fff;--pl-grid:rgba(29,95,174,.06);
+  background:var(--pl-bg);color:var(--pl-ink)
+}
+.plog::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(var(--pl-grid) 1px,transparent 1px) 0 0/40px 40px,linear-gradient(90deg,var(--pl-grid) 1px,transparent 1px) 0 0/40px 40px;
+  -webkit-mask:radial-gradient(ellipse 60% 60% at 30% 50%,#000,transparent 75%);mask:radial-gradient(ellipse 60% 60% at 30% 50%,#000,transparent 75%)}
+.plog__glow{
+  background:
+    radial-gradient(28% 36% at 18% 35%,rgba(29,95,174,.14),transparent 70%),
+    radial-gradient(24% 32% at 42% 72%,rgba(34,160,107,.12),transparent 70%),
+    radial-gradient(24% 30% at 70% 20%,rgba(244,197,49,.14),transparent 70%),
+    radial-gradient(28% 36% at 88% 70%,rgba(226,69,43,.12),transparent 70%);
+  filter:blur(10px)
+}
+.plog__brand{color:var(--pl-body)}
+.plog__brand h1{color:var(--pl-ink)}
+.plog__brand h1 em{background:linear-gradient(90deg,#1D5FAE,#22A06B,#F4C531,#F28A26,#E2452B);-webkit-background-clip:text;background-clip:text;color:transparent}
+.plog__brand>p{color:var(--pl-body)}
+.plog__perks{list-style:none;margin-left:0;padding:0}
+.plog__perks li{background:var(--pl-tile);border:1px solid var(--pl-line);border-left:3px solid var(--c);box-shadow:0 4px 14px rgba(15,17,21,.04)}
+.plog__perks li:hover{background:var(--pl-tile);box-shadow:0 12px 26px color-mix(in srgb,var(--c) 14%,transparent)}
+.plog__perks li[data-c="b"]{--c:#1D5FAE}
+.plog__perks li[data-c="g"]{--c:#22A06B}
+.plog__perks li[data-c="o"]{--c:#F28A26}
+.plog__perks li[data-c="r"]{--c:#E2452B}
+.plog__perks b{color:var(--pl-ink)}
+.plog__perks span{color:var(--pl-mute)}
+.plog__card{background:#fff;border:1px solid var(--pl-line);box-shadow:0 30px 70px rgba(15,17,21,.1);backdrop-filter:none}

@@ -106,6 +106,24 @@ export function ClientPortal() {
               <em>de projets</em>
             </h1>
             <p>Suivez jalons, livrables et échanges avec votre équipe TIC en un seul endroit.</p>
+            <ul className="plog__perks">
+              <li data-c="b">
+                <b>Jalons en temps réel</b>
+                <span>Où en est votre projet, étape par étape.</span>
+              </li>
+              <li data-c="g">
+                <b>Livrables centralisés</b>
+                <span>Maquettes, versions et documents.</span>
+              </li>
+              <li data-c="o">
+                <b>Échanges suivis</b>
+                <span>Vos demandes et nos réponses au même endroit.</span>
+              </li>
+              <li data-c="r">
+                <b>Un chef de projet dédié</b>
+                <span>Un interlocuteur unique à Abidjan.</span>
+              </li>
+            </ul>
           </aside>
           <div className="pcard plog__card reveal d1">
             <div className="plog__card-top">

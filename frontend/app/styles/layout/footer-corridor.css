@@ -116,7 +116,3 @@
   .ftr__dust,.ftr__beam{animation:none}
 }
 
-/* page qui se termine sur une section sombre (ex. connexion espace client) :
-   l'encadré du pied de page prend la même teinte, sans bande claire */
-body:has(.plog:not([hidden])) .ftr{background:var(--night-2)}
-body:has(.plog:not([hidden])) .ftr__card{box-shadow:inset 0 0 0 1px rgba(255,255,255,.06)}
