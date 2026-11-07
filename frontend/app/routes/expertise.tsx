@@ -1,7 +1,7 @@
 import type { Route } from './+types/expertise';
 import { seo } from '~/lib/seo';
 import { PageHero } from '~/components/sections/PageHero';
-import { NeonDoors } from '~/components/sections/NeonDoors';
+import { ServiceGrid } from '~/components/sections/ServiceGrid';
 import { WhyTic } from '~/components/sections/WhyTic';
 import { CtaContact } from '~/components/sections/CtaContact';
 import { useDomEffects } from '~/lib/hooks/useDomEffects';
@@ -144,7 +144,7 @@ export default function ExpertisePage() {
         </div>
       </div>
     </section>
-    <NeonDoors />
+    <ServiceGrid />
     <WhyTic
       eyebrow="Nos résultats"
       title={

@@ -3,7 +3,7 @@ import type { Route } from './+types/home';
 import { seo } from '~/lib/seo';
 import { HeroStudio } from '~/components/sections/HeroStudio';
 import { Manifesto } from '~/components/sections/Manifesto';
-import { NeonDoors } from '~/components/sections/NeonDoors';
+import { ServiceGrid } from '~/components/sections/ServiceGrid';
 import { MethodTimeline } from '~/components/sections/MethodTimeline';
 import { WhyTic } from '~/components/sections/WhyTic';
 import { CorridorMotion } from '~/components/sections/CorridorMotion';
@@ -258,7 +258,7 @@ export default function HomePage() {
     </section>
     <WhyTic />
     <MethodTimeline />
-    <NeonDoors />
+    <ServiceGrid />
     <section className="sec" id="solutions">
       <div className="shell">
         <div className="sec__hd sec__hd--c reveal">

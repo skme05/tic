@@ -2,7 +2,7 @@ import { Link } from 'react-router';
 import type { Route } from './+types/innovation';
 import { seo } from '~/lib/seo';
 import { PageHero } from '~/components/sections/PageHero';
-import { NeonDoors } from '~/components/sections/NeonDoors';
+import { ServiceGrid } from '~/components/sections/ServiceGrid';
 import { CtaContact } from '~/components/sections/CtaContact';
 import { useDomEffects } from '~/lib/hooks/useDomEffects';
 import css from '~/styles/site.css?url';
@@ -99,11 +99,11 @@ export default function InnovationPage() {
         </ul>
       </div>
     </section>
-    <NeonDoors
+    <ServiceGrid
       eyebrow="Du Lab aux portes"
       title={
         <>
-          Le Lab alimente les <span className="txt-spectrum-dk">six portes</span>.
+          Le Lab alimente les <em>six portes</em>
         </>
       }
       lead="Ce que nous validons au Lab finit par renforcer chacune de nos expertises."

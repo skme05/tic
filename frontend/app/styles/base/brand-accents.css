@@ -22,7 +22,7 @@
   padding-right:.03em
 }
 /* sections sombres et en-têtes sur photo */
-:is(.corridor,.vpanel,.cta,.plog,.ndoors,.cmo__card,.sec__hd--w) :is(h1,h2,h3) em{
+:is(.corridor,.vpanel,.cta,.plog,.cmo__card,.sec__hd--w) :is(h1,h2,h3) em{
   background-image:var(--tic-spectrum-light)
 }
 

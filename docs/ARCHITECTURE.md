@@ -21,8 +21,8 @@ tic/
 │   │   │   └── types.ts
 │   │   ├── components/
 │   │   │   ├── layout/       Header, Footer
-│   │   │   ├── sections/     Blocs réutilisables : HeroStudio, CtaContact, Manifesto, NeonDoors,
-│   │   │   │                 CorridorMotion, WhyTic, MethodTimeline, RelatedCards (props configurables par page)
+│   │   │   ├── sections/     Blocs réutilisables : HeroStudio, PageHero, CtaContact, Manifesto,
+│   │   │   │                 ServiceGrid, CorridorMotion, WhyTic, MethodTimeline, RelatedCards (props configurables par page)
 │   │   │   └── ui/           Petits éléments : Arrow, icônes, Rich (texte riche sûr)
 │   │   ├── features/         Fonctionnalités autonomes
 │   │   │   ├── loader/ (loader architectural), contact/, project-wizard/, testimonials/, client-portal/
