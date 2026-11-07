@@ -9,9 +9,9 @@ import { CorridorPlan } from '~/components/sections/ServiceGrid';
    - slides  : texte centré, photo panoramique révélée par des portes coulissantes ;
    - plan    : papier de plan bleu, photo bichromie et couloir tracé en direct ;
    - tunnel  : texte centré au cœur d'un couloir de cadres qui avance sans fin.
-   Sans `variant`, le style est tiré au hasard à partir de l'adresse de la
-   page : chaque page a « son » en-tête, stable d'une visite à l'autre (même
-   rendu pré-calculé et dans le navigateur).
+   Par principe, toutes les pages classiques partagent le même en-tête
+   (HERO_PAGES) et toutes les pages produits /solutions/<slug> le leur
+   (HERO_PRODUCTS). La prop `variant` permet une exception ponctuelle.
    Styles : styles/sections/page-hero.css
    ========================================================================== */
 export interface Crumb {
@@ -22,15 +22,10 @@ export interface Crumb {
 export const HERO_VARIANTS = ['door', 'wall', 'slides', 'plan', 'tunnel'] as const;
 export type HeroVariant = (typeof HERO_VARIANTS)[number];
 
-/* hachage stable de l'adresse → variante */
-function pickVariant(path: string): HeroVariant {
-  let h = 2166136261;
-  for (const ch of path.replace(/\/+$/, '') || '/') {
-    h ^= ch.charCodeAt(0);
-    h = Math.imul(h, 16777619);
-  }
-  return HERO_VARIANTS[(h >>> 0) % HERO_VARIANTS.length];
-}
+/* en-tête des pages classiques et des pages produits (solutions) */
+export const HERO_PAGES: HeroVariant = 'door';
+export const HERO_PRODUCTS: HeroVariant = 'wall';
+const pickVariant = (path: string): HeroVariant => (/^\/solutions\/[^/]+/.test(path) ? HERO_PRODUCTS : HERO_PAGES);
 
 interface PageHeroProps {
   crumbs: Crumb[];

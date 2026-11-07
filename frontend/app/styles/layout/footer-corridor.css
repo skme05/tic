@@ -14,8 +14,8 @@
 .ftr__art{position:absolute;inset:0;z-index:-1;pointer-events:none}
 /* rayons qui partent du point de fuite (haut-centre) */
 .ftr__rays{
-  position:absolute;inset:0;opacity:.35;
-  background:repeating-conic-gradient(from 150deg at 50% 38%,rgba(143,184,255,.18) 0 .6deg,transparent .6deg 7.5deg);
+  position:absolute;inset:0;opacity:.2;
+  background:repeating-conic-gradient(from 150deg at 50% 38%,rgba(143,184,255,.14) 0 .25deg,transparent .25deg 7.5deg);
   -webkit-mask:linear-gradient(to bottom,transparent 38%,#000 70%);mask:linear-gradient(to bottom,transparent 38%,#000 70%)
 }
 /* particules : une trame de points remplie du dégradé TIC, masquée par la forme du couloir */
@@ -23,23 +23,23 @@
   position:absolute;left:0;right:0;bottom:0;height:78%;
   background:linear-gradient(0deg,#F4C531 0%,#F28A26 18%,#E2452B 32%,#22A06B 55%,#1D5FAE 75%,transparent 100%);
   -webkit-mask:
-    radial-gradient(circle,#000 .9px,transparent 1.4px) 0 0/7px 7px,
+    radial-gradient(circle,#000 .5px,transparent .9px) 0 0/7px 7px,
     radial-gradient(ellipse 34% 100% at 50% 100%,#000 25%,rgba(0,0,0,.55) 55%,transparent 80%);
   -webkit-mask-composite:source-in;
   mask:
-    radial-gradient(circle,#000 .9px,transparent 1.4px) 0 0/7px 7px,
+    radial-gradient(circle,#000 .5px,transparent .9px) 0 0/7px 7px,
     radial-gradient(ellipse 34% 100% at 50% 100%,#000 25%,rgba(0,0,0,.55) 55%,transparent 80%);
   mask-composite:intersect;
-  opacity:.75;animation:ftrRise 14s linear infinite
+  opacity:.5;animation:ftrRise 14s linear infinite
 }
 .ftr__dust--2{
-  opacity:.45;
+  opacity:.3;
   -webkit-mask:
-    radial-gradient(circle,#000 .8px,transparent 1.3px) 3px 4px/11px 11px,
+    radial-gradient(circle,#000 .45px,transparent .8px) 3px 4px/11px 11px,
     radial-gradient(ellipse 48% 100% at 50% 100%,#000 10%,rgba(0,0,0,.35) 45%,transparent 75%);
   -webkit-mask-composite:source-in;
   mask:
-    radial-gradient(circle,#000 .8px,transparent 1.3px) 3px 4px/11px 11px,
+    radial-gradient(circle,#000 .45px,transparent .8px) 3px 4px/11px 11px,
     radial-gradient(ellipse 48% 100% at 50% 100%,#000 10%,rgba(0,0,0,.35) 45%,transparent 75%);
   mask-composite:intersect;
   animation-duration:22s
@@ -51,14 +51,14 @@
 /* faisceau central, la lumière au fond du couloir */
 .ftr__beam{
   position:absolute;left:50%;bottom:0;width:22%;height:70%;transform:translateX(-50%);
-  background:radial-gradient(ellipse at 50% 100%,rgba(255,236,190,.38),rgba(244,197,49,.1) 45%,transparent 70%);
+  background:radial-gradient(ellipse at 50% 100%,rgba(255,236,190,.22),rgba(244,197,49,.06) 45%,transparent 70%);
   filter:blur(20px);animation:ftrBreathe 6s ease-in-out infinite
 }
 @keyframes ftrBreathe{50%{opacity:.6}}
 
 /* ── contenu ── */
 .ftr__top{
-  position:relative;display:grid;grid-template-columns:minmax(0,1.4fr) repeat(4,minmax(0,1fr));gap:40px;
+  position:relative;display:grid;grid-template-columns:minmax(0,1.5fr) repeat(3,minmax(0,1fr));gap:48px;
   max-width:1280px;margin:0 auto
 }
 .ftr__logo{display:inline-flex;align-items:center;gap:12px;color:#fff;text-decoration:none}
@@ -72,9 +72,9 @@
   border:1px solid rgba(255,255,255,.14);color:#E4E7EC;transition:background .3s,border-color .3s
 }
 .ftr__soc a:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.3);color:#fff}
-.ftr__col{display:flex;flex-direction:column;gap:12px;font-size:14.5px}
-.ftr__col h2{margin:0 0 8px;font:700 11px/1 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:#7A8494}
-.ftr__col a,.ftr__col span{color:#D5DAE1;text-decoration:none;line-height:1.4}
+.ftr__col{display:flex;flex-direction:column;gap:11px;font-size:14px}
+.ftr__col h2{margin:0 0 6px;font:600 13px/1 var(--sans);letter-spacing:.01em;color:#6B7585}
+.ftr__col a,.ftr__col span{color:#A8B1BE;font-weight:400;text-decoration:none;line-height:1.45}
 .ftr__col a{position:relative;align-self:flex-start;transition:color .25s}
 .ftr__col a::after{
   content:"";position:absolute;left:0;right:0;bottom:-3px;height:1.5px;border-radius:2px;
@@ -83,7 +83,7 @@
 }
 .ftr__col a:hover{color:#fff}
 .ftr__col a:hover::after{transform:scaleX(1)}
-.ftr__more{color:#F4C531!important;font-weight:600}
+.ftr__more{color:#E9C861!important;font-weight:500;margin-top:4px}
 
 .ftr__bar{
   position:relative;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:14px;
@@ -102,6 +102,15 @@
   -webkit-mask:linear-gradient(to bottom,#000 55%,rgba(0,0,0,.35));mask:linear-gradient(to bottom,#000 55%,rgba(0,0,0,.35))
 }
 
+/* lettres qui montent une à une, puis vague aux couleurs TIC */
+.ftr__word span{display:inline-block;opacity:0;transform:translateY(55%);
+  transition:opacity .7s,transform .9s cubic-bezier(.2,.8,.2,1);transition-delay:calc(var(--i) * 40ms)}
+.ftr__word.is-in span{opacity:1;transform:none;animation:ftrWave 9s ease-in-out infinite;animation-delay:calc(1.4s + var(--i) * 90ms)}
+@keyframes ftrWave{
+  0%,26%,100%{color:#fff}
+  4%{color:#7FB0F0}8%{color:#6FD3A4}12%{color:#F4D46A}16%{color:#F5A35A}20%{color:#F2826E}
+}
+
 @media (max-width:1100px){
   .ftr__top{grid-template-columns:repeat(2,minmax(0,1fr))}
   .ftr__brand{grid-column:1 / -1}
@@ -114,5 +123,6 @@
 }
 @media (prefers-reduced-motion:reduce){
   .ftr__dust,.ftr__beam{animation:none}
+  .ftr__word span{opacity:1;transform:none;transition:none;animation:none}
 }
 

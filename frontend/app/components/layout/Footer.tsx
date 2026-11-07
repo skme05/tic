@@ -1,5 +1,6 @@
+import { useEffect, useRef, type CSSProperties } from 'react';
 import { Link } from 'react-router';
-import { exploreNav, legalNav } from '~/content/navigation';
+import { legalNav } from '~/content/navigation';
 import { services } from '~/content/services';
 import { solutions } from '~/content/solutions';
 import { nbsp, site } from '~/content/site';
@@ -8,13 +9,41 @@ import { IconEmail, IconFacebook, IconLinkedIn, IconX } from '~/components/ui/ic
 /* ==========================================================================
    Pied de page — carte sombre aux coins arrondis.
    En fond : un couloir de lumière en particules qui monte vers un point de
-   fuite (dégradé TIC). En bas : « THE INFINITE CORRIDOR » en très grand,
-   coupé par le bord de la carte. Styles : styles/layout/footer-corridor.css
+   fuite (dégradé TIC). En bas : « The Infinite Corridor » en très grand,
+   coupé par le bord de la carte : les lettres montent une à une quand le
+   pied de page apparaît, puis une vague aux couleurs TIC les parcourt.
+   Les colonnes ne répètent pas le menu : portes, solutions, coordonnées.
+   Styles : styles/layout/footer-corridor.css
    ========================================================================== */
 const FOOTER_SOLUTIONS = ['odoo', 'paie', 'school-manager', 'e-clinique', 'scraper-pro'];
 
+const WORD = 'The Infinite Corridor';
+
 export function Footer() {
   const c = site.contact;
+  const wordRef = useRef<HTMLParagraphElement>(null);
+
+  /* animation de l'inscription quand elle entre à l'écran */
+  useEffect(() => {
+    const el = wordRef.current;
+    if (!el) return;
+    if (!('IntersectionObserver' in window)) {
+      el.classList.add('is-in');
+      return;
+    }
+    const io = new IntersectionObserver(
+      ([e]) => {
+        if (e.isIntersecting) {
+          el.classList.add('is-in');
+          io.disconnect();
+        }
+      },
+      { threshold: 0.3 },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
   const sols = FOOTER_SOLUTIONS.map((s) => solutions.find((x) => x.slug === s)).filter((s) => s !== undefined);
   return (
     <footer className="ftr">
@@ -71,8 +100,8 @@ export function Footer() {
             </div>
           </div>
 
-          <nav className="ftr__col" aria-label="Le corridor">
-            <h2>Le corridor</h2>
+          <nav className="ftr__col" aria-label="Nos portes">
+            <h2>Nos portes</h2>
             {services.map((s) => (
               <Link viewTransition key={s.slug} to={`/services/${s.slug}`}>
                 {s.name}
@@ -90,14 +119,6 @@ export function Footer() {
               Toutes les solutions →
             </Link>
           </nav>
-          <nav className="ftr__col" aria-label="Explorer">
-            <h2>Explorer</h2>
-            {exploreNav.map((l) => (
-              <Link viewTransition key={l.to} to={l.to}>
-                {l.label}
-              </Link>
-            ))}
-          </nav>
           <div className="ftr__col">
             <h2>Nous joindre</h2>
             <a href={`tel:${c.phoneHref}`}>{nbsp(c.phone)}</a>
@@ -106,6 +127,9 @@ export function Footer() {
               {c.district}, {c.city} — {c.country}
             </span>
             <span>Lun – Ven · 08 h – 18 h GMT</span>
+            <Link viewTransition to="/demarrer-un-projet" className="ftr__more">
+              Démarrer un projet →
+            </Link>
           </div>
         </div>
 
@@ -114,6 +138,9 @@ export function Footer() {
             © {new Date().getFullYear()} TIC — {site.legalName}. Tous droits réservés.
           </p>
           <ul>
+            <li>
+              <Link viewTransition to="/espace-client">Espace client</Link>
+            </li>
             {legalNav.map((l) => (
               <li key={l.to}>
                 <Link viewTransition to={l.to}>
@@ -127,8 +154,12 @@ export function Footer() {
           </ul>
         </div>
 
-        <p className="ftr__word" aria-hidden="true">
-          The Infinite Corridor
+        <p className="ftr__word" aria-hidden="true" ref={wordRef}>
+          {WORD.split('').map((ch, i) => (
+            <span key={i} style={{ '--i': i } as CSSProperties}>
+              {ch === ' ' ? '\u00a0' : ch}
+            </span>
+          ))}
         </p>
       </div>
     </footer>
