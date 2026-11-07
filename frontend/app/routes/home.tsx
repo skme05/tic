@@ -1,6 +1,7 @@
 import { Link } from 'react-router';
 import type { Route } from './+types/home';
 import { seo } from '~/lib/seo';
+import { HeroStudio } from '~/components/sections/HeroStudio';
 import { Manifesto } from '~/components/sections/Manifesto';
 import { NeonDoors } from '~/components/sections/NeonDoors';
 import { MethodTimeline } from '~/components/sections/MethodTimeline';
@@ -9,7 +10,6 @@ import { CorridorMotion } from '~/components/sections/CorridorMotion';
 import { TestimonialsRail } from '~/features/testimonials/TestimonialsRail';
 import { TestimonialForm } from '~/features/testimonials/TestimonialForm';
 import { CtaContact } from '~/components/sections/CtaContact';
-import { useDomEffects } from '~/lib/hooks/useDomEffects';
 import { Intro } from '~/features/intro/Intro';
 import { organizationJsonLd } from '~/lib/seo';
 import css from '~/styles/home.css?url';
@@ -19,54 +19,10 @@ export const links: Route.LinksFunction = () => [{ rel: 'stylesheet', href: css 
 export const meta: Route.MetaFunction = () => [...seo({ path: "/", description: "The Infinite Corridor Software Solutions accompagne entreprises et institutions dans leur transformation numérique : développement web et mobile, IA, plateformes métiers. Basés à Abidjan, Côte d'Ivoire." }), { 'script:ld+json': organizationJsonLd }];
 
 export default function HomePage() {
-  useDomEffects(
-    [
-      () => import('~/features/globe/globe-effect').then((m) => m.globe),
-      () => import('~/features/globe/dive-light-effect').then((m) => m.diveLight),
-    ],
-    true,
-  );
   return (
     <>
       <Intro />
-    <div className="dive-light" id="diveLight" aria-hidden="true"></div>
-    <section className="hero">
-      <div className="hero__stage">
-        <span className="hero__deep" aria-hidden="true"></span>
-        {' '}
-        <span className="hero__grid" aria-hidden="true"></span>
-        {' '}
-        <span className="hero__halo" aria-hidden="true"></span>
-        {' '}
-        <canvas id="globe" aria-hidden="true"></canvas>
-        {' '}
-        <span className="hero__veil" aria-hidden="true"></span>
-        {' '}
-        <div className="hero__copy">
-          <h1>
-            Le logiciel qui fait
-            <br />
-            avancer{' '}
-            <em>l'Afrique</em>
-          </h1>
-          <p className="hero__lead">
-            Nous concevons, développons et maintenons les plateformes numériques des entreprises et institutions africaines. Un corridor, une porte par expertise.
-          </p>
-          <div className="hero__cta">
-            <Link to="/demarrer-un-projet" className="btn btn--red btn--lg">
-              Démarrer un projet{' '}
-              <i className="arw"></i>
-            </Link>
-          </div>
-        </div>
-        <div className="hero__land">
-          <h2>Abidjan, Côte d'Ivoire</h2>
-          <p>
-            C'est ici que le corridor commence. Nos équipes livrent depuis Cocody vers toute l'Afrique de l'Ouest et au-delà.
-          </p>
-        </div>
-      </div>
-    </section>
+    <HeroStudio />
     <Manifesto />
     <CorridorMotion />
     <section className="band" id="secteurs">

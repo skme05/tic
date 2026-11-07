@@ -21,12 +21,12 @@ tic/
 │   │   │   └── types.ts
 │   │   ├── components/
 │   │   │   ├── layout/       Header, Footer
-│   │   │   ├── sections/     Blocs réutilisables : CtaContact, Manifesto, NeonDoors,
+│   │   │   ├── sections/     Blocs réutilisables : HeroStudio, CtaContact, Manifesto, NeonDoors,
 │   │   │   │                 CorridorMotion, WhyTic, MethodTimeline, MethodSteps, RelatedCards
 │   │   │   └── ui/           Petits éléments : Arrow, icônes, Rich (texte riche sûr)
 │   │   ├── features/         Fonctionnalités autonomes
 │   │   │   ├── contact/, project-wizard/, testimonials/, client-portal/, intro/
-│   │   │   └── globe/, scenes-3d/, text-reveal/, doors/, rails/, reveal/,
+│   │   │   └── scenes-3d/, text-reveal/, doors/, rails/, reveal/,
 │   │   │       videos/, walkthrough/   moteurs d'animation (voir plus bas)
 │   │   ├── lib/
 │   │   │   ├── api/          SEUL point de contact avec le backend (client, endpoints, types)
@@ -59,15 +59,15 @@ tic/
 
 ## Effets d'animation
 
-Les animations lourdes (globe, scènes 3D, révélation de texte, défilements) sont du code
+Les animations lourdes (scènes 3D, révélation de texte, défilements) sont du code
 impératif sur le DOM, repris du site d'origine et testé. Elles sont lancées par
 `useDomEffects` et reçoivent un **Scope** (`lib/dom/scope.ts`) qui retire écouteurs,
 observateurs et boucles d'animation au changement de page : aucune fuite en navigation sans
 rechargement. Les fonctionnalités d'interface (menus, formulaires, onglets, accordéons, espace
 client) sont, elles, écrites en React avec état.
 
-Chaque effet lourd est **chargé à la demande** (`import()` dynamique) : le globe et ses
-données ne sont téléchargés que sur l'accueil, les scènes 3D que sur les pages qui en ont.
+Chaque effet lourd est **chargé à la demande** (`import()` dynamique) : les scènes 3D ne
+sont téléchargées que sur les pages qui en ont.
 
 ## CSS
 
@@ -75,5 +75,5 @@ Le CSS d'origine (2 624 lignes) a été découpé en fichiers par composant (`st
 `layout`, `components`, `sections`, `pages`, `responsive`). Chaque type de page charge un
 **bundle** (`site.css`, `home.css`, `about.css`, `client.css`, `wizard.css`) qui importe ses
 fichiers **dans l'ordre d'origine** (l'ordre compte : les règles responsive viennent après les
-composants). Les nouveaux blocs ont des classes préfixées (`.mf`, `.ndoor`, `.cmo`, `.why`,
+composants). Les nouveaux blocs ont des classes préfixées (`.hs`, `.mf`, `.ndoor`, `.cmo`, `.why`,
 `.mtl`) pour ne rien casser autour d'eux.

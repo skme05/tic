@@ -5,7 +5,7 @@ import { getSolution } from '~/content/solutions';
 
 /* En-tête : fond plein dès qu'on défile, menu burger sur mobile, sous-menus
    au survol (vraie souris), au focus clavier ou au toucher. */
-export function Header() {
+export function Header({ forceSolid = false }: { forceSolid?: boolean }) {
   const [solid, setSolid] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [openDrop, setOpenDrop] = useState<string | null>(null);
@@ -45,7 +45,7 @@ export function Header() {
   }, [openDrop]);
 
   return (
-    <header className={'hdr' + (solid ? ' is-solid' : '')} id="hdr">
+    <header className={'hdr' + (solid || forceSolid ? ' is-solid' : '')} id="hdr">
       <div className="shell hdr__in">
         <Link className="brand" to="/">
           <img src="/assets/img/logo-tic.webp" width="600" height="138" alt="TIC — The Infinite Corridor Software Solutions" />

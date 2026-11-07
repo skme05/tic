@@ -33,7 +33,7 @@ liens), lecture du CSS et du JavaScript, comparaison visuelle page par page.
 |---|---|---|
 | Médias | 28 Mo (PNG, MP4 avec audio) | 4,9 Mo (WebP, MP4 sans audio en `faststart`, affiches) |
 | CSS par page | 132 Ko (tout le site, partout) | 69 à 92 Ko selon la page, minifié |
-| JavaScript | 67 Ko + 250 Ko de données du globe sur toutes les pages qui l'incluent | Découpé par page ; le globe et ses données (arrondies, ~170 Ko) ne se chargent que sur l'accueil |
+| JavaScript | 67 Ko + 250 Ko de données du globe 3D | Découpé par page ; le globe 3D est remplacé par un hero en CSS/SVG animé (plus aucune donnée géographique à charger) |
 | Vidéo « corridor en mouvement » | 1,3 Mo | Remplacée par une animation SVG de quelques Ko |
 
 ## Points à vérifier par l'équipe TIC

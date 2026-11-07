@@ -11,7 +11,7 @@ export type LazyDomEffect = () => Promise<DomEffect>;
  * Lance des effets d'animation impératifs après le rendu de la page et les
  * nettoie tous quand la page change ou que le composant est démonté.
  *
- *   useDomEffects([() => import('~/features/globe/globe-effect').then((m) => m.globe)]);
+ *   useDomEffects([() => import('~/features/scenes-3d/scenes-3d-effect').then((m) => m.scenes3d)], true);
  */
 export function useDomEffects(effects: (DomEffect | LazyDomEffect)[], lazy = false) {
   const { pathname } = useLocation();

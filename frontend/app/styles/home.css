@@ -1,4 +1,4 @@
-/* Bundle « home » — Accueil : socle + intro vidéo, globe, nouveaux blocs
+/* Bundle « home » — Accueil : socle + intro vidéo, hero « studio » animé, nouveaux blocs
    (manifeste, corridor en mouvement, chiffres, méthode, portes néon), bento,
    plateformes. Les fichiers sont importés dans l'ordre de la feuille
    d'origine : l'ordre compte (le responsive vient après les composants). */
@@ -6,10 +6,9 @@
 @import './base/atoms.css';
 @import './components/intro-video.css';
 @import './layout/header.css';
-@import './sections/hero-globe.css';
+@import './sections/hero-studio.css';
 @import './base/section-titles.css';
 @import './sections/bento.css';
-@import './sections/dive-light.css';
 @import './sections/corridor-motion.css';
 @import './sections/why-tic.css';
 @import './sections/method-timeline.css';
@@ -25,7 +24,6 @@
 @import './responsive/small-phones.css';
 @import './responsive/short-screens.css';
 @import './responsive/reduced-motion.css';
-@import './sections/medallions.css';
 @import './components/rails.css';
 @import './sections/platforms.css';
 @import './sections/testimonials.css';

@@ -30,6 +30,8 @@ const WALK_PRE = `(function(){try{var c=sessionStorage.getItem("tic_walk_c");if(
 export interface PageHandle {
   /** false : pied de page sans vidéo ni recouvrement (pages formulaire) */
   footerCover?: boolean;
+  /** true : en-tête sur fond plein dès le haut de page (hero sombre) */
+  headerSolid?: boolean;
 }
 
 export function Layout({ children }: { children: React.ReactNode }) {
@@ -65,7 +67,7 @@ export default function App() {
       <a className="skip" href="#top">
         Aller au contenu
       </a>
-      <Header />
+      <Header forceSolid={handle.headerSolid === true} />
       <main id="top">
         <Outlet />
       </main>
