@@ -67,6 +67,9 @@ Le site répond sur `http://<serveur>:4000` (sonde de santé : `/healthz`).
 
 - Mise à jour : `git pull && docker compose up -d --build`
 - Journaux : `docker compose logs -f tic`
+- Le projet Docker s'appelle `tic-v2` (conteneur `tic-v2`) : il ne touche pas aux
+  autres projets du serveur. **Ne pas utiliser `--remove-orphans`** si Docker signale
+  des conteneurs « orphelins » d'un autre projet.
 - Fichiers : `Dockerfile`, `docker-compose.yml`, `deploy/nginx.conf`
   (redirections des anciennes adresses `.html`, en-têtes de sécurité, cache, page 404).
 

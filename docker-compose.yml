@@ -1,6 +1,11 @@
 # Site TIC — déploiement Docker
 #   git clone … && cd tic
 #   docker compose up -d --build      → http://<serveur>:4000
+
+# nom de projet propre au site : évite de se mélanger avec d'autres projets
+# Docker du serveur (ex. Odoo) qui seraient dans un dossier du même nom
+name: tic-v2
+
 services:
   tic:
     build:
@@ -10,8 +15,8 @@ services:
         VITE_SITE_URL: ${VITE_SITE_URL:-https://infinitecorridor.io}
         # API Django (formulaires, espace client) — vide tant qu'elle n'existe pas
         VITE_API_URL: ${VITE_API_URL:-}
-    image: tic-site:latest
-    container_name: tic
+    image: tic-site-v2:latest
+    container_name: tic-v2
     restart: always
     ports:
       - "4000:4000"
