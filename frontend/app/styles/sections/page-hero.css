@@ -1,0 +1,164 @@
+/* ==========================================================================
+   En-tête des pages intérieures « la porte du couloir » — composant PageHero (.ph)
+   --c : couleur d'accent ; --mx / --my : souris (-1 → 1) ; --i : rang d'une
+   porte dans le couloir (1 = la plus proche).
+   ========================================================================== */
+.ph{
+  --c:#1D5FAE;--mx:0;--my:0;
+  position:relative;overflow:hidden;isolation:isolate;
+  background:
+    radial-gradient(40% 60% at 80% 45%,color-mix(in srgb,var(--c) 9%,transparent),transparent 70%),
+    radial-gradient(30% 40% at 5% 95%,rgba(244,197,49,.08),transparent 70%),
+    #FBFBFD
+}
+.ph::after{ /* filet aux couleurs TIC en pied de section */
+  content:"";position:absolute;left:0;right:0;bottom:0;height:3px;
+  background:linear-gradient(90deg,#1D5FAE 0 25%,#22A06B 25% 50%,#F4C531 50% 75%,#E2452B 75%);opacity:.9
+}
+.ph__aura{
+  position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:
+    linear-gradient(90deg,rgba(15,17,21,.035) 1px,transparent 1px) 0 0/56px 56px,
+    linear-gradient(0deg,rgba(15,17,21,.035) 1px,transparent 1px) 0 0/56px 56px;
+  -webkit-mask:radial-gradient(ellipse 55% 70% at 20% 40%,#000,transparent 75%);
+          mask:radial-gradient(ellipse 55% 70% at 20% 40%,#000,transparent 75%)
+}
+.ph__in{
+  max-width:1280px;margin:0 auto;padding:calc(var(--hdr) + 36px) 24px 56px;box-sizing:border-box;
+  display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:48px;align-items:center
+}
+
+/* ── entrée en cascade ── */
+.ph__enter{animation:phEnter .85s cubic-bezier(.2,.8,.2,1) both;animation-delay:var(--d,0s)}
+@keyframes phEnter{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+
+/* ── texte ── */
+.ph__crumbs ol{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:0 0 22px;padding:0;list-style:none;font-size:13px;font-weight:600}
+.ph__crumbs li{display:flex;align-items:center;gap:6px;color:#7A8494}
+.ph__crumbs li+li::before{content:"";width:5px;height:5px;border-top:1.5px solid currentColor;border-right:1.5px solid currentColor;transform:rotate(45deg);opacity:.6;margin-right:4px}
+.ph__crumbs a{color:#5B6472;text-decoration:none;transition:color .2s}
+.ph__crumbs a:hover{color:var(--ink)}
+.ph__crumbs [aria-current]{color:var(--ink)}
+.ph__eyebrow{
+  display:inline-flex;align-items:center;gap:10px;margin:0 0 20px;padding:8px 16px;border-radius:999px;
+  background:#fff;border:1px solid color-mix(in srgb,var(--c) 22%,#E4E7EC);box-shadow:0 4px 14px rgba(15,17,21,.05);
+  font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:color-mix(in srgb,var(--c) 75%,#0f1115)
+}
+.ph__dot{position:relative;flex:0 0 auto;width:8px;height:8px;border-radius:50%;background:var(--c)}
+.ph__dot::after{content:"";position:absolute;inset:-4px;border-radius:50%;border:2px solid var(--c);animation:phPing 2.2s ease-out infinite}
+@keyframes phPing{from{transform:scale(.4);opacity:1}to{transform:scale(2.2);opacity:0}}
+.ph__title{
+  margin:0 0 20px;max-width:15ch;color:var(--ink);font-family:var(--lab);font-weight:800;
+  font-size:clamp(34px,4.4vw,62px);line-height:1.06;letter-spacing:-.025em
+}
+.ph__lead{margin:0;max-width:540px;font-size:17.5px;line-height:1.7;color:#4A5260}
+.ph__actions{display:flex;flex-wrap:wrap;align-items:center;gap:16px;margin-top:30px}
+
+/* ── la scène : une porte et le couloir derrière elle ── */
+.ph__stage{position:relative;height:clamp(380px,40vw,520px);perspective:1000px}
+.ph__floor{
+  position:absolute;left:-30%;right:-30%;bottom:-8%;height:46%;
+  background:
+    linear-gradient(90deg,color-mix(in srgb,var(--c) 30%,transparent) 1.5px,transparent 1.5px) 50% 0/44px 100%,
+    linear-gradient(0deg,color-mix(in srgb,var(--c) 26%,transparent) 1.5px,transparent 1.5px) 0 0/100% 34px;
+  transform:rotateX(68deg);transform-origin:50% 100%;
+  -webkit-mask:linear-gradient(to top,#000 10%,transparent 85%);mask:linear-gradient(to top,#000 10%,transparent 85%);
+  animation:phWalk 3.5s linear infinite;opacity:.55
+}
+@keyframes phWalk{to{background-position:50% 0,0 34px}}
+.ph__vanish{ /* la lumière au bout du couloir */
+  position:absolute;left:66%;top:20%;width:180px;height:180px;transform:translate(-50%,-50%);border-radius:50%;
+  background:radial-gradient(circle,rgba(255,236,190,.9),rgba(244,197,49,.25) 40%,transparent 70%);
+  filter:blur(6px);animation:phBreathe 5s ease-in-out infinite
+}
+@keyframes phBreathe{50%{opacity:.55;transform:translate(-50%,-50%) scale(.85)}}
+
+/* portes en enfilade vers le point de fuite */
+.ph__arch,.ph__door{
+  position:absolute;left:12%;bottom:6%;width:min(62%,340px);aspect-ratio:3/4.1;
+  border-radius:999px 999px 22px 22px
+}
+.ph__arch{
+  --s:calc(1 - var(--i) * .15);
+  border:2px solid transparent;
+  background:linear-gradient(180deg,#1D5FAE,#22A06B,#F4C531,#F28A26,#E2452B) border-box;
+  -webkit-mask:linear-gradient(#000 0 0) padding-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;
+  mask:linear-gradient(#000 0 0) padding-box exclude,linear-gradient(#000 0 0);
+  opacity:calc(.95 - var(--i) * .2);transform-origin:50% 100%;
+  transform:
+    translate(calc(var(--i) * 24% + var(--mx) * var(--i) * -6px),calc(var(--i) * -10% + var(--my) * var(--i) * -4px))
+    scale(var(--s));
+  animation:phArch .9s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(.15s + (4 - var(--i)) * .12s);
+  transition:transform .5s cubic-bezier(.2,.8,.2,1)
+}
+@keyframes phArch{from{opacity:0;scale:.9}}
+
+.ph__door{
+  margin:0;z-index:2;overflow:hidden;background:#0A0F1C;
+  box-shadow:0 40px 80px -20px rgba(15,17,21,.35),0 0 0 8px #fff;
+  transform:translate(calc(var(--mx) * 8px),calc(var(--my) * 6px)) rotateY(calc(var(--mx) * 4deg));
+  transition:transform .5s cubic-bezier(.2,.8,.2,1)
+}
+.ph__door img{
+  width:100%;height:100%;object-fit:cover;display:block;
+  animation:phZoom 1.8s cubic-bezier(.2,.8,.2,1) .2s both
+}
+@keyframes phZoom{from{transform:scale(1.25);filter:brightness(1.6) saturate(.6)}}
+/* les deux battants s'ouvrent à l'arrivée */
+.ph__leaf{
+  position:absolute;top:0;bottom:0;width:50.5%;
+  background:linear-gradient(160deg,#1C2638,#0E1524);box-shadow:inset 0 0 0 1px rgba(255,255,255,.06);
+  animation:phOpen 1.3s cubic-bezier(.7,0,.2,1) .35s both
+}
+.ph__leaf--l{left:0;--x:-102%}
+.ph__leaf--r{right:0;--x:102%}
+.ph__leaf--l::after,.ph__leaf--r::after{ /* poignées lumineuses */
+  content:"";position:absolute;top:52%;width:4px;height:26px;border-radius:3px;background:#F4C531;box-shadow:0 0 10px #F4C531
+}
+.ph__leaf--l::after{right:10px}
+.ph__leaf--r::after{left:10px}
+@keyframes phOpen{to{transform:translateX(var(--x))}}
+.ph__frame{
+  position:absolute;inset:0;border-radius:inherit;border:4px solid transparent;pointer-events:none;
+  background:linear-gradient(180deg,#1D5FAE,#22A06B,#F4C531,#F28A26,#E2452B) border-box;
+  -webkit-mask:linear-gradient(#000 0 0) padding-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;
+  mask:linear-gradient(#000 0 0) padding-box exclude,linear-gradient(#000 0 0)
+}
+
+.ph__badge{
+  position:absolute;z-index:3;left:2%;bottom:14%;display:flex;align-items:center;gap:12px;
+  padding:12px 18px 12px 16px;border-radius:18px;background:rgba(255,255,255,.92);
+  border:1px solid #E4E7EC;box-shadow:0 18px 40px rgba(15,17,21,.14);backdrop-filter:blur(8px);
+  transform:translate(calc(var(--mx) * 14px),calc(var(--my) * 10px));
+  transition:transform .5s cubic-bezier(.2,.8,.2,1);
+  animation:phEnter .8s cubic-bezier(.2,.8,.2,1) 1.2s both
+}
+.ph__badge > span:last-child{display:flex;flex-direction:column;gap:3px}
+.ph__badge small{font-size:10.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#7A8494}
+.ph__badge b{font:700 14.5px/1.25 var(--lab);color:var(--ink)}
+
+/* sortie au défilement (navigateurs compatibles) */
+@supports (animation-timeline:view()){
+  .ph__in{animation:phOut linear both;animation-timeline:view();animation-range:exit 10% exit 100%}
+  @keyframes phOut{to{opacity:.2;transform:translateY(-60px) scale(.97)}}
+}
+
+/* version basse (pages formulaire) */
+.ph--compact .ph__stage{height:clamp(320px,30vw,400px)}
+.ph--compact .ph__arch,.ph--compact .ph__door{width:min(52%,280px)}
+
+@media (max-width:900px){
+  .ph__in{grid-template-columns:1fr;gap:20px;padding:calc(var(--hdr) + 24px) var(--pad) 40px}
+  .ph__title{max-width:18ch}
+  .ph__stage,.ph--compact .ph__stage{height:330px;max-width:460px;width:100%;margin:0 auto}
+  .ph__arch,.ph__door,.ph--compact .ph__arch,.ph--compact .ph__door{left:18%;width:52%}
+  .ph__badge{left:0;bottom:8%}
+}
+@media (max-width:480px){
+  .ph__stage,.ph--compact .ph__stage{height:280px}
+  .ph__lead{font-size:16px}
+}
+@media (prefers-reduced-motion:reduce){
+  .ph__enter,.ph__arch,.ph__door img,.ph__badge,.ph__floor,.ph__vanish,.ph__dot::after,.ph__in{animation:none}
+  .ph__leaf{display:none}
+}

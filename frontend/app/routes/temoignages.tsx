@@ -1,5 +1,6 @@
 import type { Route } from './+types/temoignages';
 import { seo } from '~/lib/seo';
+import { PageHero } from '~/components/sections/PageHero';
 import { WhyTic } from '~/components/sections/WhyTic';
 import { CorridorMotion } from '~/components/sections/CorridorMotion';
 import { TestimonialsRail } from '~/features/testimonials/TestimonialsRail';
@@ -21,24 +22,19 @@ export default function TemoignagesPage() {
   );
   return (
     <>
-    <section className="phead phead--photo phead--temo">
-      <div className="shell">
-        <h1>
-          Résultats réels,
-          <br />
-          impact{' '}
-          <em>réel</em>
-        </h1>
-        <p>
-          Six organisations, six contextes différents, une même exigence : que ça fonctionne en production.
-        </p>
-        {' '}
-        <a href="#deposer" className="btn btn--red btn--lg">
-          Laisser un témoignage{' '}
-          <i className="arw"></i>
-        </a>
-      </div>
-    </section>
+    <PageHero
+      crumbs={[{ label: 'Accueil', to: '/' }, { label: 'Témoignages' }]}
+      eyebrow="Ils nous font confiance"
+      color="#E2452B"
+      title={<>Résultats réels, impact <em>réel</em></>}
+      lead="Six organisations, six contextes différents, une même exigence : que ça fonctionne en production."
+      image="/assets/img/equipe-presentation.webp"
+      badge={{ k: 'Témoignages', v: '6 organisations' }}
+    >
+      <a href="#deposer" className="btn btn--red btn--lg">
+        Laisser un témoignage <i className="arw"></i>
+      </a>
+    </PageHero>
     <section className="sec" id="voix" data-scene="cubes" data-scene-tone="light">
       <div className="shell">
         <div className="temo-hd reveal">

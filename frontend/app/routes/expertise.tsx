@@ -1,5 +1,6 @@
 import type { Route } from './+types/expertise';
 import { seo } from '~/lib/seo';
+import { PageHero } from '~/components/sections/PageHero';
 import { NeonDoors } from '~/components/sections/NeonDoors';
 import { WhyTic } from '~/components/sections/WhyTic';
 import { CtaContact } from '~/components/sections/CtaContact';
@@ -19,20 +20,18 @@ export default function ExpertisePage() {
   );
   return (
     <>
-    <section className="phead phead--photo phead--expertise">
-      <div className="shell">
-        <h1>
-          Trois pôles.
-          <br />
-          Six{' '}
-          <em>portes</em>
-          .
-        </h1>
-        <p>
-          Nos expertises sont organisées en trois pôles complémentaires. Chacun mobilise des équipes dédiées et des plateformes déjà éprouvées en production.
-        </p>
-      </div>
-    </section>
+    <PageHero
+      crumbs={[{ label: 'Accueil', to: '/' }, { label: 'Expertise' }]}
+      eyebrow="Nos expertises"
+      title={<>Trois pôles. Six <em>portes</em>.</>}
+      lead="Nos expertises sont organisées en trois pôles complémentaires. Chacun mobilise des équipes dédiées et des plateformes déjà éprouvées en production."
+      image="/assets/img/equipe-presentation.webp"
+      badge={{ k: 'Organisation', v: '3 pôles · 6 portes' }}
+    >
+      <a href="#digital-ia" className="btn btn--red btn--lg">
+        Découvrir les pôles <i className="arw"></i>
+      </a>
+    </PageHero>
     <section className="sec" data-scene="ico" data-scene-tone="light">
       <div className="shell">
         <article className="pole reveal" id="digital-ia">

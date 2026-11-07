@@ -1,6 +1,7 @@
 import { Link } from 'react-router';
 import type { Route } from './+types/innovation';
 import { seo } from '~/lib/seo';
+import { PageHero } from '~/components/sections/PageHero';
 import { NeonDoors } from '~/components/sections/NeonDoors';
 import { CtaContact } from '~/components/sections/CtaContact';
 import { useDomEffects } from '~/lib/hooks/useDomEffects';
@@ -19,17 +20,15 @@ export default function InnovationPage() {
   );
   return (
     <>
-    <section className="phead phead--photo phead--lab">
-      <div className="shell">
-        <h1>
-          Le{' '}
-          <em>Corridor Lab</em>
-        </h1>
-        <p>
-          Un espace dédié à l'exploration : prototypage rapide, veille technologique et recherche appliquée. Nous testons aujourd'hui les usages de demain, puis nous les industrialisons avec vous.
-        </p>
-      </div>
-    </section>
+    <PageHero
+      crumbs={[{ label: 'Accueil', to: '/' }, { label: 'Innovation & Lab' }]}
+      eyebrow="Innovation"
+      color="#B88A00"
+      title={<>Le <em>Corridor Lab</em></>}
+      lead="Un espace dédié à l'exploration : prototypage rapide, veille technologique et recherche appliquée. Nous testons aujourd'hui les usages de demain, puis nous les industrialisons avec vous."
+      image="/assets/img/equipe-reunion.webp"
+      badge={{ k: 'Corridor Lab', v: 'Prototyper · tester · industrialiser' }}
+    />
     <section className="sec" id="rd" data-scene="helix" data-scene-tone="light">
       <div className="shell split">
         <div className="split__txt reveal">

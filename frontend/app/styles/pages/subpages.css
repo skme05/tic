@@ -1,4 +1,4 @@
-/* Gabarits des sous-pages (dhead, split, related, solutions...)
+/* Gabarits des sous-pages (phead, split, related, solutions...)
    Source : style.css d'origine, lignes 1070-1538. */
 
 /* ══════════════════════ 14c · SOUS-PAGES ══════════════════════ */
@@ -18,55 +18,6 @@
 .phead h1{font-size:clamp(30px,4.4vw,52px);max-width:19ch;margin-inline:auto}
 .phead p{margin:20px auto 0;max-width:56ch;font-size:16.5px}
 .phead .btn{margin-top:30px}
-.phead--photo{
-  background:
-    linear-gradient(180deg,rgba(8,12,18,.42) 0%,rgba(8,12,18,.28) 45%,rgba(8,12,18,.55) 100%),
-    url('/assets/img/equipe-open-space.webp') center/cover no-repeat;
-  color:#fff
-}
-.phead--photo h1{color:#fff;text-shadow:0 2px 20px rgba(0,0,0,.45)}
-.phead--photo h1 em{color:#ffb4b4}
-.phead--photo p{color:rgba(255,255,255,.9);text-shadow:0 1px 12px rgba(0,0,0,.4)}
-.phead--lab{
-  background:
-    linear-gradient(180deg,rgba(8,12,18,.55) 0%,rgba(8,12,18,.4) 50%,rgba(8,12,18,.62) 100%),
-    url('/assets/img/equipe-reunion.webp') center/cover no-repeat
-}
-.phead--lab h1,.phead--lab p{
-  text-shadow:0 2px 22px rgba(0,0,0,.65),0 1px 3px rgba(0,0,0,.8)
-}
-.phead--expertise{
-  background:
-    linear-gradient(180deg,rgba(8,12,18,.55) 0%,rgba(8,12,18,.4) 50%,rgba(8,12,18,.62) 100%),
-    url('/assets/img/equipe-presentation.webp') center/cover no-repeat
-}
-.phead--expertise h1,.phead--expertise p{
-  text-shadow:0 2px 22px rgba(0,0,0,.65),0 1px 3px rgba(0,0,0,.8)
-}
-.phead--contact{
-  background:
-    linear-gradient(180deg,rgba(8,12,18,.55) 0%,rgba(8,12,18,.4) 50%,rgba(8,12,18,.62) 100%),
-    url('/assets/img/equipe-open-space.webp') center/cover no-repeat
-}
-.phead--contact h1,.phead--contact p{
-  text-shadow:0 2px 22px rgba(0,0,0,.65),0 1px 3px rgba(0,0,0,.8)
-}
-.phead--projet{
-  background:
-    linear-gradient(180deg,rgba(8,12,18,.55) 0%,rgba(8,12,18,.4) 50%,rgba(8,12,18,.62) 100%),
-    url('/assets/img/equipe-reunion.webp') center/cover no-repeat
-}
-.phead--projet h1,.phead--projet p{
-  text-shadow:0 2px 22px rgba(0,0,0,.65),0 1px 3px rgba(0,0,0,.8)
-}
-.phead--temo{
-  background:
-    linear-gradient(180deg,rgba(8,12,18,.55) 0%,rgba(8,12,18,.38) 50%,rgba(8,12,18,.62) 100%),
-    url('/assets/img/equipe-presentation.webp') center/cover no-repeat
-}
-.phead--temo h1,.phead--temo p{
-  text-shadow:0 2px 22px rgba(0,0,0,.65),0 1px 3px rgba(0,0,0,.8)
-}
 
 /* page contact — panneau formulaire */
 .cpanel{
@@ -229,83 +180,6 @@
   .hist__body{padding-right:0}
 }
 
-/* en-tete d'une porte / service : on est dans l'embrasure */
-.dhead{
-  position:relative;padding:calc(var(--hdr) + 86px) 0 86px;overflow:hidden;
-  background:#0a0c11;color:#fff
-}
-.dhead::before{
-  content:"";position:absolute;inset:0;
-  background:
-    radial-gradient(60% 80% at 8% 40%,color-mix(in srgb,var(--c) 34%,transparent),transparent 64%),
-    linear-gradient(120deg,#0a0c11,#12161e 60%,#0a0c11)
-}
-.dhead::after{
-  /* embrasure ouverte : lumiere qui vient du couloir */
-  content:"";position:absolute;left:0;top:0;bottom:0;width:min(38%,420px);
-  clip-path:polygon(0 0,72% 12%,72% 88%,0 100%);
-  background:linear-gradient(90deg,color-mix(in srgb,var(--c) 46%,#fff9f2),transparent 88%);
-  opacity:.3;filter:blur(10px)
-}
-.dhead .shell{position:relative;z-index:2}
-.dhead__n{
-  display:inline-flex;align-items:center;gap:9px;margin-bottom:20px;padding:7px 15px;border-radius:6px;
-  background:linear-gradient(150deg,color-mix(in srgb,var(--c) 84%,#fff),color-mix(in srgb,var(--c) 56%,#000));
-  color:#fff;font:800 10.5px/1 var(--lab);letter-spacing:.2em;text-transform:uppercase;
-  box-shadow:0 3px 10px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.3)
-}
-.dhead h1{color:#fff;font-size:clamp(30px,4.6vw,54px);max-width:17ch}
-.dhead p{margin-top:20px;max-width:54ch;font-size:16.5px;color:rgba(255,255,255,.7)}
-.dhead .btn{margin-top:30px}
-
-/* solutions — hero photo + interactions */
-.dhead--sol{padding:calc(var(--hdr) + 100px) 0 110px}
-.dhead--sol::before{
-  z-index:1;
-  background:
-    linear-gradient(105deg,rgba(6,8,12,.82) 0%,rgba(6,8,12,.58) 45%,rgba(6,8,12,.4) 100%),
-    radial-gradient(70% 80% at 18% 42%,rgba(0,0,0,.45),transparent 72%),
-    radial-gradient(55% 70% at 12% 40%,color-mix(in srgb,var(--c) 38%,transparent),transparent 68%)
-}
-.dhead--sol::after{opacity:.1;z-index:1}
-.dhead__photo{
-  position:absolute;inset:0;z-index:0;
-  background-image:var(--bg);background-size:cover;background-position:center;
-  transform:scale(1.08);filter:brightness(.68) contrast(1.06);
-  animation-name:dheadKen;animation-duration:18s;animation-timing-function:ease-in-out;animation-iteration-count:infinite;animation-direction:alternate
-}
-@keyframes dheadKen{
-  from{transform:scale(1.06) translate3d(0,0,0)}
-  to{transform:scale(1.14) translate3d(-1.5%,1%,0)}
-}
-.dhead--sol .shell{z-index:2}
-.dhead__copy{
-  max-width:560px;padding:0;background:none;border:0;box-shadow:none;backdrop-filter:none
-}
-.dhead--sol .dhead__n{animation:solPop .7s cubic-bezier(.2,.8,.2,1) both}
-.dhead--sol h1{
-  animation:solPop .75s .08s cubic-bezier(.2,.8,.2,1) both;
-  color:#fff;
-  text-shadow:
-    0 2px 24px rgba(0,0,0,.75),
-    0 1px 3px rgba(0,0,0,.9),
-    0 0 40px rgba(0,0,0,.35)
-}
-.dhead--sol p{
-  animation:solPop .75s .16s cubic-bezier(.2,.8,.2,1) both;
-  color:#fff;
-  text-shadow:
-    0 2px 18px rgba(0,0,0,.7),
-    0 1px 2px rgba(0,0,0,.85)
-}
-.dhead--sol .btn{
-  animation:solPop .75s .24s cubic-bezier(.2,.8,.2,1) both;
-  box-shadow:0 10px 28px rgba(0,0,0,.35)
-}
-@keyframes solPop{
-  from{opacity:0;transform:translateY(18px)}
-  to{opacity:1;transform:none}
-}
 
 .solnav{
   position:sticky;top:calc(var(--hdr) - 2px);z-index:40;
@@ -424,11 +298,6 @@
 @media (max-width:900px){
   .solfeat,.solsteps,.solcases,.solstats{grid-template-columns:1fr}
   .solnav__cta{margin-left:0}
-  .dhead__copy{padding:22px 20px}
-}
-@media (prefers-reduced-motion:reduce){
-  .dhead__photo{animation:none}
-  .dhead--sol .dhead__n,.dhead--sol h1,.dhead--sol p,.dhead--sol .btn{animation:none}
 }
 
 .related{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}

@@ -1,6 +1,7 @@
 import { Link } from 'react-router';
 import type { Route } from './+types/solutions';
 import { seo } from '~/lib/seo';
+import { PageHero } from '~/components/sections/PageHero';
 import { MethodTimeline } from '~/components/sections/MethodTimeline';
 import { CtaContact } from '~/components/sections/CtaContact';
 import { useDomEffects } from '~/lib/hooks/useDomEffects';
@@ -19,20 +20,15 @@ export default function SolutionsPage() {
   );
   return (
     <>
-    <section className="phead">
-      <span className="phead__grid" aria-hidden="true"></span>
-      {' '}
-      <div className="shell">
-        <h1>
-          Des plateformes déjà
-          <br />
-          <em>en production</em>
-        </h1>
-        <p>
-          Nos solutions métiers ne sont pas des maquettes : elles tournent chez des clients ivoiriens et de la sous-région, et nos équipes les maintiennent au quotidien.
-        </p>
-      </div>
-    </section>
+    <PageHero
+      crumbs={[{ label: 'Accueil', to: '/' }, { label: 'Solutions' }]}
+      eyebrow="Nos solutions"
+      color="#1E8F5E"
+      title={<>Des plateformes déjà <em>en production</em></>}
+      lead="Nos solutions métiers ne sont pas des maquettes : elles tournent chez des clients ivoiriens et de la sous-région, et nos équipes les maintiennent au quotidien."
+      image="/assets/img/equipe-presentation.webp"
+      badge={{ k: 'En production', v: 'Maintenues au quotidien' }}
+    />
     <section className="sec" data-scene="cubes" data-scene-tone="light">
       <div className="shell">
         <div className="sec__hd sec__hd--c reveal">

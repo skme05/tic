@@ -1,6 +1,7 @@
 import { Link, data } from 'react-router';
 import type { Route } from './+types/service';
 import { seo } from '~/lib/seo';
+import { PageHero } from '~/components/sections/PageHero';
 import { imgSize } from '~/lib/media';
 import { getService, services } from '~/content/services';
 import { CtaContact } from '~/components/sections/CtaContact';
@@ -35,15 +36,19 @@ export default function ServicePage({ loaderData }: Route.ComponentProps) {
 
   return (
     <>
-      <section className="dhead" style={{ '--c': service.color }}>
-        <div className="shell">
-          <span className="dhead__n">{service.number}</span> <h1>{service.name}</h1>
-          <p>{service.lead}</p>{' '}
-          <Link viewTransition to="/contact" className="btn btn--red btn--lg">
-            Discutons-en <Arrow />
-          </Link>
-        </div>
-      </section>
+      <PageHero
+        crumbs={[{ label: 'Accueil', to: '/' }, { label: 'Expertise', to: '/expertise' }, { label: service.name }]}
+        eyebrow={service.number}
+        color={service.color}
+        title={service.name}
+        lead={service.lead}
+        image={service.image}
+        badge={{ k: service.number, v: 'De l\'idée à la mise en production' }}
+      >
+        <Link viewTransition to="/contact" className="btn btn--red btn--lg">
+          Discutons-en <Arrow />
+        </Link>
+      </PageHero>
 
       <section className="sec" data-scene="sphere" data-scene-tone="light">
         <div className="shell split">

@@ -1,6 +1,7 @@
 import { Link } from 'react-router';
 import type { Route } from './+types/contact';
 import { seo } from '~/lib/seo';
+import { PageHero } from '~/components/sections/PageHero';
 import { ContactForm } from '~/features/contact/ContactForm';
 import { nbsp, site } from '~/content/site';
 import css from '~/styles/site.css?url';
@@ -12,19 +13,16 @@ export const meta: Route.MetaFunction = () => seo({ title: "Contact", path: "/co
 export default function ContactPage() {
   return (
     <>
-    <section className="phead phead--photo phead--contact">
-      <div className="shell">
-        <h1>
-          Franchissons la
-          <br />
-          première{' '}
-          <em>porte</em>
-        </h1>
-        <p>
-          Décrivez-nous votre besoin. Nous revenons sous 24 heures ouvrées avec un premier avis et une proposition de rendez-vous.
-        </p>
-      </div>
-    </section>
+    <PageHero
+      crumbs={[{ label: 'Accueil', to: '/' }, { label: 'Contact' }]}
+      eyebrow="Parlons de votre projet"
+      color="#1E8F5E"
+      title={<>Franchissons la première <em>porte</em></>}
+      lead="Décrivez-nous votre besoin. Nous revenons sous 24 heures ouvrées avec un premier avis et une proposition de rendez-vous."
+      image="/assets/img/consultante.webp"
+      badge={{ k: 'Réponse', v: `sous ${site.contact.responseTime}` }}
+      compact
+    />
     <section className="sec sec--soft" id="ecrire">
       <div className="shell">
         <div className="cpanel reveal">

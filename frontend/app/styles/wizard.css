@@ -22,6 +22,7 @@
 @import './sections/testimonials-form-fix.css';
 @import './pages/project-wizard.css';
 @import './responsive/overrides.css';
+@import './sections/page-hero.css';
 @import './sections/cta-door.css';
 @import './layout/footer-corridor.css';
 @import './base/brand-accents.css';

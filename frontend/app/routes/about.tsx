@@ -1,6 +1,7 @@
 import { Link } from 'react-router';
 import type { Route } from './+types/about';
 import { seo } from '~/lib/seo';
+import { PageHero } from '~/components/sections/PageHero';
 import { WhyTic } from '~/components/sections/WhyTic';
 import { CorridorMotion } from '~/components/sections/CorridorMotion';
 import { Manifesto } from '~/components/sections/Manifesto';
@@ -21,24 +22,18 @@ export default function AboutPage() {
   );
   return (
     <>
-    <section className="phead phead--photo">
-      <div className="shell">
-        <h1>
-          Nous ouvrons des portes
-          <br />
-          depuis{' '}
-          <em>2021</em>
-        </h1>
-        <p>
-          The Infinite Corridor Software Solutions est une société d'ingénierie logicielle basée à Abidjan. Nous concevons, développons et maintenons les plateformes numériques des entreprises et institutions africaines.
-        </p>
-        {' '}
-        <Link viewTransition to="/contact" className="btn btn--red btn--lg">
-          Travailler avec nous{' '}
-          <i className="arw"></i>
-        </Link>
-      </div>
-    </section>
+    <PageHero
+      crumbs={[{ label: 'Accueil', to: '/' }, { label: 'À propos' }]}
+      eyebrow="Qui sommes-nous"
+      title={<>Nous ouvrons des portes depuis <em>2021</em></>}
+      lead="The Infinite Corridor Software Solutions est une société d'ingénierie logicielle basée à Abidjan. Nous concevons, développons et maintenons les plateformes numériques des entreprises et institutions africaines."
+      image="/assets/img/equipe-open-space.webp"
+      badge={{ k: 'Depuis 2021', v: 'Abidjan · Cocody' }}
+    >
+      <Link viewTransition to="/contact" className="btn btn--red btn--lg">
+        Travailler avec nous <i className="arw"></i>
+      </Link>
+    </PageHero>
     <section className="sec" id="histoire" data-scene="helix" data-scene-tone="light">
       <div className="shell">
         <div className="sec__hd sec__hd--c reveal">

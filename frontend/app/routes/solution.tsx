@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link, data } from 'react-router';
 import type { Route } from './+types/solution';
 import { seo } from '~/lib/seo';
+import { PageHero } from '~/components/sections/PageHero';
 import { imgSize } from '~/lib/media';
 import { getSolution, solutions } from '~/content/solutions';
 import { CtaContact } from '~/components/sections/CtaContact';
@@ -78,21 +79,19 @@ export default function SolutionPage({ loaderData }: Route.ComponentProps) {
 
   return (
     <>
-      <section
-        className="dhead dhead--sol"
-        style={{ '--c': s.color, '--bg': `url('${s.heroImage}')` }}
+      <PageHero
+        crumbs={[{ label: 'Accueil', to: '/' }, { label: 'Solutions', to: '/solutions' }, { label: s.name }]}
+        eyebrow={s.tag}
+        color={s.color}
+        title={s.name}
+        lead={s.lead}
+        image={s.heroImage}
+        badge={{ k: 'Solution métier', v: 'Déjà en production' }}
       >
-        <span className="dhead__photo" aria-hidden="true"></span>{' '}
-        <div className="shell">
-          <div className="dhead__copy">
-            <span className="dhead__n">{s.tag}</span> <h1>{s.name}</h1>
-            <p>{s.lead}</p>{' '}
-            <Link viewTransition to="/contact" className="btn btn--red btn--lg">
-              Demander un devis <Arrow />
-            </Link>
-          </div>
-        </div>
-      </section>
+        <Link viewTransition to="/contact" className="btn btn--red btn--lg">
+          Demander un devis <Arrow />
+        </Link>
+      </PageHero>
 
       <nav className="solnav" aria-label="Sections de la solution">
         <div className="shell solnav__in">

@@ -1,5 +1,6 @@
 import type { Route } from './+types/demarrer-un-projet';
 import { seo } from '~/lib/seo';
+import { PageHero } from '~/components/sections/PageHero';
 import { ProjectWizard } from '~/features/project-wizard/ProjectWizard';
 import css from '~/styles/wizard.css?url';
 
@@ -10,18 +11,16 @@ export const meta: Route.MetaFunction = () => seo({ title: "Démarrer un projet"
 export default function ProjectBriefPage() {
   return (
     <>
-    <section className="phead phead--photo phead--projet">
-      <div className="shell">
-        <h1>
-          Racontez-nous
-          <br />
-          <em>votre projet</em>
-        </h1>
-        <p>
-          Cinq étapes rapides pour bien cerner votre besoin — environ 3 minutes. Vous pourrez toujours revenir en arrière.
-        </p>
-      </div>
-    </section>
+    <PageHero
+      crumbs={[{ label: 'Accueil', to: '/' }, { label: 'Démarrer un projet' }]}
+      eyebrow="Brief projet"
+      color="#E2452B"
+      title={<>Racontez-nous <em>votre projet</em></>}
+      lead="Cinq étapes rapides pour bien cerner votre besoin — environ 3 minutes. Vous pourrez toujours revenir en arrière."
+      image="/assets/img/equipe-reunion.webp"
+      badge={{ k: 'Durée', v: '≈ 3 minutes · 5 étapes' }}
+      compact
+    />
     <ProjectWizard />
     </>
   );
