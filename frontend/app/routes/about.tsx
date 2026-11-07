@@ -6,6 +6,7 @@ import { WhyTic } from '~/components/sections/WhyTic';
 import { CorridorMotion } from '~/components/sections/CorridorMotion';
 import { Manifesto } from '~/components/sections/Manifesto';
 import { CtaContact } from '~/components/sections/CtaContact';
+import { TeamRoles } from '~/components/sections/TeamRoles';
 import { useDomEffects } from '~/lib/hooks/useDomEffects';
 import css from '~/styles/about.css?url';
 
@@ -34,103 +35,7 @@ export default function AboutPage() {
         Travailler avec nous <i className="arw"></i>
       </Link>
     </PageHero>
-    <section className="sec" id="histoire" data-scene="helix" data-scene-tone="light">
-      <div className="shell">
-        <div className="sec__hd sec__hd--c reveal">
-          <h2>
-            Notre histoire,
-            <br />
-            porte après{' '}
-            <em>porte</em>
-          </h2>
-          <p>
-            Depuis 2021, TIC s'est construite autour d'une idée simple : ouvrir des corridors numériques qui tiennent en production, en Côte d'Ivoire et au-delà.
-          </p>
-        </div>
-        <ol className="hist">
-          <li className="hist__i reveal">
-            <time className="hist__yr" dateTime="2021">2021</time>
-            {' '}
-            <span className="hist__dot" aria-hidden="true"></span>
-            {' '}
-            <div className="hist__card">
-              <span className="hist__no" aria-hidden="true">01</span>
-              {' '}
-              <div className="hist__body">
-                <h3>Les premières portes s'ouvrent</h3>
-                <p>
-                  Création de The Infinite Corridor Software Solutions à Abidjan. Premiers projets web et accompagnements pour des entreprises locales qui cherchaient une exécution fiable, pas seulement des maquettes.
-                </p>
-              </div>
-            </div>
-          </li>
-          <li className="hist__i reveal">
-            <time className="hist__yr" dateTime="2022">2022</time>
-            {' '}
-            <span className="hist__dot" aria-hidden="true"></span>
-            {' '}
-            <div className="hist__card">
-              <span className="hist__no" aria-hidden="true">02</span>
-              {' '}
-              <div className="hist__body">
-                <h3>Le corridor s'élargit</h3>
-                <p>
-                  UI/UX, migrations et applications mobiles rejoignent le web design. L'équipe se structure : designers, développeurs et chefs de projet partagent le même atelier à Cocody.
-                </p>
-              </div>
-            </div>
-          </li>
-          <li className="hist__i reveal">
-            <time className="hist__yr" dateTime="2023">2023</time>
-            {' '}
-            <span className="hist__dot" aria-hidden="true"></span>
-            {' '}
-            <div className="hist__card">
-              <span className="hist__no" aria-hidden="true">03</span>
-              {' '}
-              <div className="hist__body">
-                <h3>Des solutions métiers, pas seulement des sites</h3>
-                <p>
-                  Lancement et consolidation des solutions ERP, paie, RH et outils sectoriels. TIC passe d'agence de réalisation à partenaire d'ingénierie sur le long cycle de vie des plateformes.
-                </p>
-              </div>
-            </div>
-          </li>
-          <li className="hist__i reveal">
-            <time className="hist__yr" dateTime="2024">2024</time>
-            {' '}
-            <span className="hist__dot" aria-hidden="true"></span>
-            {' '}
-            <div className="hist__card">
-              <span className="hist__no" aria-hidden="true">04</span>
-              {' '}
-              <div className="hist__body">
-                <h3>Innovation & transmission</h3>
-                <p>
-                  Renforcement du lab (R&D, prototypage), intégrations HubSpot et data. La formation des équipes clientes devient une règle : chaque livraison doit pouvoir vivre sans nous.
-                </p>
-              </div>
-            </div>
-          </li>
-          <li className="hist__i is-now reveal">
-            <time className="hist__yr" dateTime="2025">Aujourd'hui</time>
-            {' '}
-            <span className="hist__dot" aria-hidden="true"></span>
-            {' '}
-            <div className="hist__card">
-              <span className="hist__no" aria-hidden="true">05</span>
-              {' '}
-              <div className="hist__body">
-                <h3>Six portes, une exigence</h3>
-                <p>
-                  Plus de 200 projets livrés. Six portes d'expertise, une culture d'exécution, et la même adresse : rester joignables longtemps après la mise en ligne.
-                </p>
-              </div>
-            </div>
-          </li>
-        </ol>
-      </div>
-    </section>
+    <TeamRoles />
     <Manifesto
       eyebrow="Notre manifeste"
       title={
