@@ -1,7 +1,8 @@
-import { useEffect, useRef, useState, type CSSProperties, type PointerEvent as RPointerEvent } from 'react';
+import { useCallback, useEffect, useRef, useState, type CSSProperties, type PointerEvent as RPointerEvent } from 'react';
 import { Link, NavLink, useLocation } from 'react-router';
 import { mainNav, type NavItem } from '~/content/navigation';
 import { getSolution } from '~/content/solutions';
+import { MobileMenu } from './MobileMenu';
 
 /* En-tête : fond plein dès qu'on défile, menu burger sur mobile, sous-menus
    au survol (vraie souris), au focus clavier ou au toucher. */
@@ -91,14 +92,17 @@ export function Header({ forceSolid = false }: { forceSolid?: boolean }) {
     return () => document.removeEventListener('click', onClick);
   }, [openDrop]);
 
+  const closeMenu = useCallback(() => setMenuOpen(false), []);
+
   return (
-    <header className={'hdr' + (solid || forceSolid ? ' is-solid' : '')} id="hdr">
+    <>
+    <header className={'hdr' + (solid || forceSolid || menuOpen ? ' is-solid' : '') + (menuOpen ? ' is-menu' : '')} id="hdr">
       <div className="shell hdr__in">
         <Link viewTransition className="brand" to="/">
           <img src="/assets/img/logo-tic.webp" width="600" height="138" alt="TIC — The Infinite Corridor Software Solutions" />
         </Link>
 
-        <nav className={'nav' + (menuOpen ? ' open' : '')} id="nav" aria-label="Navigation principale">
+        <nav className="nav" id="nav" aria-label="Navigation principale">
           <ul ref={listRef} onPointerOver={onNavOver} onPointerLeave={onNavLeave}>
             <li className="nav__thumb" aria-hidden="true"></li>
             <li className="nav__hover" aria-hidden="true"></li>
@@ -133,9 +137,9 @@ export function Header({ forceSolid = false }: { forceSolid?: boolean }) {
           className="burger"
           id="burger"
           type="button"
-          aria-label="Menu"
+          aria-label={menuOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
           aria-expanded={menuOpen}
-          aria-controls="nav"
+          aria-controls="mnav"
           onClick={() => setMenuOpen((o) => !o)}
         >
           <span></span>
@@ -144,6 +148,8 @@ export function Header({ forceSolid = false }: { forceSolid?: boolean }) {
         </button>
       </div>
     </header>
+    <MobileMenu open={menuOpen} onClose={closeMenu} />
+    </>
   );
 }
 

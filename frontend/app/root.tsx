@@ -11,6 +11,7 @@ import { doors } from '~/features/doors/doors-effect';
 import { walkthrough } from '~/features/walkthrough/walkthrough-effect';
 import siteCss from '~/styles/site.css?url';
 import { LOADER_KEY, SiteLoader } from '~/features/loader/SiteLoader';
+import { CursorCorridor } from '~/features/cursor/CursorCorridor';
 
 export const links: Route.LinksFunction = () => [
   { rel: 'icon', href: '/favicon-32.png', sizes: '32x32', type: 'image/png' },
@@ -66,6 +67,7 @@ export default function App() {
   return (
     <>
       <SiteLoader />
+      <CursorCorridor />
       <a className="skip" href="#top">
         Aller au contenu
       </a>

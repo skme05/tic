@@ -74,3 +74,7 @@
 @media (prefers-reduced-motion:reduce){
   ::view-transition-old(root),::view-transition-new(root){animation:none}
 }
+
+/* traînée du curseur « couloir éphémère » (features/cursor/CursorCorridor.tsx) */
+.cursor-corridor{position:fixed;inset:0;width:100vw;height:100vh;z-index:9990;pointer-events:none}
+@media (hover:none),(pointer:coarse),(prefers-reduced-motion:reduce){.cursor-corridor{display:none}}
