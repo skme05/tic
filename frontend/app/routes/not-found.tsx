@@ -7,8 +7,6 @@ export const links: Route.LinksFunction = () => [{ rel: 'stylesheet', href: css 
 
 export const meta: Route.MetaFunction = () => seo({ title: "Page introuvable", path: "/404", description: "Cette porte n'existe pas (ou plus). Retrouvez votre chemin dans le corridor.", noindex: true });
 
-export const handle = { footerCover: false };
-
 export default function NotFoundPage() {
   return (
     <>

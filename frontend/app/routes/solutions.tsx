@@ -1,6 +1,7 @@
 import { Link } from 'react-router';
 import type { Route } from './+types/solutions';
 import { seo } from '~/lib/seo';
+import { MethodTimeline } from '~/components/sections/MethodTimeline';
 import { CtaContact } from '~/components/sections/CtaContact';
 import { useDomEffects } from '~/lib/hooks/useDomEffects';
 import css from '~/styles/site.css?url';
@@ -104,59 +105,7 @@ export default function SolutionsPage() {
         </div>
       </div>
     </section>
-    <section className="sec sec--soft" data-scene="torus" data-scene-tone="light">
-      <div className="shell">
-        <div className="sec__hd sec__hd--c reveal">
-          <h2>
-            Comment nous{' '}
-            <em>déployons</em>
-          </h2>
-          <p>Un cadrage clair, des livraisons visibles, une mise en production maîtrisée.</p>
-        </div>
-        <div className="steps3">
-          <div className="steps3__art reveal">
-            <img loading="lazy" decoding="async" src="/assets/img/consultante.webp" width="1000" height="666" alt="Consultante TIC" />
-            {' '}
-            <div className="steps3__art__c">
-              <b>Un binôme dédié</b>
-              {' '}
-              <p>
-                Un référent projet et un architecte technique vous suivent du premier échange à la mise en production.
-              </p>
-            </div>
-          </div>
-          <div className="steps3__l">
-            <article className="stp reveal">
-              <i>01</i>
-              <div>
-                <h3>Cadrage & devis gratuit</h3>
-                <p>
-                  Nous analysons vos besoins, vos contraintes et votre environnement existant, puis nous chiffrons précisément le projet.
-                </p>
-              </div>
-            </article>
-            <article className="stp reveal">
-              <i>02</i>
-              <div>
-                <h3>Conception & développement</h3>
-                <p>
-                  Maquettes validées, développement en cycles courts, démonstration à chaque étape. Vous voyez le produit grandir.
-                </p>
-              </div>
-            </article>
-            <article className="stp reveal">
-              <i>03</i>
-              <div>
-                <h3>Mise en production & suivi</h3>
-                <p>
-                  Recette avec vos équipes, formation, déploiement, puis maintenance et supervision continues.
-                </p>
-              </div>
-            </article>
-          </div>
-        </div>
-      </div>
-    </section>
+    <MethodTimeline eyebrow="Déploiement" title="Comment nous déployons" />
     <CtaContact />
     </>
   );

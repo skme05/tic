@@ -8,8 +8,6 @@ export const links: Route.LinksFunction = () => [{ rel: 'stylesheet', href: css 
 
 export const meta: Route.MetaFunction = () => seo({ title: "Mentions légales", path: "/mentions-legales", description: "Mentions légales du site de The Infinite Corridor Software Solutions (TIC), Abidjan, Côte d'Ivoire." });
 
-export const handle = { footerCover: false };
-
 export default function LegalNoticePage() {
   return (
     <>

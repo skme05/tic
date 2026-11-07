@@ -9,8 +9,6 @@ export const links: Route.LinksFunction = () => [{ rel: 'stylesheet', href: css 
 
 export const meta: Route.MetaFunction = () => seo({ title: "Contact", path: "/contact", description: "Contactez TIC — The Infinite Corridor Software Solutions à Abidjan, Cocody : +225 07 08 09 10 11, contact@tic-solutions.com." });
 
-export const handle = { footerCover: false };
-
 export default function ContactPage() {
   return (
     <>

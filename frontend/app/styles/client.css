@@ -10,11 +10,8 @@
 @import './sections/video-panel.css';
 @import './components/doors.css';
 @import './components/cards.css';
-@import './layout/cta-video.css';
-@import './layout/footer.css';
 @import './pages/subpages.css';
 @import './base/reveal.css';
-@import './layout/coverstack.css';
 @import './responsive/breakpoints.css';
 @import './responsive/small-phones.css';
 @import './responsive/reduced-motion.css';
@@ -25,4 +22,6 @@
 @import './sections/testimonials-form-fix.css';
 @import './pages/espace-client.css';
 @import './responsive/overrides.css';
+@import './sections/cta-door.css';
+@import './layout/footer-corridor.css';
 @import './base/brand-accents.css';

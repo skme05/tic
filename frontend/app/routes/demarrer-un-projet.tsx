@@ -7,8 +7,6 @@ export const links: Route.LinksFunction = () => [{ rel: 'stylesheet', href: css 
 
 export const meta: Route.MetaFunction = () => seo({ title: "Démarrer un projet", path: "/demarrer-un-projet", description: "Décrivez votre projet en quelques étapes guidées : TIC — The Infinite Corridor Software Solutions revient vers vous avec une proposition adaptée." });
 
-export const handle = { footerCover: false };
-
 export default function ProjectBriefPage() {
   return (
     <>

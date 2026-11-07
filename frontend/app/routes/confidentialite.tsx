@@ -7,8 +7,6 @@ export const links: Route.LinksFunction = () => [{ rel: 'stylesheet', href: css 
 
 export const meta: Route.MetaFunction = () => seo({ title: "Politique de confidentialité", path: "/confidentialite", description: "Comment TIC — The Infinite Corridor Software Solutions collecte et utilise les informations transmises via ses formulaires." });
 
-export const handle = { footerCover: false };
-
 export default function PrivacyPage() {
   return (
     <>

@@ -29,8 +29,6 @@ const WALK_PRE = `(function(){try{var c=sessionStorage.getItem("tic_walk_c");if(
 
 /** Données de mise en page qu'une route peut déclarer via `handle`. */
 export interface PageHandle {
-  /** false : pied de page sans vidéo ni recouvrement (pages formulaire) */
-  footerCover?: boolean;
   /** true : en-tête sur fond plein dès le haut de page (hero sombre) */
   headerSolid?: boolean;
 }
@@ -75,7 +73,7 @@ export default function App() {
       <main id="top">
         <Outlet />
       </main>
-      <Footer cover={handle.footerCover !== false} />
+      <Footer />
     </>
   );
 }

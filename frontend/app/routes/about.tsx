@@ -1,6 +1,9 @@
 import { Link } from 'react-router';
 import type { Route } from './+types/about';
 import { seo } from '~/lib/seo';
+import { WhyTic } from '~/components/sections/WhyTic';
+import { CorridorMotion } from '~/components/sections/CorridorMotion';
+import { Manifesto } from '~/components/sections/Manifesto';
 import { CtaContact } from '~/components/sections/CtaContact';
 import { useDomEffects } from '~/lib/hooks/useDomEffects';
 import css from '~/styles/about.css?url';
@@ -12,7 +15,6 @@ export const meta: Route.MetaFunction = () => seo({ title: "À propos", path: "/
 export default function AboutPage() {
   useDomEffects(
     [
-      () => import('~/features/text-reveal/text-reveal-effect').then((m) => m.textReveal),
       () => import('~/features/scenes-3d/scenes-3d-effect').then((m) => m.scenes3d),
     ],
     true,
@@ -134,39 +136,51 @@ export default function AboutPage() {
         </ol>
       </div>
     </section>
-    <section className="reveal-sec" id="manifeste">
-      <div className="rs__stage">
-        <div className="rs__in">
-          <p className="rs__txt">
-            Le numérique africain ne manque ni d'idées ni d'énergie : il manque d'
-            <b>exécution</b>
-            . Nous existons pour ça. Chaque ligne de code que nous écrivons doit tenir en production, être{' '}
-            <b>maintenable</b>
-            {' '}et rester la propriété de nos clients. Nous formons vos équipes, nous documentons tout, et nous restons{' '}
-            <b>joignables</b>
-            {' '}longtemps après la mise en ligne.
-          </p>
-        </div>
-      </div>
-    </section>
-    <section className="vpanel vpanel--cover">
-      <div className="shell shell--wide">
-        <div className="vpanel__wrap reveal">
-          <video id="secVideo" data-auto="" aria-hidden="true" src="/assets/video/corridor-mouvement.mp4" poster="/assets/video/corridor-mouvement.webp" muted loop playsInline preload="metadata"></video>
-          <div className="vpanel__ov">
-            <h2>Une équipe, un lieu, une culture</h2>
-            <p>
-              Nos équipes travaillent ensemble à Cocody : développeurs, designers, architectes et chefs de projet dans la même pièce.
-            </p>
-            {' '}
-            <Link viewTransition to="/contact" className="btn btn--white">
-              Venir nous rencontrer{' '}
-              <i className="arw"></i>
-            </Link>
-          </div>
-        </div>
-      </div>
-    </section>
+    <Manifesto
+      eyebrow="Notre manifeste"
+      title={
+        <>
+          Nous existons pour l'<span className="mfx__mark">exécution</span>.
+        </>
+      }
+      lead="Le numérique africain ne manque ni d'idées ni d'énergie : il manque d'exécution. Nous existons pour ça."
+      commitments={[
+        {
+          kicker: 'Exécution',
+          title: 'Des solutions qui tiennent',
+          text: "Chaque solution que nous concevons doit tenir en production, rester maintenable et demeurer la propriété de nos clients.",
+          color: '#1D5FAE',
+          viz: 'deploy',
+        },
+        {
+          kicker: 'Transmission',
+          title: 'Des équipes autonomes',
+          text: 'Nous formons vos équipes et documentons tout, pour que vous gardiez la pleine maîtrise de vos outils.',
+          color: '#1E8F5E',
+          viz: 'growth',
+        },
+        {
+          kicker: 'Proximité',
+          title: 'Joignables, longtemps après',
+          text: 'Depuis Cocody, nous restons joignables longtemps après la mise en ligne : support, évolutions, supervision.',
+          color: '#B88A00',
+          viz: 'pin',
+        },
+        {
+          kicker: 'Promesse',
+          title: 'Toujours derrière vous',
+          text: 'Nous ouvrons des portes, une à une, et nous restons derrière vous quand elles sont ouvertes.',
+          color: '#C9361C',
+          viz: 'door',
+        },
+      ]}
+    />
+    <CorridorMotion
+      eyebrow="Notre quotidien"
+      title="Une équipe, un lieu, une culture"
+      lead="Nos équipes travaillent ensemble à Cocody : développeurs, designers, architectes et chefs de projet dans la même pièce."
+      cta={{ label: 'Venir nous rencontrer', to: '/contact' }}
+    />
     <section className="band" id="secteurs">
       <div className="shell band__hd reveal">
         <p>Ils avancent avec nous</p>
@@ -302,41 +316,14 @@ export default function AboutPage() {
         </div>
       </div>
     </section>
-    <section className="sec" data-scene="helix" data-scene-tone="light">
-      <div className="shell">
-        <div className="sec__hd sec__hd--c reveal">
-          <h2>
-            Ce que produit
-            <br />
-            notre{' '}
-            <em>exigence</em>
-          </h2>
-          <p>Des résultats mesurés chez nos clients, secteur public comme secteur privé.</p>
-        </div>
-        <div className="stats">
-          <div className="st reveal">
-            <i></i>
-            <b>+200</b>
-            <p>Projets livrés depuis 2021, du site vitrine à l'ERP complet.</p>
-          </div>
-          <div className="st reveal">
-            <i></i>
-            <b>−38 %</b>
-            <p>De temps de traitement sur les processus que nous automatisons.</p>
-          </div>
-          <div className="st reveal">
-            <i></i>
-            <b>99,8 %</b>
-            <p>De disponibilité mesurée sur les plateformes que nous infogérons.</p>
-          </div>
-          <div className="st reveal">
-            <i></i>
-            <b>6</b>
-            <p>Portes d'expertise, une équipe dédiée derrière chacune d'elles.</p>
-          </div>
-        </div>
-      </div>
-    </section>
+    <WhyTic
+      eyebrow="Nos résultats"
+      title={
+        <>
+          Ce que produit notre <span className="txt-spectrum">exigence</span>
+        </>
+      }
+    />
     <CtaContact />
     </>
   );

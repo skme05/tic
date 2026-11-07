@@ -4,7 +4,7 @@ import { seo } from '~/lib/seo';
 import { imgSize } from '~/lib/media';
 import { getService, services } from '~/content/services';
 import { CtaContact } from '~/components/sections/CtaContact';
-import { MethodSteps } from '~/components/sections/MethodSteps';
+import { MethodTimeline } from '~/components/sections/MethodTimeline';
 import { RelatedCards } from '~/components/sections/RelatedCards';
 import { Arrow } from '~/components/ui/Arrow';
 import { useDomEffects } from '~/lib/hooks/useDomEffects';
@@ -68,17 +68,7 @@ export default function ServicePage({ loaderData }: Route.ComponentProps) {
         </div>
       </section>
 
-      <section className="sec sec--soft" data-scene="neural" data-scene-tone="light">
-        <div className="shell">
-          <div className="sec__hd sec__hd--c reveal">
-            <h2>
-              Notre <em>méthode</em>
-            </h2>
-            <p>Un cadrage clair, des livraisons visibles, une mise en production maîtrisée.</p>
-          </div>
-          <MethodSteps />
-        </div>
-      </section>
+      <MethodTimeline />
 
       <section className="sec" data-scene="cubes" data-scene-tone="light">
         <div className="shell">

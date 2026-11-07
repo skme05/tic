@@ -1,6 +1,7 @@
-import { Link } from 'react-router';
 import type { Route } from './+types/temoignages';
 import { seo } from '~/lib/seo';
+import { WhyTic } from '~/components/sections/WhyTic';
+import { CorridorMotion } from '~/components/sections/CorridorMotion';
 import { TestimonialsRail } from '~/features/testimonials/TestimonialsRail';
 import { TestimonialForm } from '~/features/testimonials/TestimonialForm';
 import { CtaContact } from '~/components/sections/CtaContact';
@@ -58,57 +59,20 @@ export default function TemoignagesPage() {
         <TestimonialForm />
       </div>
     </section>
-    <section className="sec">
-      <div className="shell">
-        <div className="sec__hd sec__hd--c reveal">
-          <h2>
-            Ce que produit
-            <br />
-            notre{' '}
-            <em>exigence</em>
-          </h2>
-          <p>Des résultats mesurés chez nos clients, secteur public comme secteur privé.</p>
-        </div>
-        <div className="stats">
-          <div className="st reveal">
-            <i></i>
-            <b>+200</b>
-            <p>Projets livrés depuis 2021, du site vitrine à l'ERP complet.</p>
-          </div>
-          <div className="st reveal">
-            <i></i>
-            <b>−38 %</b>
-            <p>De temps de traitement sur les processus que nous automatisons.</p>
-          </div>
-          <div className="st reveal">
-            <i></i>
-            <b>99,8 %</b>
-            <p>De disponibilité mesurée sur les plateformes que nous infogérons.</p>
-          </div>
-          <div className="st reveal">
-            <i></i>
-            <b>6</b>
-            <p>Portes d'expertise, une équipe dédiée derrière chacune d'elles.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section className="vpanel vpanel--top">
-      <div className="shell shell--wide">
-        <div className="vpanel__wrap reveal">
-          <video id="secVideo" data-auto="" aria-hidden="true" src="/assets/video/corridor-mouvement.mp4" poster="/assets/video/corridor-mouvement.webp" muted loop playsInline preload="metadata"></video>
-          <div className="vpanel__ov">
-            <h2>Le prochain témoignage sera peut-être le vôtre</h2>
-            <p>Parlons de votre projet : cadrage gratuit, devis chiffré, aucune obligation.</p>
-            {' '}
-            <Link viewTransition to="/contact" className="btn btn--white">
-              Prendre rendez-vous{' '}
-              <i className="arw"></i>
-            </Link>
-          </div>
-        </div>
-      </div>
-    </section>
+    <WhyTic
+      eyebrow="Nos résultats"
+      title={
+        <>
+          Ce que produit notre <span className="txt-spectrum">exigence</span>
+        </>
+      }
+    />
+    <CorridorMotion
+      eyebrow="À votre tour"
+      title="Le prochain témoignage sera peut-être le vôtre"
+      lead="Parlons de votre projet : cadrage gratuit, devis chiffré, aucune obligation."
+      cta={{ label: 'Prendre rendez-vous', to: '/contact' }}
+    />
     <CtaContact />
     </>
   );

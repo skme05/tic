@@ -51,9 +51,6 @@ const FAVICONS = [
   ['the-infinite-corridor_logo.png', 'apple-touch-icon.png', '180x180'],
 ];
 const VIDEOS = [
-  ['section_video.mp4', 'corridor-mouvement.mp4', 736, 28],
-  ['pinterest-video-2.mp4', 'cta-fond.mp4', 720, 30],
-  ['video-footer.mp4', 'pied-de-page.mp4', 736, 30],
 ];
 
 const kb = (f) => Math.round(fs.statSync(f).size / 1024) + ' Ko';

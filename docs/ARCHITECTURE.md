@@ -22,7 +22,7 @@ tic/
 │   │   ├── components/
 │   │   │   ├── layout/       Header, Footer
 │   │   │   ├── sections/     Blocs réutilisables : HeroStudio, CtaContact, Manifesto, NeonDoors,
-│   │   │   │                 CorridorMotion, WhyTic, MethodTimeline, MethodSteps, RelatedCards
+│   │   │   │                 CorridorMotion, WhyTic, MethodTimeline, RelatedCards (props configurables par page)
 │   │   │   └── ui/           Petits éléments : Arrow, icônes, Rich (texte riche sûr)
 │   │   ├── features/         Fonctionnalités autonomes
 │   │   │   ├── loader/ (loader architectural), contact/, project-wizard/, testimonials/, client-portal/
@@ -35,7 +35,7 @@ tic/
 │   │   │   ├── seo.ts        Balises titre / description / canonical / Open Graph
 │   │   │   └── media.ts      Dimensions des images
 │   │   └── styles/           CSS découpé par composant + un « bundle » par type de page
-│   ├── public/               Images, vidéos, favicons, déclaration Netlify Forms
+│   ├── public/               Images, favicons (plus aucune vidéo : tout est en CSS/SVG), déclaration Netlify Forms
 │   └── scripts/              postbuild (404, sitemap, robots, redirections), médias, liens
 ├── backend/                  API Django (à venir) — contrat d'API dans backend/README.md
 ├── docs/                     Ce document, l'audit

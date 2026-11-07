@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { Link } from 'react-router';
 import { services } from '~/content/services';
 
@@ -10,7 +10,21 @@ import { services } from '~/content/services';
      mini-couloir infini défile derrière la porte, la lumière déborde au sol ;
    - clic : transition « franchir la porte » (effet walkthrough) ;
    - écran tactile : premier appui = ouvrir, second = entrer. */
-export function NeonDoors() {
+export function NeonDoors({
+  eyebrow = 'Le corridor',
+  title = (
+    <>
+      Six portes.
+      <br />
+      Une seule <span className="txt-spectrum-dk">entrée</span>.
+    </>
+  ),
+  lead = "Approchez une porte : elle s'ouvre sur son expertise. Franchissez-la pour découvrir la page complète.",
+}: {
+  eyebrow?: string;
+  title?: ReactNode;
+  lead?: string;
+}) {
   const ref = useRef<HTMLElement>(null);
   const [lit, setLit] = useState(false);
   const [openSlug, setOpenSlug] = useState<string | null>(null);
@@ -42,13 +56,9 @@ export function NeonDoors() {
     <section className={'ndoors' + (lit ? ' is-lit' : '')} id="corridor" ref={ref}>
       <div className="ndoors__in">
         <div className="ndoors__hd">
-          <p className="ndoors__eyebrow">Le corridor</p>
-          <h2 className="ndoors__title">
-            Six portes.
-            <br />
-            Une seule <span className="txt-spectrum-dk">entrée</span>.
-          </h2>
-          <p className="ndoors__lead">Approchez une porte : elle s'ouvre sur son expertise. Franchissez-la pour découvrir la page complète.</p>
+          <p className="ndoors__eyebrow">{eyebrow}</p>
+          <h2 className="ndoors__title">{title}</h2>
+          <p className="ndoors__lead">{lead}</p>
         </div>
 
         <div className="ndoors__grid">

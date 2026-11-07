@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { prefersReducedMotion } from '~/lib/dom/scope';
 
 /* ==========================================================================
@@ -10,7 +10,17 @@ import { prefersReducedMotion } from '~/lib/dom/scope';
    s'estompent). Styles : styles/sections/manifesto.css (préfixe .mfx).
    ========================================================================== */
 
-const COMMITMENTS = [
+export type VizKind = 'pin' | 'deploy' | 'growth' | 'door';
+export interface Commitment {
+  kicker: string;
+  title: string;
+  text: string;
+  color: string;
+  viz: VizKind;
+}
+
+/* engagements de l'accueil (valeur par défaut) */
+const COMMITMENTS: Commitment[] = [
   {
     kicker: 'Origine',
     title: 'Nés à Abidjan',
@@ -39,7 +49,7 @@ const COMMITMENTS = [
     color: '#C9361C',
     viz: 'door',
   },
-] as const;
+];
 
 const FACTS = [
   { value: 2021, prefix: '', suffix: '', label: 'année de création' },
@@ -84,7 +94,7 @@ function CountUp({ value, prefix, suffix }: { value: number; prefix: string; suf
 }
 
 /* mini-illustrations (décoratives) */
-function Viz({ kind }: { kind: (typeof COMMITMENTS)[number]['viz'] }) {
+function Viz({ kind }: { kind: VizKind }) {
   switch (kind) {
     case 'pin':
       return (
@@ -140,7 +150,22 @@ function Viz({ kind }: { kind: (typeof COMMITMENTS)[number]['viz'] }) {
   }
 }
 
-export function Manifesto() {
+export function Manifesto({
+  eyebrow = 'Notre manifeste',
+  title = (
+    <>
+      Nous ouvrons des <span className="mfx__mark">portes</span>, une à une.
+    </>
+  ),
+  lead = "Une équipe née à Abidjan, qui livre des logiciels à des entreprises qui n'attendent plus — et qui reste à vos côtés une fois la porte franchie.",
+  commitments = COMMITMENTS,
+}: {
+  eyebrow?: string;
+  /** titre ; entourer le mot clé de <span className="mfx__mark"> pour le surligner */
+  title?: ReactNode;
+  lead?: string;
+  commitments?: Commitment[];
+}) {
   const listRef = useRef<HTMLOListElement>(null);
   const [active, setActive] = useState(0);
 
@@ -184,14 +209,11 @@ export function Manifesto() {
       <div className="mfx__in">
         <div className="mfx__side">
           <div className="mfx__sticky reveal">
-            <p className="mfx__eyebrow">Notre manifeste</p>
+            <p className="mfx__eyebrow">{eyebrow}</p>
             <h2 className="mfx__title" id="mfx-title">
-              Nous ouvrons des <span className="mfx__mark">portes</span>, une à une.
+              {title}
             </h2>
-            <p className="mfx__lead">
-              Une équipe née à Abidjan, qui livre des logiciels à des entreprises qui n'attendent plus — et qui reste à vos côtés une fois
-              la porte franchie.
-            </p>
+            <p className="mfx__lead">{lead}</p>
             <ul className="mfx__facts">
               {FACTS.map((f) => (
                 <li key={f.label}>
@@ -212,7 +234,7 @@ export function Manifesto() {
           <span className="mfx__track" aria-hidden="true">
             <i></i>
           </span>
-          {COMMITMENTS.map((c, i) => (
+          {commitments.map((c, i) => (
             <li
               key={c.kicker}
               /* classe FIXE (l'effet d'apparition y ajoute « in ») : l'état

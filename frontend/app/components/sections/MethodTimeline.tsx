@@ -1,4 +1,18 @@
-import { METHOD_STEPS } from './MethodSteps';
+/* Les 3 étapes d'un projet (accueil, Solutions, pages services). */
+export const METHOD_STEPS = [
+  {
+    title: 'Cadrage & devis gratuit',
+    text: 'Nous analysons vos besoins, vos contraintes et votre environnement existant, puis nous chiffrons précisément le projet.',
+  },
+  {
+    title: 'Conception & développement',
+    text: 'Maquettes validées, développement en cycles courts, démonstration à chaque étape. Vous voyez le produit grandir.',
+  },
+  {
+    title: 'Mise en production & suivi',
+    text: 'Recette avec vos équipes, formation, déploiement, puis maintenance et supervision continues.',
+  },
+];
 
 /* Couleurs des numéros : bleu, vert, jaune (versions foncées, lisibles sur
    fond clair), assorties au liseré des cartes (base/brand-accents.css). */
@@ -7,15 +21,23 @@ const STEP_COLORS = ['#1D5FAE', '#1E8F5E', '#B88A00'];
 /* « Votre projet démarre en 3 étapes simples » (accueil) : en-tête + carte
    « binôme dédié », ligne parcourue par un point lumineux, 3 cartes.
    Styles : styles/sections/method-timeline.css. */
-export function MethodTimeline() {
+export function MethodTimeline({
+  eyebrow = 'Notre méthode',
+  title = 'Votre projet démarre en 3 étapes simples',
+  lead = 'Un cadrage clair, des livraisons visibles, une mise en production maîtrisée.',
+}: {
+  eyebrow?: string;
+  title?: string;
+  lead?: string;
+}) {
   return (
     <section className="mtl" id="methode">
       <div className="mtl__in">
         <div className="mtl__hd">
           <div className="mtl__intro reveal">
-            <p className="mtl__eyebrow">Notre méthode</p>
-            <h2 className="mtl__title">Votre projet démarre en 3 étapes simples</h2>
-            <p className="mtl__lead">Un cadrage clair, des livraisons visibles, une mise en production maîtrisée.</p>
+            <p className="mtl__eyebrow">{eyebrow}</p>
+            <h2 className="mtl__title">{title}</h2>
+            <p className="mtl__lead">{lead}</p>
           </div>
           <div className="mtl__duo reveal">
             <span className="mtl__avatars" aria-hidden="true">
