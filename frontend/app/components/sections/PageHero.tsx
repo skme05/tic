@@ -24,7 +24,7 @@ export type HeroVariant = (typeof HERO_VARIANTS)[number];
 
 /* en-tête des pages classiques et des pages produits (solutions) */
 export const HERO_PAGES: HeroVariant = 'door';
-export const HERO_PRODUCTS: HeroVariant = 'wall';
+export const HERO_PRODUCTS: HeroVariant = 'slides';
 const pickVariant = (path: string): HeroVariant => (/^\/solutions\/[^/]+/.test(path) ? HERO_PRODUCTS : HERO_PAGES);
 
 interface PageHeroProps {
