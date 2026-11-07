@@ -52,7 +52,7 @@ const COMMITMENTS: Commitment[] = [
 ];
 
 const FACTS = [
-  { value: 2021, prefix: '', suffix: '', label: 'année de création' },
+  { value: 24, prefix: '', suffix: ' h', label: 'pour vous répondre' },
   { value: 200, prefix: '+', suffix: '', label: 'projets livrés' },
   { value: 100, prefix: '', suffix: ' %', label: 'des équipes à Abidjan' },
 ];
@@ -64,7 +64,7 @@ function CountUp({ value, prefix, suffix }: { value: number; prefix: string; suf
   useEffect(() => {
     const el = ref.current;
     if (!el || prefersReducedMotion() || !('IntersectionObserver' in window)) return;
-    const from = value > 1000 ? value - 25 : 0; /* 2021 compte depuis 1996, pas depuis 0 */
+    const from = value > 1000 ? value - 25 : 0; /* une grande valeur compte depuis value - 25 */
     setN(from);
     let raf = 0;
     const io = new IntersectionObserver(([e]) => {

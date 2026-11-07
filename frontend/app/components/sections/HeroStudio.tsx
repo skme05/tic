@@ -71,7 +71,7 @@ export function HeroStudio() {
         <div className="hs__copy">
           <p className="hs__pill hs__enter" style={{ '--d': '.05s' }}>
             <span className="hs__pill-dot" aria-hidden="true"></span>
-            Abidjan · Côte d'Ivoire · depuis 2021
+            Abidjan · Côte d'Ivoire
           </p>
           <h1 className="hs__title" id="hs-title">
             <span className="hs__line hs__enter" style={{ '--d': '.12s' }}>

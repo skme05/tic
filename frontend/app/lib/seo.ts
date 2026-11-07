@@ -48,7 +48,7 @@ export const organizationJsonLd = {
   description: site.description,
   email: site.contact.email,
   telephone: site.contact.phoneHref,
-  foundingDate: '2021',
+  foundingDate: '2025',
   address: {
     '@type': 'PostalAddress',
     addressLocality: `${site.contact.district}, ${site.contact.city}`,

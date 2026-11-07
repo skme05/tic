@@ -28,10 +28,10 @@ export default function AboutPage() {
     <PageHero
       crumbs={[{ label: 'Accueil', to: '/' }, { label: 'À propos' }]}
       eyebrow="Qui sommes-nous"
-      title={<>Nous ouvrons des portes depuis <em>2021</em></>}
+      title={<>Nous ouvrons des <em>portes</em></>}
       lead="The Infinite Corridor Software Solutions est une société d'ingénierie logicielle basée à Abidjan. Nous concevons, développons et maintenons les plateformes numériques des entreprises et institutions africaines."
       image="/assets/img/equipe-open-space.webp"
-      badge={{ k: 'Depuis 2021', v: 'Abidjan · Cocody' }}
+      badge={{ k: 'Basés à', v: 'Abidjan · Côte d’Ivoire' }}
     >
       <Link viewTransition to="/contact" className="btn btn--red btn--lg">
         Travailler avec nous <i className="arw"></i>
@@ -179,7 +179,7 @@ export default function AboutPage() {
             <div className="bx__t">
               <h3>Durée</h3>
               <p>
-                Nous restons. Maintenance, évolutions, montées de version : nos clients de 2021 sont toujours nos clients.
+                Nous restons. Maintenance, évolutions, montées de version : nos premiers clients sont toujours nos clients.
               </p>
             </div>
           </article>

@@ -103,7 +103,7 @@ export function Terrain() {
 
           <div className="terr__stat">
             <b>+200</b>
-            <span>Projets livrés depuis 2021</span>
+            <span>Projets livrés et accompagnés</span>
           </div>
         </div>
 

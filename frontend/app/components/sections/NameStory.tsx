@@ -103,6 +103,12 @@ export function NameStory() {
           <p className="story__lead reveal">
             Notre nom est un clin d’œil au célèbre couloir du Massachusetts Institute of Technology. Il dit ce que nous faisons : relier les idées, et ouvrir des portes.
           </p>
+          <div className="story__origin reveal">
+            <span className="story__origin-k">Avant le nom, le terrain</span>
+            <p>
+              The Infinite Corridor Software Solutions est née officiellement en 2025. Mais l’équipe n’est pas partie de zéro : depuis des années, elle travaille en partenariat avec des cabinets d’expertise comptable et a conçu plusieurs solutions, déjà utilisées, bien avant la création de la société. 2025, c’est le moment où nous avons donné un nom et une maison à ce travail.
+            </p>
+          </div>
           <ol className="story__beats">
             {BEATS.map((b, i) => (
               <li key={b.t} className="reveal" style={{ transitionDelay: `${i * 90}ms` }}>
