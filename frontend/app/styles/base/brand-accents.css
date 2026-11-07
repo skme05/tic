@@ -1,0 +1,41 @@
+/* ==========================================================================
+   Accents de marque TIC — chargé EN DERNIER dans chaque bundle pour
+   s'appliquer à tout le site.
+   1. Le mot mis en avant dans les titres (<em>) prend le dégradé du logo
+      (bleu → vert → jaune → orange → rouge) au lieu du rouge.
+   2. Les cartes reçoivent un liseré supérieur qui alterne les couleurs TIC.
+   ========================================================================== */
+:root{
+  --tic-blue:#1D5FAE;--tic-green:#22A06B;--tic-yellow:#F4C531;--tic-orange:#F28A26;--tic-red:#E2452B;
+  /* version foncée : lisible sur fond clair */
+  --tic-spectrum:linear-gradient(90deg,#1D5FAE,#1E8F5E 30%,#B88A00 52%,#D9631A 74%,#C9361C);
+  /* version lumineuse : sur fond sombre ou photo */
+  --tic-spectrum-light:linear-gradient(90deg,#6FB0FF,#3CCB86 30%,#F4C531 52%,#F59A3E 74%,#FF7A5C)
+}
+
+/* ── 1. titres ── */
+:is(h1,h2,h3) em{
+  font-style:normal;
+  background:var(--tic-spectrum);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  -webkit-box-decoration-break:clone;box-decoration-break:clone;
+  padding-right:.03em
+}
+/* sections sombres et en-têtes sur photo */
+:is(.corridor,.vpanel,.cta,.plog,.dhead,.ndoors,.cmo__card,.phead--photo,.sec__hd--w) :is(h1,h2,h3) em{
+  background-image:var(--tic-spectrum-light)
+}
+
+/* ── 2. liseré des cartes, couleurs en alternance ── */
+:is(.sol,.solcase,.solstat,.solstep,.solfeat__c,.related > a,.pole,.st,.hist__card,.pstat,.q,.mtl__card){
+  --tic-bar:var(--tic-blue);
+  border-top:4px solid var(--tic-bar)
+}
+:is(.sol,.solcase,.solstat,.solstep,.solfeat__c,.related > a,.pole,.st,.hist__i,.pstat,.q,.mtl__card):nth-child(4n+2){--tic-bar:var(--tic-green)}
+:is(.sol,.solcase,.solstat,.solstep,.solfeat__c,.related > a,.pole,.st,.hist__i,.pstat,.q,.mtl__card):nth-child(4n+3){--tic-bar:var(--tic-yellow)}
+:is(.sol,.solcase,.solstat,.solstep,.solfeat__c,.related > a,.pole,.st,.hist__i,.pstat,.q,.mtl__card):nth-child(4n+4){--tic-bar:var(--tic-red)}
+/* la frise historique : la carte est dans un élément de liste */
+.hist__i:nth-child(4n+2) .hist__card{--tic-bar:var(--tic-green)}
+.hist__i:nth-child(4n+3) .hist__card{--tic-bar:var(--tic-yellow)}
+.hist__i:nth-child(4n+4) .hist__card{--tic-bar:var(--tic-red)}
+/* « Pourquoi TIC » dessine déjà son liseré (.why__bar) */

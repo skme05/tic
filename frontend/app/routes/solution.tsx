@@ -141,7 +141,7 @@ export default function SolutionPage({ loaderData }: Route.ComponentProps) {
               <button
                 key={f.title}
                 type="button"
-                className={'solfeat__c reveal' + (feature === i ? ' is-on' : '')}
+                className={'solfeat__c' + (feature === i ? ' is-on' : '')}
                 aria-expanded={feature === i}
                 onClick={() => setFeature(feature === i ? null : i)}
               >

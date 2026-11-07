@@ -1,8 +1,8 @@
 import { METHOD_STEPS } from './MethodSteps';
 
-/* Couleurs des étapes : début, milieu et fin du dégradé du logo
-   (versions foncées, lisibles sur fond clair). */
-const STEP_COLORS = ['#1D5FAE', '#B88A00', '#C9361C'];
+/* Couleurs des numéros : bleu, vert, jaune (versions foncées, lisibles sur
+   fond clair), assorties au liseré des cartes (base/brand-accents.css). */
+const STEP_COLORS = ['#1D5FAE', '#1E8F5E', '#B88A00'];
 
 /* « Votre projet démarre en 3 étapes simples » (accueil) : en-tête + carte
    « binôme dédié », ligne parcourue par un point lumineux, 3 cartes.

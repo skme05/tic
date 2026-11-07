@@ -13,7 +13,7 @@
 @import './sections/why-tic.css';
 @import './sections/method-timeline.css';
 @import './sections/neon-doors.css';
-@import './sections/manifesto-v2.css';
+@import './sections/manifesto-commitments.css';
 @import './components/cards.css';
 @import './layout/cta-video.css';
 @import './layout/footer.css';
@@ -31,3 +31,4 @@
 @import './components/scenes-3d.css';
 @import './sections/testimonials-form-fix.css';
 @import './responsive/overrides.css';
+@import './base/brand-accents.css';

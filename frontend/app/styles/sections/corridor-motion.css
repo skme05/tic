@@ -1,6 +1,7 @@
 /* « Le corridor en mouvement » (accueil) — composant CorridorMotion.
    Remplace le panneau vidéo (.vpanel) : SVG animé, aucune vidéo à charger. */
-.cmo{position:relative;z-index:4;padding:0 24px 110px;background:var(--bg)}
+/* espace au-dessus : la carte ne se colle plus à la section précédente */
+.cmo{position:relative;padding:96px 24px 110px;background:#FBFBFD}
 .cmo__card{
   position:relative;display:flex;align-items:center;
   max-width:1240px;min-height:500px;margin:0 auto;
@@ -26,7 +27,7 @@
 @keyframes cmoTrace{from{stroke-dashoffset:720}to{stroke-dashoffset:0}}
 
 @media (max-width:700px){
-  .cmo{padding:0 var(--pad) 80px}
+  .cmo{padding:56px var(--pad) 80px}
   .cmo__card{min-height:420px;border-radius:22px}
   .cmo__copy{padding:44px 26px}
 }

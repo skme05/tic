@@ -1,198 +1,238 @@
-import { Fragment, useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { prefersReducedMotion } from '~/lib/dom/scope';
 
-/* « Notre manifeste » (accueil) — lecture rythmée au défilement.
-   La section est épinglée (sticky) : en défilant, les mots s'allument un à
-   un, temps par temps ; la phrase en cours est pleinement lisible, les
-   précédentes s'estompent, les mots clés s'allument dans le dégradé du
-   logo, et le symbole ∞ se dessine en fond. Styles : styles/sections/manifesto-v2.css
+/* ==========================================================================
+   « Notre manifeste » (accueil) — le manifeste en 4 engagements.
+   Gauche (reste visible) : titre, message, chiffres qui comptent, signature.
+   Droite : 4 cartes numérotées avec chacune une mini-illustration animée ;
+   en défilant, une ligne se remplit dans le dégradé du logo et la carte au
+   centre de l'écran s'active (son illustration s'anime, les autres
+   s'estompent). Styles : styles/sections/manifesto.css (préfixe .mfx).
+   ========================================================================== */
 
-   Texte : chaque temps est une liste de segments ; `hot` = mot clé. */
-const BEATS: { label: string; parts: { t: string; hot?: boolean }[] }[] = [
-  { label: 'Origine', parts: [{ t: 'Nous sommes nés à ' }, { t: 'Abidjan', hot: true }, { t: '.' }] },
+const COMMITMENTS = [
   {
-    label: 'Engagement',
-    parts: [{ t: 'Nous écrivons du code pour des entreprises qui ' }, { t: "n'attendent plus", hot: true }, { t: '.' }],
+    kicker: 'Origine',
+    title: 'Nés à Abidjan',
+    text: "Nous sommes nés à Abidjan. Nos équipes conçoivent et livrent depuis Cocody, au plus près des réalités de nos clients.",
+    color: '#1D5FAE',
+    viz: 'pin',
   },
   {
-    label: 'Valeur',
-    parts: [
-      { t: "Chaque plateforme métier, chaque application, chaque modèle d'" },
-      { t: 'intelligence artificielle', hot: true },
-      { t: ' que nous livrons devient un ' },
-      { t: 'avantage réel', hot: true },
-      { t: '.' },
-    ],
+    kicker: 'Engagement',
+    title: "Pour ceux qui n'attendent plus",
+    text: "Nous écrivons du code pour des entreprises qui n'attendent plus : des cycles courts, des livraisons visibles chaque semaine.",
+    color: '#1E8F5E',
+    viz: 'deploy',
   },
   {
-    label: 'Promesse',
-    parts: [
-      { t: 'Nous ne vendons pas des promesses : nous ouvrons des ' },
-      { t: 'portes', hot: true },
-      { t: ', une à une, et nous restons ' },
-      { t: 'derrière vous', hot: true },
-      { t: ' quand elles sont ouvertes.' },
-    ],
+    kicker: 'Valeur',
+    title: 'Un avantage réel',
+    text: "Chaque plateforme métier, chaque application, chaque modèle d'intelligence artificielle que nous livrons devient un avantage réel.",
+    color: '#B88A00',
+    viz: 'growth',
   },
+  {
+    kicker: 'Promesse',
+    title: 'Toujours derrière vous',
+    text: 'Nous ne vendons pas des promesses : nous ouvrons des portes, une à une, et nous restons derrière vous quand elles sont ouvertes.',
+    color: '#C9361C',
+    viz: 'door',
+  },
+] as const;
+
+const FACTS = [
+  { value: 2021, prefix: '', suffix: '', label: 'année de création' },
+  { value: 200, prefix: '+', suffix: '', label: 'projets livrés' },
+  { value: 100, prefix: '', suffix: ' %', label: 'des équipes à Abidjan' },
 ];
 
-interface Word {
-  text: string;
-  hot: boolean;
-  /** index global du mot */
-  i: number;
-  /** le mot est collé au précédent (ponctuation, apostrophe) */
-  glued: boolean;
+/** nombre qui compte jusqu'à sa valeur quand il devient visible */
+function CountUp({ value, prefix, suffix }: { value: number; prefix: string; suffix: string }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const [n, setN] = useState(value);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el || prefersReducedMotion() || !('IntersectionObserver' in window)) return;
+    const from = value > 1000 ? value - 25 : 0; /* 2021 compte depuis 1996, pas depuis 0 */
+    setN(from);
+    let raf = 0;
+    const io = new IntersectionObserver(([e]) => {
+      if (!e.isIntersecting) return;
+      io.disconnect();
+      const t0 = performance.now();
+      const tick = (t: number) => {
+        const p = Math.min(1, (t - t0) / 1400);
+        setN(Math.round(from + (value - from) * (1 - Math.pow(1 - p, 3))));
+        if (p < 1) raf = requestAnimationFrame(tick);
+      };
+      raf = requestAnimationFrame(tick);
+    }, { threshold: 0.6 });
+    io.observe(el);
+    return () => {
+      io.disconnect();
+      cancelAnimationFrame(raf);
+    };
+  }, [value]);
+  return (
+    <span ref={ref}>
+      {prefix}
+      {n}
+      {suffix}
+    </span>
+  );
 }
 
-/* découpe en mots ; un mot clé de plusieurs mots reste un seul bloc lumineux */
-function splitBeats() {
-  let i = 0;
-  return BEATS.map((beat) => {
-    const words: Word[] = [];
-    beat.parts.forEach((p) => {
-      if (p.hot) {
-        words.push({ text: p.t, hot: true, i: i++, glued: !/^\s/.test(p.t) && words.length > 0 && /[’']$/.test(words[words.length - 1].text) });
-        return;
-      }
-      const tokens = p.t.split(/(\s+)/);
-      let glue = words.length > 0 && !/^\s/.test(p.t);
-      tokens.forEach((tk) => {
-        if (!tk) return;
-        if (/^\s+$/.test(tk)) {
-          glue = false;
-          return;
-        }
-        words.push({ text: tk, hot: false, i: i++, glued: glue });
-        glue = false;
-      });
-    });
-    return { label: beat.label, words, first: words[0].i, last: words[words.length - 1].i };
-  });
+/* mini-illustrations (décoratives) */
+function Viz({ kind }: { kind: (typeof COMMITMENTS)[number]['viz'] }) {
+  switch (kind) {
+    case 'pin':
+      return (
+        <svg className="mfx__viz mfx__viz--pin" viewBox="0 0 120 90" aria-hidden="true">
+          <path className="mfx__route" d="M60 58 Q36 30 14 26" />
+          <path className="mfx__route mfx__route--2" d="M60 58 Q86 26 106 22" />
+          <path className="mfx__route mfx__route--3" d="M60 58 Q90 66 110 74" />
+          <circle cx="14" cy="26" r="3" /> <circle cx="106" cy="22" r="3" /> <circle cx="110" cy="74" r="3" />
+          <circle className="mfx__wave" cx="60" cy="58" r="10" />
+          <circle className="mfx__wave mfx__wave--2" cx="60" cy="58" r="10" />
+          <path className="mfx__pin" d="M60 60 C52 50 48 45 48 38 a12 12 0 0 1 24 0 c0 7 -4 12 -12 22Z" />
+          <circle cx="60" cy="38" r="4.5" fill="#fff" />
+        </svg>
+      );
+    case 'deploy':
+      return (
+        <div className="mfx__viz mfx__viz--term" aria-hidden="true">
+          <span className="mfx__term-bar">
+            <i></i>
+            <i></i>
+            <i></i>
+          </span>
+          <code className="mfx__cmd">
+            <span className="mfx__prompt">$</span> <span className="mfx__typed">deploy --prod</span>
+            <span className="mfx__caret"></span>
+          </code>
+          <code className="mfx__ok">✓ en ligne</code>
+        </div>
+      );
+    case 'growth':
+      return (
+        <svg className="mfx__viz mfx__viz--growth" viewBox="0 0 120 90" aria-hidden="true">
+          <path className="mfx__axis" d="M14 78 H110" />
+          {[0, 1, 2, 3, 4].map((i) => (
+            <rect key={i} className="mfx__bar" x={20 + i * 18} y={78 - (14 + i * 11)} width="11" height={14 + i * 11} rx="3" style={{ '--i': i }} />
+          ))}
+          <path className="mfx__trend" d="M24 62 L44 54 L62 44 L80 32 L100 16" />
+          <path className="mfx__spark" d="M100 2 C101 9 104 11 110 12 C104 13 101 15 100 22 C99 15 96 13 90 12 C96 11 99 9 100 2Z" />
+        </svg>
+      );
+    case 'door':
+      return (
+        <div className="mfx__viz mfx__viz--door" aria-hidden="true">
+          <span className="mfx__door-light"></span>
+          <span className="mfx__door-frame">
+            <span className="mfx__door-leaf">
+              <i></i>
+            </span>
+          </span>
+          <span className="mfx__door-floor"></span>
+        </div>
+      );
+  }
 }
 
 export function Manifesto() {
-  const beats = useMemo(splitBeats, []);
-  const total = beats[beats.length - 1].last + 1;
-  const ref = useRef<HTMLElement>(null);
-  const [lit, setLit] = useState(0); /* nombre de mots allumés */
-  const [progress, setProgress] = useState(0);
+  const listRef = useRef<HTMLOListElement>(null);
+  const [active, setActive] = useState(0);
 
+  /* carte active (au centre de l'écran) + remplissage de la ligne */
   useEffect(() => {
-    if (prefersReducedMotion()) {
-      setLit(total);
-      setProgress(1);
-      return;
-    }
-    let tick = false;
-    const run = () => {
-      tick = false;
-      const sec = ref.current;
-      if (!sec) return;
-      const r = sec.getBoundingClientRect();
-      const span = r.height - window.innerHeight;
-      const p = span > 0 ? Math.min(1, Math.max(0, -r.top / span)) : 1;
-      setProgress(p);
-      /* tout est lu à 85 % du parcours : la fin reste un temps de pause */
-      setLit(Math.round(Math.min(1, p / 0.85) * total));
-    };
+    const list = listRef.current;
+    if (!list) return;
+    const cards = Array.from(list.querySelectorAll<HTMLElement>('.mfx__card'));
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) setActive(cards.indexOf(e.target as HTMLElement));
+        });
+      },
+      { rootMargin: '-45% 0px -45% 0px' },
+    );
+    cards.forEach((c) => io.observe(c));
+
+    let raf = 0;
     const onScroll = () => {
-      if (!tick) {
-        tick = true;
-        requestAnimationFrame(run);
-      }
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        const r = list.getBoundingClientRect();
+        const p = (window.innerHeight * 0.5 - r.top) / r.height;
+        list.style.setProperty('--fill', Math.min(1, Math.max(0, p)).toFixed(3));
+      });
     };
-    run();
+    onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', onScroll, { passive: true });
     return () => {
+      io.disconnect();
+      cancelAnimationFrame(raf);
       window.removeEventListener('scroll', onScroll);
       window.removeEventListener('resize', onScroll);
     };
-  }, [total]);
-
-  const current = beats.findIndex((b) => lit <= b.last + 1 && lit > b.first) ;
-  const activeBeat = lit >= total ? beats.length - 1 : Math.max(0, current);
-  const done = lit >= total;
+  }, []);
 
   return (
-    <section className={'mf' + (done ? ' is-done' : '')} id="manifeste" ref={ref} aria-labelledby="mf-title">
-      <div className="mf__stage">
-        {/* le symbole ∞ se dessine avec le défilement */}
-        <svg className="mf__infinity" viewBox="0 0 200 100" aria-hidden="true">
-          <defs>
-            <linearGradient id="mfSpectrum" x1="0" x2="1" y1="0" y2="0">
-              <stop offset="0" stopColor="#1D5FAE" />
-              <stop offset=".3" stopColor="#22A06B" />
-              <stop offset=".5" stopColor="#F4C531" />
-              <stop offset=".72" stopColor="#F28A26" />
-              <stop offset="1" stopColor="#E2452B" />
-            </linearGradient>
-          </defs>
-          <path className="mf__inf-track" d="M100 50 C120 18 178 12 182 50 C186 88 122 82 100 50 C78 18 14 12 18 50 C22 88 80 82 100 50 Z" />
-          <path
-            className="mf__inf-draw"
-            pathLength={100}
-            style={{ strokeDashoffset: 100 - progress * 100 }}
-            d="M100 50 C120 18 178 12 182 50 C186 88 122 82 100 50 C78 18 14 12 18 50 C22 88 80 82 100 50 Z"
-          />
-        </svg>
-
-        <div className="mf__in">
-          <ol className="mf__rail" aria-hidden="true">
-            {beats.map((b, k) => (
-              <li key={b.label} className={(k < activeBeat || done ? 'is-past' : '') + (k === activeBeat && !done ? ' is-now' : '')}>
-                <span>{String(k + 1).padStart(2, '0')}</span>
-                {b.label}
-              </li>
-            ))}
-          </ol>
-
-          <div className="mf__body">
-            <p className="mf__eyebrow" id="mf-title">
-              Notre manifeste
+    <section className="mfx" id="manifeste" aria-labelledby="mfx-title">
+      <div className="mfx__in">
+        <div className="mfx__side">
+          <div className="mfx__sticky reveal">
+            <p className="mfx__eyebrow">Notre manifeste</p>
+            <h2 className="mfx__title" id="mfx-title">
+              Nous ouvrons des <span className="mfx__mark">portes</span>, une à une.
+            </h2>
+            <p className="mfx__lead">
+              Une équipe née à Abidjan, qui livre des logiciels à des entreprises qui n'attendent plus — et qui reste à vos côtés une fois
+              la porte franchie.
             </p>
-            {/* texte complet pour les lecteurs d'écran (les mots découpés sont masqués) */}
-            <p className="sr">{BEATS.map((b) => b.parts.map((p) => p.t).join('')).join(' ')}</p>
-            <div className="mf__text" aria-hidden="true">
-              {beats.map((b, k) => (
-                <p
-                  key={b.label}
-                  className={
-                    'mf__beat' + (k === activeBeat && !done ? ' is-now' : '') + (k < activeBeat ? ' is-past' : '') + (done ? ' is-all' : '')
-                  }
-                >
-                  {b.words.map((w) => (
-                    <Fragment key={w.i}>
-                      {!w.glued && w.i !== b.first ? ' ' : ''}
-                      <span className={'mf__w' + (w.hot ? ' mf__w--hot' : '') + (w.i < lit ? ' on' : '')}>{w.text}</span>
-                    </Fragment>
-                  ))}
-                </p>
+            <ul className="mfx__facts">
+              {FACTS.map((f) => (
+                <li key={f.label}>
+                  <b>
+                    <CountUp value={f.value} prefix={f.prefix} suffix={f.suffix} />
+                  </b>
+                  <span>{f.label}</span>
+                </li>
               ))}
-            </div>
-
-            <div className="mf__sign">
-              <span className="mf__sign-line" aria-hidden="true"></span>
-              <span>L'équipe TIC — Cocody, Abidjan</span>
-            </div>
-            <ul className="mf__facts">
-              <li>
-                <b>2021</b> année de création
-              </li>
-              <li>
-                <b>+200</b> projets livrés
-              </li>
-              <li>
-                <b>100 %</b> des équipes à Abidjan
-              </li>
             </ul>
+            <p className="mfx__sign">
+              <span aria-hidden="true"></span>L'équipe TIC — Cocody, Abidjan
+            </p>
           </div>
         </div>
 
-        <div className="mf__progress" aria-hidden="true">
-          <i style={{ transform: `scaleX(${progress})` }}></i>
-        </div>
+        <ol className="mfx__list" ref={listRef}>
+          <span className="mfx__track" aria-hidden="true">
+            <i></i>
+          </span>
+          {COMMITMENTS.map((c, i) => (
+            <li
+              key={c.kicker}
+              /* classe FIXE (l'effet d'apparition y ajoute « in ») : l'état
+                 actif passe par data-state, pour que React ne l'efface pas */
+              className="mfx__card reveal"
+              data-state={i === active ? 'active' : i < active ? 'past' : 'next'}
+              style={{ '--c': c.color }}
+            >
+              <span className="mfx__num" aria-hidden="true">
+                {String(i + 1).padStart(2, '0')}
+              </span>
+              <div className="mfx__body">
+                <p className="mfx__kicker">{c.kicker}</p>
+                <h3 className="mfx__h">{c.title}</h3>
+                <p className="mfx__text">{c.text}</p>
+              </div>
+              <Viz kind={c.viz} />
+            </li>
+          ))}
+        </ol>
       </div>
     </section>
   );
