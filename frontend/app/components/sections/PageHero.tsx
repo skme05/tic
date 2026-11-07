@@ -24,7 +24,7 @@ export type HeroVariant = (typeof HERO_VARIANTS)[number];
 
 /* en-tête des pages classiques et des pages produits (solutions) */
 export const HERO_PAGES: HeroVariant = 'door';
-export const HERO_PRODUCTS: HeroVariant = 'slides';
+export const HERO_PRODUCTS: HeroVariant = 'plan';
 const pickVariant = (path: string): HeroVariant => (/^\/solutions\/[^/]+/.test(path) ? HERO_PRODUCTS : HERO_PAGES);
 
 interface PageHeroProps {
@@ -77,7 +77,7 @@ export function PageHero({ crumbs, eyebrow, title, lead, image, imageAlt = '', c
     };
   }, []);
 
-  const label = (badge?.k ?? eyebrow ?? 'Porte').toUpperCase();
+  const label = (typeof title === 'string' ? title : (badge?.k ?? eyebrow ?? 'Porte')).toUpperCase();
   const badgeEl = badge && (
     <span className="ph__badge">
       <span className="ph__dot"></span>
