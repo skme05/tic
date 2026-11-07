@@ -10,6 +10,7 @@ import { CorridorMotion } from '~/components/sections/CorridorMotion';
 import { TestimonialsRail } from '~/features/testimonials/TestimonialsRail';
 import { TestimonialForm } from '~/features/testimonials/TestimonialForm';
 import { CtaContact } from '~/components/sections/CtaContact';
+import { LabShowcase } from '~/components/sections/LabShowcase';
 import { organizationJsonLd } from '~/lib/seo';
 import css from '~/styles/home.css?url';
 
@@ -330,38 +331,7 @@ export default function HomePage() {
         </div>
       </div>
     </section>
-    <section className="sec sec--soft" id="lab">
-      <div className="shell split split--rev">
-        <div className="split__txt reveal">
-          <h2>
-            Le{' '}
-            <em>Corridor Lab</em>
-          </h2>
-          <p>
-            Un espace dédié à l'exploration : prototypage rapide, veille technologique et recherche appliquée. Nous testons aujourd'hui les usages de demain, puis nous les industrialisons avec vous.
-          </p>
-          {' '}
-          <Link viewTransition to="/innovation" className="btn btn--red btn--lg">
-            Découvrir le Lab{' '}
-            <i className="arw"></i>
-          </Link>
-        </div>
-        <ul className="labl reveal">
-          <li>
-            <b>Recherche & Développement</b>
-            <span>Veille technologique et recherche appliquée à vos métiers.</span>
-          </li>
-          <li>
-            <b>Prototypage & Fablab</b>
-            <span>Du concept au prototype fonctionnel en quelques semaines.</span>
-          </li>
-          <li>
-            <b>IA générative</b>
-            <span>Assistants métiers et automatisation documentaire.</span>
-          </li>
-        </ul>
-      </div>
-    </section>
+    <LabShowcase />
     <section className="sec" id="temoignages">
       <div className="shell">
         <div className="sec__hd sec__hd--c reveal">
