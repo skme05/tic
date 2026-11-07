@@ -88,3 +88,60 @@
 .burger[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg)}
 .burger[aria-expanded="true"] span:nth-child(2){opacity:0}
 .burger[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* ── barre de menu « TIC » (bureau) ──────────────────────────────────────
+   - une pastille sombre suit la page active et glisse d'un élément à l'autre
+     au changement de page ; une pastille claire suit le survol ;
+   - à la base de la barre, un filet aux couleurs TIC, fin aux extrémités,
+     discret au repos et bien visible au survol (plus intense sous l'élément
+     survolé). Variables posées par Header.tsx : --ax/--aw (active),
+     --hx/--hw/--ho (survol). */
+li.nav__thumb,li.nav__hover{display:none}
+@media (min-width:1161px){
+  .nav>ul{position:relative;isolation:isolate}
+  li.nav__thumb,li.nav__hover{display:block}
+  .nav__thumb,.nav__hover{
+    position:absolute;top:5px;bottom:5px;left:0;z-index:-1;border-radius:var(--r-f);pointer-events:none;
+    width:var(--w,0);transform:translateX(var(--x,0))
+  }
+  .nav__thumb{--x:var(--ax);--w:var(--aw);background:var(--ink);opacity:var(--ao,0);box-shadow:0 6px 16px rgba(15,17,21,.18)}
+  .nav__hover{--x:var(--hx);--w:var(--hw);background:var(--soft);opacity:var(--ho,0)}
+  .nav>ul[data-hover="active"] .nav__hover{opacity:0}
+  .nav>ul.is-ready :is(.nav__thumb,.nav__hover){
+    transition:transform .45s cubic-bezier(.3,.9,.25,1),width .45s cubic-bezier(.3,.9,.25,1),opacity .25s
+  }
+  /* les fonds par élément cèdent la place aux pastilles glissantes */
+  .nav__l,.nav__l:hover,.nav__l.is-on,.nav__l.is-on:hover,
+  .drop,.drop:hover,.drop.is-open,.drop:has(.nav__l.is-on),.drop:has(.nav__l.is-on):hover,
+  .drop:has(.nav__l.is-on) .nav__l{background:none}
+  .nav__l{transition:color .3s}
+  .nav__c{transition:color .3s}
+
+  /* filet TIC à la base de la barre */
+  .nav>ul::after{
+    content:"";position:absolute;left:22px;right:22px;bottom:-1px;height:3px;z-index:1;pointer-events:none;
+    background:linear-gradient(90deg,#1D5FAE,#22A06B,#F4C531,#F28A26,#E2452B);
+    clip-path:polygon(0 100%,50% 0,100% 100%); /* fin aux extrémités, plus épais au centre */
+    opacity:.5;transition:opacity .35s,filter .35s
+  }
+  .nav>ul::before{ /* éclat sous l'élément survolé */
+    content:"";position:absolute;bottom:-3px;left:0;height:7px;z-index:1;pointer-events:none;
+    width:var(--hw,0);transform:translateX(var(--hx,0));
+    background:linear-gradient(90deg,transparent,#F4C531 30%,#F28A26 60%,transparent);
+    filter:blur(3px);opacity:0;transition:transform .45s cubic-bezier(.3,.9,.25,1),width .45s cubic-bezier(.3,.9,.25,1),opacity .3s
+  }
+  .nav>ul:hover::after{opacity:1;filter:drop-shadow(0 0 4px rgba(244,197,49,.55))}
+  .nav>ul[data-hover]::before{opacity:.9}
+}
+
+/* sous-menus aux couleurs de chaque entrée */
+.menu a{position:relative}
+.menu a:hover,.menu a:focus-visible{background:color-mix(in srgb,var(--c,var(--red)) 9%,#fff);color:color-mix(in srgb,var(--c,var(--red)) 80%,#0F1115)}
+.menu a:hover b,.menu a:focus-visible b{color:color-mix(in srgb,var(--c,var(--red)) 85%,#0F1115)}
+.menu > a::before{
+  content:"";position:absolute;left:4px;top:12px;bottom:12px;width:3px;border-radius:3px;background:var(--c,var(--red));
+  transform:scaleY(0);transition:transform .3s cubic-bezier(.2,.8,.2,1)
+}
+.menu > a:hover::before,.menu > a:focus-visible::before{transform:scaleY(1)}
+.menu__dot{display:inline-block;width:7px;height:7px;margin-right:9px;border-radius:50%;background:var(--c);vertical-align:1px;transition:box-shadow .25s}
+.menu a:hover .menu__dot{box-shadow:0 0 0 3px color-mix(in srgb,var(--c) 25%,transparent)}

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, type CSSProperties, type PointerEvent as RPointerEvent } from 'react';
 import { Link, NavLink, useLocation } from 'react-router';
 import { mainNav, type NavItem } from '~/content/navigation';
 import { getSolution } from '~/content/solutions';
@@ -10,6 +10,53 @@ export function Header({ forceSolid = false }: { forceSolid?: boolean }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [openDrop, setOpenDrop] = useState<string | null>(null);
   const { pathname } = useLocation();
+  const listRef = useRef<HTMLUListElement>(null);
+
+  /* indicateurs glissants (bureau) : la pastille sombre suit la page active,
+     la pastille claire suit le survol ; les deux se déplacent en douceur. */
+  const place = (prefix: 'a' | 'h', li: Element | null) => {
+    const ul = listRef.current;
+    if (!ul) return;
+    if (!li) {
+      ul.style.setProperty(`--${prefix}o`, '0');
+      return;
+    }
+    const r = (li as HTMLElement).getBoundingClientRect();
+    const u = ul.getBoundingClientRect();
+    ul.style.setProperty(`--${prefix}x`, `${r.left - u.left}px`);
+    ul.style.setProperty(`--${prefix}w`, `${r.width}px`);
+    ul.style.setProperty(`--${prefix}o`, '1');
+  };
+  const activeItem = () => listRef.current?.querySelector('.nav__l.is-on')?.closest('li') ?? null;
+  const onNavOver = (e: RPointerEvent) => {
+    if (e.pointerType !== 'mouse') return;
+    const li = (e.target as Element).closest('ul > li:not(.nav__thumb):not(.nav__hover)');
+    if (li && li.parentElement === listRef.current) {
+      place('h', li);
+      listRef.current?.setAttribute('data-hover', li === activeItem() ? 'active' : 'other');
+    }
+  };
+  const onNavLeave = () => {
+    place('h', null);
+    listRef.current?.removeAttribute('data-hover');
+  };
+  useEffect(() => {
+    const ul = listRef.current;
+    if (!ul) return;
+    const sync = () => place('a', activeItem());
+    /* attendre le rendu de la nouvelle classe active */
+    const raf = requestAnimationFrame(() => {
+      sync();
+      requestAnimationFrame(() => ul.classList.add('is-ready'));
+    });
+    const ro = new ResizeObserver(sync);
+    ro.observe(ul);
+    document.fonts?.ready.then(sync).catch(() => {});
+    return () => {
+      cancelAnimationFrame(raf);
+      ro.disconnect();
+    };
+  }, [pathname]);
 
   useEffect(() => {
     let tick = false;
@@ -52,7 +99,9 @@ export function Header({ forceSolid = false }: { forceSolid?: boolean }) {
         </Link>
 
         <nav className={'nav' + (menuOpen ? ' open' : '')} id="nav" aria-label="Navigation principale">
-          <ul>
+          <ul ref={listRef} onPointerOver={onNavOver} onPointerLeave={onNavLeave}>
+            <li className="nav__thumb" aria-hidden="true"></li>
+            <li className="nav__hover" aria-hidden="true"></li>
             {mainNav.map((item) =>
               item.menu || item.columns ? (
                 <DropItem
@@ -97,6 +146,8 @@ export function Header({ forceSolid = false }: { forceSolid?: boolean }) {
     </header>
   );
 }
+
+const MENU_COLORS = ['#1D5FAE', '#1E8F5E', '#D97706', '#E2452B'];
 
 const finePointer = () => typeof window !== 'undefined' && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
@@ -152,7 +203,8 @@ function DropItem({ item, open, setOpen }: { item: NavItem; open: boolean; setOp
                 const sol = getSolution(slug);
                 if (!sol) return null;
                 return (
-                  <Link viewTransition key={slug} to={`/solutions/${slug}`}>
+                  <Link viewTransition key={slug} to={`/solutions/${slug}`} style={{ '--c': sol.color } as CSSProperties}>
+                    <i className="menu__dot" aria-hidden="true"></i>
                     {sol.menuLabel ?? sol.name}
                   </Link>
                 );
@@ -167,8 +219,8 @@ function DropItem({ item, open, setOpen }: { item: NavItem; open: boolean; setOp
         </div>
       ) : (
         <div className="menu">
-          {item.menu!.map((sub) => (
-            <Link viewTransition key={sub.to} to={sub.to}>
+          {item.menu!.map((sub, i) => (
+            <Link viewTransition key={sub.to} to={sub.to} style={{ '--c': sub.color ?? MENU_COLORS[i % MENU_COLORS.length] } as CSSProperties}>
               <b>{sub.title}</b>
               <span>{sub.text}</span>
             </Link>

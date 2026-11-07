@@ -4,6 +4,8 @@ export interface MenuLink {
   title: string;
   text: string;
   to: string;
+  /** couleur TIC de l'entrée (pastille, survol) */
+  color?: string;
 }
 
 export interface NavItem {
