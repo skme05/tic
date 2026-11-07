@@ -4,13 +4,13 @@ import { useEffect, useRef } from 'react';
    Traînée du curseur « couloir éphémère » (souris uniquement).
    En se déplaçant, le curseur trace deux rails parallèles reliés par des
    cadres de porte, aux couleurs TIC : un couloir vu de dessus, large près du
-   curseur et qui s'amincit vers le passé avant de s'effacer (~0,9 s).
+   curseur et qui s'amincit vers le passé avant de s'effacer (~0,7 s), en traits fins et très transparents comme le plan des cartes services.
    Désactivé sur écran tactile et si l'utilisateur réduit les animations.
    ========================================================================== */
-const LIFE = 900; // durée de vie d'un point (ms)
+const LIFE = 700; // durée de vie d'un point (ms)
 const STEP = 4; // distance mini entre deux points (px)
-const DOOR = 34; // espacement des cadres de porte (px de trajet)
-const MAX_W = 16; // demi-largeur du couloir près du curseur (px)
+const DOOR = 26; // espacement des cadres de porte (px de trajet)
+const MAX_W = 8; // demi-largeur du couloir près du curseur (px)
 const COLORS = [
   [29, 95, 174],
   [34, 160, 107],
@@ -117,9 +117,9 @@ export function CursorCorridor() {
       ctx.lineJoin = 'round';
       /* rails */
       for (let i = 1; i < pts.length; i++) {
-        const al = Math.min(1, Math.max(0, A[i]) * 1.1);
+        const al = Math.max(0, A[i]) * 0.32;
         ctx.strokeStyle = color(pts[i].d, al);
-        ctx.lineWidth = 0.8 + 2 * A[i];
+        ctx.lineWidth = 0.75;
         ctx.beginPath();
         ctx.moveTo(L[i - 1][0], L[i - 1][1]);
         ctx.lineTo(L[i][0], L[i][1]);
@@ -130,17 +130,13 @@ export function CursorCorridor() {
       /* cadres de porte : traverse + deux montants courts */
       for (let i = 1; i < pts.length - 1; i++) {
         if (!pts[i].door) continue;
-        const al = Math.min(1, Math.max(0, A[i]) * 0.95);
+        const al = Math.max(0, A[i]) * 0.22;
         ctx.strokeStyle = color(pts[i].d, al);
-        ctx.lineWidth = 0.8 + 1.6 * A[i];
+        ctx.lineWidth = 0.6;
         ctx.beginPath();
         ctx.moveTo(L[i][0], L[i][1]);
         ctx.lineTo(R[i][0], R[i][1]);
         ctx.stroke();
-        ctx.beginPath();
-        ctx.arc(pts[i].x, pts[i].y, 1.2 + 1.6 * A[i], 0, Math.PI * 2);
-        ctx.fillStyle = color(pts[i].d, al);
-        ctx.fill();
       }
       raf = requestAnimationFrame(frame);
     };
