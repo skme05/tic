@@ -20,6 +20,7 @@
 @import './components/walkthrough.css';
 @import './components/scenes-3d.css';
 @import './sections/testimonials-form-fix.css';
+@import './sections/testimonial-form.css';
 @import './responsive/overrides.css';
 @import './sections/why-tic.css';
 @import './sections/corridor-motion.css';

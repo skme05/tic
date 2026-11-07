@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type FormEvent } from 'react';
+import { useEffect, useRef, useState, type CSSProperties, type FormEvent } from 'react';
 import { submitTestimonial } from '~/lib/api/endpoints';
 import { prefersReducedMotion } from '~/lib/dom/scope';
 import { IconCheck } from '~/components/ui/icons';
@@ -8,8 +8,16 @@ type Status = 'idle' | 'flying' | 'landed' | 'sent' | 'error';
 /* Dépôt d'un témoignage. Envoyé à l'API (publication APRÈS relecture).
    Correction : l'ancien site l'« affichait » seulement dans le navigateur du
    visiteur (localStorage) en annonçant une publication immédiate. */
-export function TestimonialForm({ className = 'qform' }: { className?: string }) {
+const RATING_LABEL = ['', 'Décevant', 'Moyen', 'Bien', 'Très bien', 'Excellent'];
+const STARTERS = ['Avant TIC, ', 'Aujourd’hui, ', 'Ce que j’ai apprécié : '];
+const AVATAR = ['#1D5FAE', '#1E8F5E', '#B88A00', '#D9531E', '#E2452B'];
+const MIN = 12;
+
+export function TestimonialForm({ className = 'tf' }: { className?: string }) {
   const [rating, setRating] = useState(5);
+  const [name, setName] = useState('');
+  const [role, setRole] = useState('');
+  const [text, setText] = useState('');
   const [hover, setHover] = useState<number | null>(null);
   const [status, setStatus] = useState<Status>('idle');
   const [bad, setBad] = useState(false);
@@ -40,6 +48,9 @@ export function TestimonialForm({ className = 'qform' }: { className?: string })
       setStatus('landed');
       later(() => {
         form.reset();
+        setName('');
+        setRole('');
+        setText('');
         setRating(5);
         setStatus('sent');
         later(() => setStatus('idle'), 8000);
@@ -52,44 +63,39 @@ export function TestimonialForm({ className = 'qform' }: { className?: string })
   const shown = hover ?? rating;
   const flying = status === 'flying' || status === 'landed';
 
+  const initials = (name.trim() || 'Votre nom')
+    .split(/\s+/)
+    .slice(0, 2)
+    .map((w) => w[0]?.toUpperCase() ?? '')
+    .join('');
+  const avatar = AVATAR[(name.trim().length || 0) % AVATAR.length];
+  const missing = Math.max(0, MIN - text.trim().length);
+
   return (
     <div className={className}>
-      <div>
-        <h3>Laissez votre témoignage</h3>
-        <p>Vous avez travaillé avec nos équipes ? Racontez-le en quelques lignes : nous le relisons puis le publions dans le fil ci-dessus.</p>
-        <ul className="ticks">
-          <li>Publication après relecture par notre équipe</li>
-          <li>Aucune inscription nécessaire</li>
-          <li>Réponse sous 24 h ouvrées</li>
-        </ul>
-      </div>
       <form
-        className={'qform__f' + (flying ? ' is-sending' : '') + (bad ? ' is-bad' : '')}
+        className={'tf__form qform__f' + (flying ? ' is-sending' : '') + (bad ? ' is-bad' : '')}
         id="temoForm"
         noValidate
         onSubmit={onSubmit}
       >
+        <p className="tf__k">Votre avis compte</p>
+        <h3 className="tf__title">
+          Laissez votre <em>témoignage</em>
+        </h3>
+        <p className="tf__lead">Vous avez travaillé avec nos équipes ? Racontez-le en quelques lignes : nous le relisons puis le publions.</p>
+
         <p className="cpanel__honey" aria-hidden="true">
           <label>
             Ne pas remplir : <input type="text" name="website" tabIndex={-1} autoComplete="off" />
           </label>
         </p>
-        <div className="fld">
-          <label htmlFor="temoNom">Votre nom</label>
-          <input id="temoNom" name="name" type="text" placeholder="Ex. Aya Konan" required autoComplete="name" />
-        </div>
-        <div className="fld">
-          <label htmlFor="temoRole">Fonction &amp; organisation</label>
-          <input id="temoRole" name="role" type="text" placeholder="Ex. DAF, Groupe Lagune" />
-        </div>
-        <div className="fld fld--full">
-          <label htmlFor="temoTexte">Votre témoignage</label>{' '}
-          <textarea id="temoTexte" name="text" placeholder="Ce que nous avons livré, ce que ça a changé pour vous…" required rows={4} />
-        </div>
-        <div className="fld fld--full qform__rate">
-          {/* étiquette de groupe (pas de champ unique associé) */}
-          <label id="temoNoteLabel">Votre note</label>{' '}
-          <div className="qstars" role="group" aria-labelledby="temoNoteLabel" onMouseLeave={() => setHover(null)}>
+
+        <div className="tf__rate">
+          <span id="temoNoteLabel" className="tf__label">
+            Votre note
+          </span>
+          <div className="qstars tf__stars" role="group" aria-labelledby="temoNoteLabel" onMouseLeave={() => setHover(null)}>
             {[1, 2, 3, 4, 5].map((n) => (
               <button
                 key={n}
@@ -100,10 +106,49 @@ export function TestimonialForm({ className = 'qform' }: { className?: string })
                 onClick={() => setRating(n)}
                 onMouseEnter={() => setHover(n)}
               >
-                <i></i>
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="m12 2.8 2.8 5.8 6.3.9-4.6 4.4 1.1 6.3L12 17.2l-5.6 3 1.1-6.3L2.9 9.5l6.3-.9z" />
+                </svg>
               </button>
             ))}
           </div>
+          <span className="tf__rate-l" aria-live="polite">
+            {RATING_LABEL[shown]}
+          </span>
+        </div>
+
+        <div className="tf__grid">
+          <label className="tf__fld">
+            <span className="tf__label">Votre nom</span>
+            <input id="temoNom" name="name" type="text" placeholder="Ex. Aya Konan" required autoComplete="name" value={name} onChange={(e) => setName(e.target.value)} />
+          </label>
+          <label className="tf__fld">
+            <span className="tf__label">Fonction &amp; organisation</span>
+            <input id="temoRole" name="role" type="text" placeholder="Ex. DAF, Groupe Lagune" value={role} onChange={(e) => setRole(e.target.value)} />
+          </label>
+          <label className="tf__fld tf__fld--full">
+            <span className="tf__label">Votre témoignage</span>
+            <textarea
+              id="temoTexte"
+              name="text"
+              placeholder="Ce que nous avons livré, ce que ça a changé pour vous…"
+              required
+              rows={4}
+              maxLength={600}
+              value={text}
+              onChange={(e) => setText(e.target.value)}
+            />
+          </label>
+        </div>
+        <div className="tf__help">
+          {STARTERS.map((s) => (
+            <button type="button" key={s} onClick={() => setText((v) => (v.trim() ? `${v.trim()} ${s}` : s))}>
+              + {s.replace(/[,:]\s*$/, '')}
+            </button>
+          ))}
+          <small className={'tf__count' + (missing ? '' : ' is-ok')}>
+            {missing ? `Encore ${missing} caractère${missing > 1 ? 's' : ''}` : `${text.length} / 600`}
+          </small>
         </div>
 
         <div className={'qsend' + (flying ? ' is-fly' : '') + (status === 'landed' ? ' is-done' : '')} hidden={!flying} aria-hidden="true">
@@ -136,14 +181,45 @@ export function TestimonialForm({ className = 'qform' }: { className?: string })
             <em>Reçu · merci ! Publication après relecture.</em>
           </p>
         </div>{' '}
-        <button className="btn btn--red btn--lg qform__submit" type="submit" disabled={flying}>
-          Envoyer mon témoignage <i className="arw"></i>
+        <button className="tf__submit qform__submit" type="submit" disabled={flying}>
+          <span>Envoyer mon témoignage</span>
+          <i aria-hidden="true">→</i>
         </button>
       </form>
-      <div className="qok" id="temoOk" role="status" hidden={status !== 'sent'}>
+
+      <aside className="tf__preview" aria-label="Aperçu de votre témoignage">
+        <span className="tf__rays" aria-hidden="true"></span>
+        <p className="tf__pk">
+          <i></i>Aperçu en direct
+        </p>
+        <figure className="tf__card">
+          <span className="tf__quote" aria-hidden="true">
+            “
+          </span>
+          <div className="tf__cstars" aria-label={`${rating} sur 5`}>
+            {'★★★★★'.slice(0, rating)}
+            <span>{'★★★★★'.slice(rating)}</span>
+          </div>
+          <blockquote className={text.trim() ? '' : 'is-empty'}>{text.trim() || 'Votre témoignage apparaîtra ici, tel qu’il sera publié après relecture.'}</blockquote>
+          <figcaption>
+            <i style={{ '--a': avatar } as CSSProperties}>{initials}</i>
+            <span>
+              <b>{name.trim() || 'Votre nom'}</b>
+              <small>{role.trim() || 'Fonction, organisation'}</small>
+            </span>
+          </figcaption>
+        </figure>
+        <ul className="tf__ticks">
+          <li>Publication après relecture</li>
+          <li>Aucune inscription</li>
+          <li>Réponse sous 24 h ouvrées</li>
+        </ul>
+      </aside>
+
+      <div className="qok tf__ok" id="temoOk" role="status" hidden={status !== 'sent'}>
         <IconCheck /> Merci ! Votre témoignage nous est parvenu : il sera publié après relecture.
       </div>
-      <div className="cpanel__err" role="alert" hidden={status !== 'error'}>
+      <div className="cpanel__err tf__ko" role="alert" hidden={status !== 'error'}>
         <b>Envoi impossible.</b> Vérifiez votre connexion puis réessayez.
       </div>
     </div>

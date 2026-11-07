@@ -375,7 +375,7 @@ export default function HomePage() {
           <p>Ce que disent les organisations qui ont franchi la porte avant vous.</p>
         </div>
         <TestimonialsRail />
-        <TestimonialForm className="qform reveal" />
+        <TestimonialForm className="tf reveal" />
       </div>
     </section>
     <CtaContact />
