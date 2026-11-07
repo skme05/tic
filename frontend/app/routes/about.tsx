@@ -7,6 +7,7 @@ import { CorridorMotion } from '~/components/sections/CorridorMotion';
 import { Manifesto } from '~/components/sections/Manifesto';
 import { CtaContact } from '~/components/sections/CtaContact';
 import { TeamRoles } from '~/components/sections/TeamRoles';
+import { Terrain } from '~/components/sections/Terrain';
 import { useDomEffects } from '~/lib/hooks/useDomEffects';
 import css from '~/styles/about.css?url';
 
@@ -135,40 +136,7 @@ export default function AboutPage() {
         </div>
       </div>
     </section>
-    <section className="sec" data-scene="neural" data-scene-tone="light">
-      <div className="shell split">
-        <div className="split__img reveal">
-          <img loading="lazy" decoding="async" src="/assets/img/equipe-open-space.webp" width="1600" height="1066" alt="L'équipe TIC au travail à Abidjan" />
-          {' '}
-          <div className="split__img__c">
-            <b>+200</b>
-            <span>Projets livrés depuis 2021</span>
-          </div>
-        </div>
-        <div className="split__txt reveal">
-          <h2>
-            Une équipe basée à
-            <br />
-            <em>Abidjan</em>
-            , pour l'Afrique
-          </h2>
-          <p>
-            Nous connaissons le terrain : connexions instables, contraintes réglementaires locales, paiements mobiles, multilinguisme. Nos solutions sont conçues pour fonctionner ici, pas seulement en démonstration.
-          </p>
-          <ul className="ticks">
-            <li>Équipes pluridisciplinaires 100 % basées en Côte d'Ivoire</li>
-            <li>Méthodologie agile et livraisons continues</li>
-            <li>Conformité aux obligations locales : FNE, déclarations sociales</li>
-            <li>Support et maintenance applicative sur le long terme</li>
-          </ul>
-          {' '}
-          <Link viewTransition to="/expertise" className="btn btn--red btn--lg">
-            Voir nos expertises{' '}
-            <i className="arw"></i>
-          </Link>
-        </div>
-      </div>
-    </section>
+    <Terrain />
     <section className="sec sec--soft" data-scene="ico" data-scene-tone="light">
       <div className="shell">
         <div className="sec__hd sec__hd--c reveal">
