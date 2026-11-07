@@ -1,0 +1,142 @@
+/* ==========================================================================
+   « Six portes. Une seule entrée. » — composant NeonDoors (accueil)
+   Portes néon aux couleurs de chaque expertise (--c), index --i pour
+   l'allumage en cascade.
+   ========================================================================== */
+.ndoors{position:relative;z-index:4;background:#06080D;color:#fff;overflow:hidden}
+.ndoors::before{ /* sol réfléchissant et lueur lointaine */
+  content:"";position:absolute;inset:auto 0 0;height:45%;pointer-events:none;
+  background:radial-gradient(ellipse 60% 70% at 50% 100%,rgba(29,95,174,.16),transparent 70%)
+}
+.ndoors__in{position:relative;max-width:1240px;margin:0 auto;padding:120px 24px;box-sizing:border-box}
+.ndoors__hd{text-align:center;margin-bottom:64px}
+.ndoors__eyebrow{margin:0 0 14px;font-size:12px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#AEB6C2}
+.ndoors__title{
+  margin:0 0 16px;color:#fff;font-family:var(--lab);font-weight:800;
+  font-size:clamp(36px,4.4vw,60px);line-height:1.02;letter-spacing:-.03em
+}
+.ndoors__lead{margin:0 auto;max-width:560px;font-size:17px;line-height:1.6;color:#AEB6C2}
+.txt-spectrum-dk{
+  background:linear-gradient(90deg,#4F9BF0,#3CCB86 30%,#F4C531 52%,#F59A3E 74%,#F2674A);
+  -webkit-background-clip:text;background-clip:text;color:transparent
+}
+.ndoors__grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:64px 32px}
+
+/* ── une porte ─────────────────────────────────────────────────────────── */
+.ndoor{
+  --glow:color-mix(in srgb,var(--c) 70%,#fff);
+  position:relative;display:block;height:400px;perspective:1400px;
+  color:var(--c);text-decoration:none;border-radius:6px 6px 0 0;
+  opacity:.12;filter:saturate(.3);
+  transition:opacity .2s,filter .2s
+}
+.ndoor:focus-visible{outline:2px solid var(--glow);outline-offset:8px}
+
+/* allumage en cascade, façon tube néon qui grésille */
+.ndoors.is-lit .ndoor{animation:ndoorPowerOn 1.1s steps(1,end) both;animation-delay:calc(var(--i) * .16s + .1s)}
+@keyframes ndoorPowerOn{
+  0%{opacity:.12;filter:saturate(.3)}
+  12%{opacity:1;filter:none}
+  18%{opacity:.25}
+  30%{opacity:1}
+  36%{opacity:.4}
+  44%,100%{opacity:1;filter:none}
+}
+
+/* cadre néon + trait de lumière qui en fait le tour */
+.ndoor__frame{
+  position:absolute;inset:0;border-radius:6px 6px 0 0;pointer-events:none;
+  border:2px solid currentColor;border-bottom:none;
+  box-shadow:0 0 18px currentColor,inset 0 0 18px currentColor;opacity:.85
+}
+.ndoor__frame::after{
+  content:"";position:absolute;inset:-2px -2px 0;border-radius:inherit;padding:2px 2px 0;
+  background:conic-gradient(from var(--ang,0deg),transparent 0 78%,#fff 88%,transparent 96%);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0);
+  animation:ndoorSweep 5.5s linear infinite;animation-delay:calc(var(--i) * -.9s);opacity:.9
+}
+@property --ang{syntax:'<angle>';inherits:false;initial-value:0deg}
+@keyframes ndoorSweep{to{--ang:360deg}}
+
+/* la pièce derrière la porte */
+.ndoor__room{
+  position:absolute;inset:2px 2px 0;overflow:hidden;border-radius:4px 4px 0 0;
+  background:radial-gradient(ellipse at 50% 35%,color-mix(in srgb,var(--c) 22%,transparent),transparent 70%),#0A0E16;
+  display:flex;align-items:flex-end
+}
+.ndoor__tunnel{position:absolute;inset:0;opacity:0;transition:opacity .6s}
+.ndoor__tunnel span{
+  position:absolute;inset:0;border:1.5px solid var(--glow);border-bottom:none;
+  box-shadow:0 0 10px var(--c);transform-origin:50% 40%;opacity:0;
+  animation:ndoorTunnel 3.6s cubic-bezier(.6,0,1,1) infinite paused
+}
+.ndoor__tunnel span:nth-child(2){animation-delay:-.72s}
+.ndoor__tunnel span:nth-child(3){animation-delay:-1.44s}
+.ndoor__tunnel span:nth-child(4){animation-delay:-2.16s}
+.ndoor__tunnel span:nth-child(5){animation-delay:-2.88s}
+@keyframes ndoorTunnel{
+  0%{transform:scale(.05);opacity:0}
+  15%{opacity:.8}
+  85%{opacity:.6}
+  100%{transform:scale(1.15);opacity:0}
+}
+.ndoor__copy{
+  position:relative;display:flex;flex-direction:column;gap:12px;
+  padding:32px 24px 32px 19%; /* le battant ouvert occupe le bord gauche */
+  background:linear-gradient(to top,rgba(10,14,22,.95) 40%,rgba(10,14,22,0));
+  transform:translateY(14px);opacity:0;transition:transform .7s .25s,opacity .6s .25s
+}
+.ndoor__name{font-family:var(--lab);font-size:22px;font-weight:700;color:#fff}
+.ndoor__text{font-size:15px;line-height:1.6;color:#C9D0DA}
+.ndoor__go{font-weight:700;color:#fff}
+.ndoor__go span{display:inline-block;transition:transform .3s}
+
+/* le battant */
+.ndoor__leaf{
+  position:absolute;inset:2px 2px 0;padding:28px;box-sizing:border-box;
+  display:flex;flex-direction:column;gap:14px;border-radius:4px 4px 0 0;
+  background:linear-gradient(160deg,#1A2130,#10151F);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.06);
+  transform-origin:left center;transition:transform 1s cubic-bezier(.3,.7,.2,1);
+  backface-visibility:hidden
+}
+.ndoor__plate{align-self:flex-start;font-size:11px;font-weight:700;letter-spacing:.2em;padding:6px 10px;border-radius:4px;border:1px solid currentColor}
+.ndoor__leaf-name{font-family:var(--lab);font-size:22px;font-weight:700;line-height:1.2;color:#fff}
+.ndoor__hint{margin-top:auto;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#8A94A3}
+.ndoor__handle{position:absolute;right:22px;top:52%;width:5px;height:40px;border-radius:3px;background:currentColor;box-shadow:0 0 10px currentColor}
+
+/* lumière qui déborde au sol, sous la porte */
+.ndoor__spill{
+  position:absolute;left:4%;right:4%;top:100%;height:90px;pointer-events:none;
+  background:linear-gradient(to bottom,color-mix(in srgb,var(--c) 55%,transparent),transparent);
+  clip-path:polygon(8% 0,92% 0,100% 100%,0 100%);
+  transform:scaleY(.25);transform-origin:top;opacity:.45;filter:blur(2px);
+  transition:transform .8s cubic-bezier(.3,.7,.2,1),opacity .6s
+}
+
+/* ── ouverte : survol (souris), focus clavier, ou premier appui tactile ── */
+.ndoor:hover .ndoor__leaf,.ndoor:focus-visible .ndoor__leaf,.ndoor.is-open .ndoor__leaf{transform:rotateY(-78deg)}
+.ndoor:hover .ndoor__tunnel,.ndoor:focus-visible .ndoor__tunnel,.ndoor.is-open .ndoor__tunnel{opacity:1}
+.ndoor:hover .ndoor__tunnel span,.ndoor:focus-visible .ndoor__tunnel span,.ndoor.is-open .ndoor__tunnel span{animation-play-state:running}
+.ndoor:hover .ndoor__copy,.ndoor:focus-visible .ndoor__copy,.ndoor.is-open .ndoor__copy{transform:none;opacity:1}
+.ndoor:hover .ndoor__go span,.ndoor:focus-visible .ndoor__go span{transform:translateX(4px)}
+.ndoor:hover .ndoor__spill,.ndoor:focus-visible .ndoor__spill,.ndoor.is-open .ndoor__spill{transform:scaleY(1);opacity:1}
+.ndoor:hover .ndoor__frame,.ndoor:focus-visible .ndoor__frame,.ndoor.is-open .ndoor__frame{opacity:1;box-shadow:0 0 28px currentColor,inset 0 0 22px currentColor}
+
+@media (max-width:700px){
+  .ndoors__in{padding:90px var(--pad)}
+  .ndoors__grid{gap:56px 0}
+  .ndoor{height:360px}
+  .ndoor:hover .ndoor__leaf,.ndoor.is-open .ndoor__leaf{transform:rotateY(-82deg)}
+}
+
+/* mouvement réduit : portes allumées d'emblée, rien ne tourne ni ne défile ;
+   la pièce apparaît en fondu au lieu du battant qui pivote */
+@media (prefers-reduced-motion:reduce){
+  .ndoor,.ndoors.is-lit .ndoor{opacity:1;filter:none;animation:none}
+  .ndoor__frame::after,.ndoor__tunnel{display:none}
+  .ndoor__leaf{transition:opacity .3s}
+  .ndoor:hover .ndoor__leaf,.ndoor:focus-visible .ndoor__leaf,.ndoor.is-open .ndoor__leaf{transform:none;opacity:0}
+  .ndoor__copy,.ndoor__spill{transition:none}
+}

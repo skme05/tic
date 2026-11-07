@@ -1,0 +1,129 @@
+/* Révélation de texte au scroll + volumes 3D
+   Source : style.css d'origine, lignes 455-581. */
+
+/* ═══════════════ 10 · REVELATION DE TEXTE AU SCROLL ═══════════════ */
+.reveal-sec{position:relative;background:var(--night);color:#fff;height:280vh}
+.reveal-sec::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:
+    linear-gradient(to bottom,rgba(255,253,248,.92),rgba(255,253,248,0) 24vh),
+    radial-gradient(80% 50% at 50% 0%,rgba(185,28,28,.16),transparent 62%)
+}
+.rs__stage{position:sticky;top:0;height:100vh;display:grid;place-items:center;overflow:hidden}
+/* animations de fond, purement decoratives : le design du texte ne bouge pas.
+   Volontairement jouees meme en "mouvement reduit" : mouvement lent et discret,
+   sans scroll-jacking ni parallaxe, donc sans risque d'inconfort — sinon, sur les
+   machines qui demandent ce reglage, la section reste plate et figee. */
+.rs__stage::before{
+  content:"";position:absolute;inset:-12%;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(36% 30% at 18% 22%,rgba(185,28,28,.28),transparent 70%),
+    radial-gradient(32% 28% at 84% 76%,rgba(23,95,158,.26),transparent 70%),
+    radial-gradient(26% 24% at 70% 14%,rgba(99,184,67,.16),transparent 70%);
+  filter:blur(34px);
+  animation:rsDrift 20s ease-in-out infinite alternate,rsGlow 9s ease-in-out infinite alternate
+}
+.rs__stage::after{
+  content:"";position:absolute;inset:0;z-index:1;pointer-events:none;opacity:.7;
+  background:
+    radial-gradient(1.7px 1.7px at 16% 28%,rgba(255,255,255,.85),transparent),
+    radial-gradient(1.4px 1.4px at 74% 20%,rgba(255,255,255,.7),transparent),
+    radial-gradient(1.9px 1.9px at 44% 74%,rgba(255,255,255,.7),transparent),
+    radial-gradient(1.4px 1.4px at 88% 62%,rgba(255,255,255,.65),transparent),
+    radial-gradient(1.6px 1.6px at 30% 86%,rgba(255,255,255,.6),transparent),
+    radial-gradient(1.4px 1.4px at 60% 46%,rgba(255,255,255,.6),transparent),
+    radial-gradient(1.5px 1.5px at 8% 58%,rgba(255,255,255,.6),transparent),
+    radial-gradient(1.3px 1.3px at 94% 32%,rgba(255,255,255,.6),transparent);
+  animation:rsDust 24s ease-in-out infinite alternate,rsTwinkle 5s ease-in-out infinite alternate
+}
+@keyframes rsDrift{
+  0%{transform:translate3d(-2%,-1%,0) scale(1)}
+  100%{transform:translate3d(3%,2%,0) scale(1.1)}
+}
+@keyframes rsGlow{0%{opacity:.75}100%{opacity:1}}
+@keyframes rsDust{0%{transform:translate3d(0,0,0)}100%{transform:translate3d(-24px,-30px,0)}}
+@keyframes rsTwinkle{0%{opacity:.55}100%{opacity:.9}}
+
+/* ── volumes 3D : cube, anneaux et pyramide filaires, en vraie perspective CSS.
+   Chaque volume flotte dans l'espace (derive + respiration d'echelle),
+   tourne sur lui-meme nettement plus vite, et s'incline en plus au scroll et
+   au curseur. Joues meme en "mouvement reduit" : contenus, sans parallaxe
+   de camera ni clignotement brusque. */
+.rs__3d{position:absolute;inset:0;z-index:1;pointer-events:none;perspective:1400px}
+
+.rs__float{position:absolute;transform-style:preserve-3d}
+.rs__float--1{left:12%;top:16%;width:130px;height:130px;animation:rsFloat1 6.5s ease-in-out infinite}
+.rs__float--2{right:9%;bottom:13%;width:240px;height:240px;animation:rsFloat2 8.5s ease-in-out infinite}
+.rs__float--3{right:5%;bottom:2%;width:320px;height:320px;animation:rsFloat3 10.5s ease-in-out infinite}
+.rs__float--4{left:6%;bottom:9%;width:110px;height:110px;animation:rsFloat4 7.5s ease-in-out infinite}
+@keyframes rsFloat1{0%,100%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(24px,-32px,0) scale(1.12)}}
+@keyframes rsFloat2{0%,100%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(-28px,26px,0) scale(1.08)}}
+@keyframes rsFloat3{0%,100%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(20px,22px,0) scale(.9)}}
+@keyframes rsFloat4{0%,100%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(-18px,-26px,0) scale(1.16)}}
+
+.rs__cubeWrap,.rs__ringWrap,.rs__pyrWrap{
+  position:absolute;inset:0;transform-style:preserve-3d;
+  transition:transform .5s cubic-bezier(.2,.8,.2,1)
+}
+
+.rs__cube{
+  position:relative;width:100%;height:100%;transform-style:preserve-3d;opacity:.72;
+  animation:rsCubeSpin 13s linear infinite,rsPulse 3.2s ease-in-out infinite alternate
+}
+.rs__cube span{
+  position:absolute;inset:0;border:1.5px solid rgba(255,255,255,.5);
+  background:linear-gradient(135deg,rgba(220,38,38,.34),rgba(23,95,158,.28))
+}
+.rs__cube span:nth-child(1){transform:translateZ(60px)}
+.rs__cube span:nth-child(2){transform:rotateY(180deg) translateZ(60px)}
+.rs__cube span:nth-child(3){transform:rotateY(90deg) translateZ(60px)}
+.rs__cube span:nth-child(4){transform:rotateY(-90deg) translateZ(60px)}
+.rs__cube span:nth-child(5){transform:rotateX(90deg) translateZ(60px)}
+.rs__cube span:nth-child(6){transform:rotateX(-90deg) translateZ(60px)}
+@keyframes rsCubeSpin{0%{transform:rotateX(0) rotateY(0)}100%{transform:rotateX(360deg) rotateY(360deg)}}
+
+.rs__ring{
+  position:absolute;inset:0;border-radius:50%;border:1.5px solid rgba(255,255,255,.44);
+  transform:rotateX(72deg);animation:rsRingSpin 15s linear infinite,rsPulse 4s ease-in-out infinite alternate;opacity:.6
+}
+.rs__ring--2{border-color:rgba(220,38,38,.5);animation-duration:21s,4.6s;animation-direction:reverse,alternate;opacity:.46}
+@keyframes rsRingSpin{0%{transform:rotateX(72deg) rotateZ(0)}100%{transform:rotateX(72deg) rotateZ(360deg)}}
+
+.rs__pyr{position:relative;width:100%;height:100%;transform-style:preserve-3d;opacity:.64;animation:rsPyrSpin 11s linear infinite,rsPulse 2.8s ease-in-out infinite alternate}
+.rs__pyr span{
+  position:absolute;left:50%;top:50%;width:0;height:0;
+  border-left:50px solid transparent;border-right:50px solid transparent;border-bottom:86px solid rgba(99,184,67,.32);
+  transform-origin:50% 100%
+}
+.rs__pyr span:nth-child(1){transform:translate(-50%,-100%) rotateY(0deg) rotateX(18deg)}
+.rs__pyr span:nth-child(2){transform:translate(-50%,-100%) rotateY(90deg) rotateX(18deg)}
+.rs__pyr span:nth-child(3){transform:translate(-50%,-100%) rotateY(180deg) rotateX(18deg)}
+.rs__pyr span:nth-child(4){transform:translate(-50%,-100%) rotateY(270deg) rotateX(18deg)}
+@keyframes rsPyrSpin{0%{transform:rotateY(0)}100%{transform:rotateY(360deg)}}
+
+@keyframes rsPulse{0%{filter:brightness(1) saturate(1)}100%{filter:brightness(1.55) saturate(1.4)}}
+
+@media (max-width:760px){.rs__3d{display:none}}
+.rs__in{position:relative;z-index:2;width:100%;max-width:1000px;padding:0 var(--pad);text-align:center}
+.rs__k{
+  display:inline-flex;align-items:center;gap:9px;margin-bottom:34px;padding:7px 16px;border-radius:var(--r-f);
+  background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);
+  font:700 10.5px/1 var(--lab);letter-spacing:.24em;text-transform:uppercase;color:rgba(255,255,255,.72)
+}
+.rs__k::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--red-l)}
+.rs__txt{
+  font-family:var(--disp);font-weight:700;letter-spacing:-.022em;line-height:1.44;
+  font-size:clamp(18px,2.35vw,32px);color:#fff;
+  max-width:880px;margin-inline:auto;text-wrap:balance
+}
+.rs__txt .w{opacity:.17;transition:opacity .5s cubic-bezier(.2,.8,.2,1),color .5s ease}
+.rs__txt .w.on{opacity:1}
+.rs__txt .w.hot{color:#ff6a6a}
+.rs__foot{
+  margin-top:44px;display:flex;flex-wrap:wrap;justify-content:center;gap:12px 34px;
+  font:600 12.5px/1 var(--lab);letter-spacing:.06em;color:rgba(255,255,255,.42)
+}
+.rs__foot li{display:flex;align-items:center;gap:9px}
+.rs__foot i{width:5px;height:5px;border-radius:50%;background:var(--red-l)}
+.rs__prog{position:absolute;left:0;right:0;bottom:0;height:2px;background:rgba(255,255,255,.1);z-index:3}
+.rs__prog i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--red),var(--red-l),#fff)}

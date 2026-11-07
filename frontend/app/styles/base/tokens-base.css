@@ -1,0 +1,59 @@
+/* Jetons (couleurs, rayons, ombres, typo) et base HTML
+   Source : style.css d'origine, lignes 15-71. */
+
+/* ══════════════════════════ 1 · JETONS & BASE ══════════════════════════ */
+:root{
+  /* rouge de marque conserve */
+  --red:#b91c1c; --red-l:#dc2626; --red-d:#8f1414; --red-bg:#fef2f2; --red-bg2:#fee2e2;
+  /* accents secondaires */
+  --b:#175F9E; --g:#63B843; --y:#F5C400; --o:#F5891F; --rr:#D9201B;
+  /* encres */
+  --ink:#0f1115; --ink-2:#2a2f37; --body:#666e7a; --mute:#9aa2ae;
+  --line:#e8e9ee; --line-2:#f1f2f6;
+  --bg:#ffffff; --soft:#f6f7f9; --soft-2:#fbfbfd;
+  /* nuit (immersions) */
+  --night:#080a0f; --night-2:#0e1219; --night-3:#161b24;
+  /* nuit bleutee du footer — tirée de la teinte --b (tints.dev), pour
+     se distinguer nettement du noir chaud du CTA qu'il vient recouvrir */
+  --foot-1:#0a1017; --foot-2:#0b141f; --foot-3:#0d1a29;
+  /* geometrie */
+  --shell:1200px; --pad:24px; --hdr:76px;
+  --r-s:10px; --r-m:14px; --r-l:20px; --r-xl:28px; --r-f:999px;
+  --sh-s:0 1px 2px rgba(15,17,21,.05);
+  --sh-m:0 10px 28px rgba(15,17,21,.07);
+  --sh-l:0 28px 70px rgba(15,17,21,.12);
+  --sh-red:0 12px 30px rgba(185,28,28,.26);
+  /* typographie */
+  --sans:'Plus Jakarta Sans','Sora',ui-sans-serif,system-ui,'Segoe UI',Roboto,sans-serif;
+  --disp:'Plus Jakarta Sans','Sora',ui-sans-serif,system-ui,sans-serif;
+  --lab:'Sora',ui-sans-serif,system-ui,sans-serif;
+  --hero:'Syne','Sora',ui-sans-serif,system-ui,sans-serif;
+  /* pilote de l'immersion hero (0 → 1), ecrit par le JS */
+  --dive:0;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+/* overflow-x sur html (et non sur body) : sinon body devient un conteneur de
+   defilement et les sections en position:sticky — plongee du hero, revelation
+   de texte — cessent de fonctionner. */
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{
+  margin:0;background:var(--bg);color:var(--body);
+  font:400 16px/1.72 var(--sans);letter-spacing:-.005em;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+  overflow-x:clip;
+}
+body.is-locked{overflow:hidden}
+h1,h2,h3,h4{color:var(--ink);margin:0;font-family:var(--disp);font-weight:800;line-height:1.1;letter-spacing:-.035em}
+p{margin:0}
+img,video{max-width:100%;display:block}
+ul{margin:0;padding:0;list-style:none}
+a{color:inherit;text-decoration:none}
+button{font:inherit;border:0;background:none;cursor:pointer;color:inherit}
+em{font-style:normal;color:var(--red)}
+::selection{background:var(--red);color:#fff}
+:focus-visible{outline:2px solid var(--red);outline-offset:3px;border-radius:4px}
+
+.shell{width:100%;max-width:var(--shell);margin-inline:auto;padding-inline:var(--pad)}
+.shell--wide{max-width:1360px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}

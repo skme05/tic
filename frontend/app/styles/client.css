@@ -1,0 +1,26 @@
+/* Bundle « client » — Espace client : socle + tableau de bord.
+   Les fichiers sont importés dans l'ordre de la feuille d'origine :
+   l'ordre compte (les règles responsive viennent après les composants). */
+@import './base/tokens-base.css';
+@import './base/atoms.css';
+@import './layout/header.css';
+@import './base/section-titles.css';
+@import './sections/stats.css';
+@import './sections/video-panel.css';
+@import './components/doors.css';
+@import './components/cards.css';
+@import './layout/cta-video.css';
+@import './layout/footer.css';
+@import './pages/subpages.css';
+@import './base/reveal.css';
+@import './layout/coverstack.css';
+@import './responsive/breakpoints.css';
+@import './responsive/small-phones.css';
+@import './responsive/reduced-motion.css';
+@import './components/rails.css';
+@import './sections/testimonials.css';
+@import './components/walkthrough.css';
+@import './components/scenes-3d.css';
+@import './sections/testimonials-form-fix.css';
+@import './pages/espace-client.css';
+@import './responsive/overrides.css';

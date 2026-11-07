@@ -1,0 +1,50 @@
+/* Manifeste clair / logo en mouvement
+   Source : style.css d'origine, lignes 1820-1867. */
+
+/* ═════════════ 15b · MANIFESTE CLAIR / LOGO EN MOUVEMENT ═════════════
+   La sortie du globe se pose dans une surface blanche. Le signe TIC reste
+   derriere le texte, lentement vivant, sans concurrencer la lecture. */
+.reveal-sec{background:#fff;color:var(--ink);height:240vh}
+.reveal-sec::before{
+  background:
+    linear-gradient(to bottom,rgba(255,255,255,.98),rgba(255,255,255,0) 18vh),
+    radial-gradient(62% 54% at 50% 52%,rgba(23,95,158,.055),transparent 72%);
+  z-index:0
+}
+.rs__stage{background:linear-gradient(145deg,#fff 0%,#fbfcfe 45%,#f5f8fc 100%)}
+.rs__stage::before{
+  inset:-8%;
+  background:
+    radial-gradient(34% 34% at 14% 24%,rgba(23,95,158,.09),transparent 70%),
+    radial-gradient(30% 30% at 86% 72%,rgba(185,28,28,.075),transparent 70%);
+  filter:blur(38px);opacity:.9
+}
+.rs__stage::after{
+  opacity:.4;
+  background:
+    radial-gradient(1.5px 1.5px at 16% 28%,rgba(23,95,158,.32),transparent),
+    radial-gradient(1.4px 1.4px at 74% 20%,rgba(185,28,28,.28),transparent),
+    radial-gradient(1.7px 1.7px at 44% 74%,rgba(23,95,158,.24),transparent),
+    radial-gradient(1.4px 1.4px at 88% 62%,rgba(185,28,28,.24),transparent),
+    radial-gradient(1.4px 1.4px at 30% 86%,rgba(23,95,158,.18),transparent)
+}
+.rs__brand-bg{position:absolute;inset:0;z-index:1;display:grid;place-items:center;overflow:hidden;pointer-events:none}
+.rs__brand-bg::before{content:"";position:absolute;width:min(78vw,940px);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.98) 0%,rgba(255,255,255,.58) 35%,rgba(255,255,255,0) 72%);filter:blur(2px)}
+/* Le logo officiel conserve ses couleurs : la transparence le place derriere le
+   manifeste sans le transformer en filigrane gris. */
+.rs__brand-bg img{position:relative;width:min(68vw,800px);max-height:58vh;object-fit:contain;opacity:.20;filter:drop-shadow(0 22px 34px rgba(24,91,145,.14)) saturate(1.16);animation:ticLogoFloat 11s ease-in-out infinite;transform-origin:center;will-change:transform,opacity,filter}
+.rs__brand-orbit{position:absolute;border-radius:50%;border:1px solid rgba(23,95,158,.13);will-change:transform}
+.rs__brand-orbit--a{width:min(72vw,860px);aspect-ratio:1;animation:ticOrbit 24s linear infinite}
+.rs__brand-orbit--b{width:min(52vw,620px);aspect-ratio:1;border-color:rgba(185,28,28,.14);border-style:dashed;animation:ticOrbit 17s linear infinite reverse}
+@keyframes ticLogoFloat{0%,100%{transform:translate3d(-2%,-1%,0) scale(.94) rotate(-3deg);opacity:.14;filter:drop-shadow(0 16px 24px rgba(24,91,145,.10)) saturate(1.05)}50%{transform:translate3d(2%,2%,0) scale(1.06) rotate(3deg);opacity:.28;filter:drop-shadow(0 30px 42px rgba(243,122,32,.22)) saturate(1.28)}}
+@keyframes ticOrbit{to{transform:rotate(360deg)}}
+.rs__in{z-index:2}
+.rs__txt{color:var(--ink);text-shadow:0 1px 0 rgba(255,255,255,.82)}
+.rs__txt .w{opacity:.18;color:var(--ink);transition:opacity .5s cubic-bezier(.2,.8,.2,1),color .5s ease}
+.rs__txt .w.on{opacity:1}
+.rs__txt .w.hot{color:var(--red)}
+.rs__foot{color:rgba(15,17,21,.48)}
+.rs__foot i{background:var(--red)}
+.rs__prog{background:rgba(15,17,21,.08)}
+@media (max-width:760px){.rs__brand-bg img{width:108vw;max-height:none;opacity:.15}.rs__brand-orbit--a{width:112vw}.rs__brand-orbit--b{width:82vw}}
+@media (prefers-reduced-motion:reduce){.rs__brand-bg img,.rs__brand-orbit{animation:none}}

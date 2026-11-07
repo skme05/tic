@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head><meta charset="UTF-8" /><meta name="robots" content="noindex" /><title>Formulaires</title></head>
+<body>
+<!-- Déclarations Netlify Forms (repli tant que l'API Django n'est pas en ligne).
+     Netlify détecte ces formulaires au déploiement ; le site React y envoie
+     ses données (voir app/lib/api/client.ts › postNetlifyForm).
+     Les noms de champs doivent correspondre à app/lib/api/types.ts. -->
+<form name="contact" data-netlify="true" netlify-honeypot="bot-field" hidden>
+  <input type="text" name="bot-field" />
+  <input type="text" name="name" /><input type="text" name="organisation" /><input type="email" name="email" />
+  <input type="tel" name="phone" /><input type="text" name="service" /><textarea name="message"></textarea>
+  <input type="text" name="consent" />
+</form>
+<form name="brief-projet" data-netlify="true" netlify-honeypot="bot-field" hidden>
+  <input type="text" name="bot-field" />
+  <input type="text" name="type" /><textarea name="objective"></textarea><input type="text" name="audience" />
+  <input type="text" name="features" /><input type="text" name="otherFeature" /><input type="text" name="budget" />
+  <input type="text" name="deadline" /><input type="text" name="priority" /><input type="text" name="name" />
+  <input type="text" name="organisation" /><input type="email" name="email" /><input type="tel" name="phone" />
+</form>
+<form name="temoignage" data-netlify="true" netlify-honeypot="bot-field" hidden>
+  <input type="text" name="bot-field" />
+  <input type="text" name="name" /><input type="text" name="role" /><textarea name="text"></textarea><input type="text" name="rating" />
+</form>
+</body>
+</html>

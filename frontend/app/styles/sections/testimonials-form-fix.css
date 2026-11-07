@@ -1,0 +1,27 @@
+/* Correctif responsive du formulaire témoignages
+   Source : style.css d'origine, lignes 2096-2120. */
+
+/* ═════════════ 22 · CORRECTIF RESPONSIVE — FORMULAIRE TEMOIGNAGES ═════════════
+   Les regles ".qform" / ".qform__f" de la section 18 (plus bas dans la cascade
+   que le bloc RESPONSIVE) reprenaient le pas sur les surcharges mobiles avec
+   la meme specificite : le formulaire restait donc affiche en 2 colonnes
+   quelle que soit la largeur d'ecran. On rejoue ici les memes valeurs, en
+   dernier dans le fichier, pour qu'elles gagnent la cascade — design inchange,
+   uniquement le comportement responsive est retabli. */
+@media (max-width:980px){
+  .qform{grid-template-columns:1fr}
+}
+@media (max-width:700px){
+  .qform__f{grid-template-columns:1fr}
+  .qform__f .fld--full,.qform__f .btn,.qform__submit,.qform .qsend{grid-column:span 1}
+  .qform .qsend{height:140px}
+}
+@media (max-width:480px){
+  .qform{padding:22px}
+  .qform h3{font-size:clamp(19px,6vw,23px)}
+  .qform .qsend{height:132px}
+}
+@media (max-width:360px){
+  .qform{padding:18px;border-radius:var(--r-l)}
+  .qform__f{gap:12px}
+}

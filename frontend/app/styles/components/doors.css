@@ -1,0 +1,299 @@
+/* Le couloir et les portes
+   Source : style.css d'origine, lignes 616-912. */
+
+/* ═════════════ 12 · LE COULOIR & LES PORTES ═════════════
+   Couloir en perspective a un point de fuite : murs de platre sombre,
+   sol ciré, plafond avec rampe lumineuse, porte eclairee au fond.
+   Chaque porte est un vantail de bois massif dans son chambranle. */
+.corridor{
+  position:relative;padding:120px 0 140px;overflow:hidden;
+  background:#100e0c;color:#fff;isolation:isolate
+}
+.corr__arch{position:absolute;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
+/* fond reel : circuit imprime (assets/arriere_plan.jpg) */
+.corr__bg{
+  position:absolute;inset:0;
+  background:url('/assets/img/couloir-fond.webp') center/cover no-repeat;
+  filter:grayscale(.22) contrast(1.06) brightness(.6)
+}
+.corr__tint{
+  position:absolute;inset:0;
+  background:linear-gradient(180deg,
+    rgba(8,10,14,.78) 0%,rgba(8,10,14,.4) 26%,
+    rgba(8,10,14,.5) 68%,rgba(8,10,14,.86) 100%)
+}
+/* nappe de lumiere chaude au sol, sous les portes */
+.corr__pool{
+  position:absolute;left:50%;bottom:-6%;translate:-50% 0;width:min(78%,980px);height:32%;
+  background:radial-gradient(60% 100% at 50% 100%,rgba(255,196,140,.16),transparent 72%);
+  filter:blur(14px)
+}
+.corr__dust{
+  position:absolute;inset:0;opacity:.45;
+  background:
+    radial-gradient(1.5px 1.5px at 18% 30%,rgba(255,232,204,.6),transparent),
+    radial-gradient(1.2px 1.2px at 72% 22%,rgba(255,232,204,.5),transparent),
+    radial-gradient(1.7px 1.7px at 44% 68%,rgba(255,232,204,.45),transparent),
+    radial-gradient(1.2px 1.2px at 84% 62%,rgba(255,232,204,.5),transparent),
+    radial-gradient(1.4px 1.4px at 30% 82%,rgba(255,232,204,.4),transparent),
+    radial-gradient(1.2px 1.2px at 62% 44%,rgba(255,232,204,.4),transparent);
+  animation:dust 16s ease-in-out infinite alternate
+}
+@keyframes dust{0%{transform:translate3d(0,0,0)}100%{transform:translate3d(-16px,-26px,0)}}
+/* vignette : on concentre le regard au centre du couloir */
+.corr__vig{
+  position:absolute;inset:0;
+  background:radial-gradient(92% 82% at 50% 40%,transparent 46%,rgba(6,8,12,.46) 100%)
+}
+.corridor .shell{position:relative;z-index:2}
+.corridor .sec__hd{margin-bottom:118px}
+
+.doors{
+  /* le chambranle (.door__frame) et le seuil (.door__sill) debordent chacun
+     de ~19px hors de la boite de la porte : l'ecart doit etre plus grand
+     que ce debordement cumule, sans quoi deux portes voisines se touchent */
+  display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(42px,4.2vw,64px);
+  perspective:2000px;perspective-origin:50% 46%
+}
+/* les portes de gauche et de droite sont plaquees contre leur mur */
+.doors>*:nth-child(3n+1){transform:rotateY(9deg) translateZ(-30px)}
+.doors>*:nth-child(3n+3){transform:rotateY(-9deg) translateZ(-30px)}
+
+/* ── une porte ───────────────────────────────────────────────── */
+.door{
+  position:relative;display:block;aspect-ratio:.66;
+  perspective:1500px;perspective-origin:38% 50%;outline:0;cursor:pointer;
+  transition:transform .6s cubic-bezier(.2,.8,.2,1)
+}
+/* chambranle : bati + moulure d'encadrement */
+.door__frame{
+  position:absolute;inset:-19px -19px 0;border-radius:6px 6px 0 0;
+  background:
+    linear-gradient(to bottom,rgba(255,240,220,.16),transparent 26%),
+    linear-gradient(96deg,#453a2e 0%,#2a2219 42%,#3a3025 100%);
+  box-shadow:
+    0 40px 70px rgba(0,0,0,.72),
+    inset 0 0 0 1px rgba(255,226,190,.13),
+    inset 0 1px 0 rgba(255,240,220,.22)
+}
+/* feuillure : l'ombre portee du bati sur le vantail */
+.door__frame::after{
+  content:"";position:absolute;inset:19px 19px 0;border-radius:2px;
+  box-shadow:
+    inset 0 0 0 1px rgba(0,0,0,.72),
+    inset 0 10px 22px rgba(0,0,0,.6),
+    inset 12px 0 20px -10px rgba(0,0,0,.55)
+}
+/* la piece derriere la porte */
+.door__room{
+  container-type:inline-size;
+  position:absolute;inset:0;border-radius:2px;overflow:hidden;
+  background:#0b0908;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:28px 12px 64px;
+  box-shadow:inset 0 0 24px rgba(0,0,0,.28);
+  opacity:0;visibility:hidden;
+  transition:opacity .18s ease,visibility 0s .18s;
+}
+.door__room__bg{
+  position:absolute;inset:0;z-index:0;
+  background-size:cover;background-position:center;
+  transform:scale(1.05);
+  
+}
+.doors>.door:nth-child(1) .door__room__bg{background-image:url('/assets/img/portes/web-design.webp'); filter:brightness(.72) saturate(1.05) contrast(1.04)}
+.doors>.door:nth-child(2) .door__room__bg{background-image:url('/assets/img/portes/ui-ux.webp')}
+.doors>.door:nth-child(3) .door__room__bg{background-image:url('/assets/img/portes/migration.webp')}
+.doors>.door:nth-child(4) .door__room__bg{background-image:url('/assets/img/portes/applications.webp')}
+.doors>.door:nth-child(5) .door__room__bg{background-image:url('/assets/img/portes/hubspot.webp')}
+.doors>.door:nth-child(6) .door__room__bg{background-image:url('/assets/img/portes/email-marketing.svg')}
+/* voile leger au centre : image visible, texte lisible */
+.door__room::before{
+  content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:
+    linear-gradient(180deg,rgba(5,7,10,.45) 0%,rgba(5,7,10,.22) 48%,rgba(5,7,10,.52) 100%),
+    radial-gradient(ellipse 90% 70% at 50% 44%,rgba(0,0,0,.35) 0%,transparent 72%),
+    radial-gradient(ellipse 88% 70% at 50% 42%,color-mix(in srgb,var(--c) 20%,transparent),transparent 74%)
+}
+.door__room::after{
+  content:"";position:absolute;left:0;right:0;bottom:0;z-index:1;height:22%;
+  background:linear-gradient(to top,rgba(0,0,0,.4),transparent)
+}
+.door__room b{
+  position:relative;z-index:2;
+  font-family:var(--disp);font-size:clamp(13px,8.5cqi,16px);font-weight:800;
+  line-height:1.2;letter-spacing:-.025em;color:#fff;text-wrap:balance;
+  max-width:92%;padding:7px 9px;border-radius:6px;
+  
+  opacity:0;transform:translateY(10px);
+  transition:opacity .2s,transform .2s
+}
+.door__room p{
+  position:relative;z-index:2;margin-top:10px;max-width:75%;padding:7px 9px;
+  font-size:clamp(11px,6.5cqi,13px);line-height:1.52;color:rgba(255,255,255,.96);
+  opacity:0;transform:translateY(10px);
+  transition:opacity .2s,transform .2s
+}
+.door__go{
+  position:relative;z-index:2;margin-top:18px;display:inline-flex;align-items:center;gap:9px;
+  font:800 12px/1 var(--sans);color:#fff;
+  opacity:0;transform:translateY(10px);
+  transition:opacity .2s,transform .2s
+}
+.door__go i{
+  width:24px;height:24px;border-radius:50%;flex:0 0 24px;position:relative;
+  background:linear-gradient(150deg,#f7e8bd,#c9a227 58%,#8a6a12);
+  box-shadow:0 2px 6px rgba(0,0,0,.5)
+}
+.door__go i::before{
+  content:"";position:absolute;left:50%;top:50%;width:5px;height:5px;
+  border-top:1.9px solid #241a10;border-right:1.9px solid #241a10;
+  transform:translate(-62%,-50%) rotate(45deg)
+}
+
+/* ── le vantail : bois massif a deux panneaux ── */
+.door__leaf{
+  position:absolute;inset:0;z-index:3;border-radius:2px;
+  transform-origin:left center;transform-style:preserve-3d;backface-visibility:hidden;
+  background:
+    /* fil du bois */
+    repeating-linear-gradient(89deg,rgba(255,236,208,.035) 0 1px,transparent 1px 6px),
+    repeating-linear-gradient(92deg,rgba(0,0,0,.06) 0 1px,transparent 1px 14px),
+    /* reflet de la lumiere du couloir */
+    linear-gradient(102deg,rgba(255,232,198,.16) 0%,transparent 34%),
+    linear-gradient(104deg,#6b5137 0%,#42301f 44%,#553d28 76%,#33241715 100%),
+    linear-gradient(#42301f,#2b1e14);
+  box-shadow:
+    inset 0 0 0 1px rgba(255,226,190,.09),
+    inset -6px 0 14px rgba(0,0,0,.45),
+    0 14px 34px rgba(0,0,0,.55);
+  transition:transform 1s cubic-bezier(.22,.86,.2,1),box-shadow 1s
+}
+/* montant a gonds, teinte de l'expertise */
+.door__leaf::before{
+  content:"";position:absolute;left:0;top:0;bottom:0;width:10px;
+  background:linear-gradient(90deg,
+    color-mix(in srgb,var(--c) 86%,#000) 0%,
+    color-mix(in srgb,var(--c) 52%,#1a120c) 100%);
+  box-shadow:inset -1px 0 0 rgba(0,0,0,.6),1px 0 0 rgba(255,255,255,.05)
+}
+/* traverse basse */
+.door__leaf::after{
+  content:"";position:absolute;left:10px;right:0;bottom:0;height:11%;
+  background:linear-gradient(to bottom,rgba(0,0,0,.18),rgba(0,0,0,.46));
+  box-shadow:inset 0 1px 0 rgba(255,226,190,.1)
+}
+/* panneaux creuses, avec moulure */
+.door__panel{
+  position:absolute;left:20%;right:12%;border-radius:2px;
+  background:linear-gradient(150deg,rgba(0,0,0,.3) 0%,rgba(255,236,208,.05) 58%,rgba(0,0,0,.16));
+  box-shadow:
+    inset 0 0 0 1px rgba(0,0,0,.5),
+    inset 0 2px 5px rgba(0,0,0,.5),
+    inset 0 -1px 0 rgba(255,236,208,.1),
+    0 1px 0 rgba(255,236,208,.09),
+    -1px 0 0 rgba(0,0,0,.3)
+}
+.door__panel--t{top:8%;height:33%}
+.door__panel--b{top:48%;bottom:16%}
+/* plaque de numero, laiton */
+.door__plate{
+  position:absolute;left:22px;top:20px;padding:6px 11px;border-radius:3px;
+  background:linear-gradient(150deg,color-mix(in srgb,var(--c) 92%,#fff),color-mix(in srgb,var(--c) 62%,#000));
+  font:800 9.5px/1 var(--lab);letter-spacing:.2em;color:#fff;text-transform:uppercase;
+  box-shadow:0 3px 8px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.4)
+}
+/* intitule grave */
+.door__title{
+  position:absolute;left:22px;right:18px;top:56px;
+  font:800 17px/1.28 var(--disp);letter-spacing:-.03em;color:rgba(255,244,228,.96);
+  text-shadow:0 1px 0 rgba(0,0,0,.75),0 0 18px rgba(0,0,0,.4)
+}
+.door__hint{
+  position:absolute;left:22px;bottom:20px;
+  font:700 9.5px/1 var(--lab);letter-spacing:.26em;text-transform:uppercase;
+  color:rgba(255,236,208,.42);transition:color .3s
+}
+/* poignee et rosace, laiton */
+.door__knob{
+  position:absolute;right:16px;top:52%;width:15px;height:15px;border-radius:50%;
+  background:radial-gradient(circle at 32% 26%,#fff8e2,#e2c477 42%,#a5801f 100%);
+  box-shadow:
+    0 0 0 5px rgba(255,226,170,.09),
+    0 0 14px 2px rgba(255,200,120,.18),
+    0 2px 6px rgba(0,0,0,.6)
+}
+.door__knob::after{
+  content:"";position:absolute;right:3px;top:50%;margin-top:-3px;width:22px;height:6px;border-radius:4px;
+  background:linear-gradient(to bottom,#fdf3d4,#d9b45c 55%,#8f6d16);
+  box-shadow:0 3px 6px rgba(0,0,0,.55)
+}
+/* gonds */
+.door__hinge{
+  position:absolute;left:2px;width:8px;height:30px;border-radius:2px;
+  background:linear-gradient(90deg,#f2e6c4,#c2a24f 50%,#7d6318);
+  box-shadow:0 1px 4px rgba(0,0,0,.7),inset 0 1px 0 rgba(255,255,255,.35)
+}
+.door__hinge--t{top:13%}
+.door__hinge--b{bottom:13%}
+/* seuil de pierre — s'efface a l'ouverture pour laisser le vantail
+   passer devant lui, effet plus reel qu'un battant coupe par le seuil */
+.door__sill{
+  position:absolute;left:-19px;right:-19px;bottom:-16px;height:16px;border-radius:0 0 4px 4px;
+  background:linear-gradient(to bottom,#8b8378,#4c463d 52%,#25211c);
+  box-shadow:0 8px 20px rgba(0,0,0,.8),inset 0 1px 0 rgba(255,255,255,.22);
+  opacity:1;transform:translateY(0);
+  transition:opacity .45s cubic-bezier(.2,.8,.2,1),transform .5s cubic-bezier(.2,.8,.2,1);
+  z-index:1
+}
+/* filet de lumiere sous la porte fermee */
+.door__under{
+  position:absolute;left:14px;right:10px;bottom:-2px;height:4px;border-radius:3px;
+  background:linear-gradient(90deg,transparent,color-mix(in srgb,var(--c) 62%,#fff2e0),transparent);
+  opacity:.5;filter:blur(1.6px);transition:opacity .5s
+}
+/* nappe de lumiere sur le sol du couloir */
+/* .door__spill{
+  position:absolute;left:2%;right:-16%;bottom:-15px;height:150px;
+  clip-path:polygon(4% 0,66% 0,100% 100%,-22% 100%);
+  background:linear-gradient(to bottom,
+    color-mix(in srgb,var(--c) 42%,#fff0dc),
+    rgba(255,220,180,.12) 46%,transparent 84%);
+  opacity:0;filter:blur(9px);transform-origin:top;transform:scaleY(.35);
+  transition:opacity .8s .12s,transform 1s cubic-bezier(.22,.86,.2,1) .12s;
+  pointer-events:none
+} */
+
+/* ── porte ouverte ── */
+.door:hover,.door.is-open{z-index:3}
+.doors>*:nth-child(3n+1):hover,.doors>*:nth-child(3n+1).is-open{transform:rotateY(4deg) translateZ(20px)}
+.doors>*:nth-child(3n+3):hover,.doors>*:nth-child(3n+3).is-open{transform:rotateY(-4deg) translateZ(20px)}
+.door:hover .door__leaf,
+.door:focus-visible .door__leaf,
+.door.is-open .door__leaf{
+  transform:rotateY(-78deg);
+  box-shadow:44px 30px 80px rgba(0,0,0,.8),inset 0 0 0 1px rgba(255,226,190,.08);
+  z-index:2
+}
+/* le seuil disparait pendant l'ouverture : le vantail passe devant lui,
+   sans etre coupe net par la pierre — effet plus reel */
+.door:hover .door__sill,.door.is-open .door__sill,.door:focus-visible .door__sill{
+  opacity:0;transform:translateY(6px)
+}
+.door:hover .door__room,.door.is-open .door__room,.door:focus-visible .door__room{
+  opacity:1;visibility:visible;
+  transition:opacity .45s .22s,visibility 0s 0s
+}
+.door:hover .door__room b,.door.is-open .door__room b,.door:focus-visible .door__room b{
+  opacity:1;transform:none;transition:opacity .45s .34s,transform .45s .34s
+}
+.door:hover .door__room p,.door.is-open .door__room p,.door:focus-visible .door__room p{
+  opacity:1;transform:none;transition:opacity .45s .42s,transform .45s .42s
+}
+.door:hover .door__go,.door.is-open .door__go,.door:focus-visible .door__go{
+  opacity:1;transform:none;transition:opacity .45s .5s,transform .45s .5s
+}
+.door:hover .door__spill,.door.is-open .door__spill,.door:focus-visible .door__spill{opacity:.9;transform:scaleY(1)}
+.door:hover .door__under,.door.is-open .door__under,.door:focus-visible .door__under{opacity:0}
+.door:hover .door__hint,.door.is-open .door__hint{color:rgba(255,236,208,.8)}
+.door:focus-visible .door__frame{box-shadow:0 0 0 3px var(--red-l),0 40px 70px rgba(0,0,0,.72)}

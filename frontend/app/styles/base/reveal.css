@@ -1,0 +1,47 @@
+/* Apparitions au scroll
+   Source : style.css d'origine, lignes 1539-1583. */
+
+/* ══════════════════════ apparitions au scroll ══════════════════════
+   meme logique que le portfolio : fondu + glissement directionnel,
+   bidirectionnel (rejoue a chaque passage), delais en cascade par grille */
+.reveal{
+  opacity:0;transform:translateY(42px);
+  transition:opacity .65s cubic-bezier(.22,.61,.36,1),transform .65s cubic-bezier(.22,.61,.36,1);
+  will-change:opacity,transform
+}
+.reveal.in{opacity:1;transform:none}
+.reveal:not(.in){transition-delay:0ms !important}
+
+.d1{transition-delay:.07s}.d2{transition-delay:.14s}.d3{transition-delay:.21s}
+.d4{transition-delay:.28s}.d5{transition-delay:.35s}
+
+/* cascade dans les grilles (cartes, portes, poles, stats, faq...) */
+.bento .reveal:nth-child(2),.doors .reveal:nth-child(2),.sols .reveal:nth-child(2),
+.stats .reveal:nth-child(2),.quotes .reveal:nth-child(2),.related .reveal:nth-child(2),
+.solfeat .reveal:nth-child(2),.solfaq .reveal:nth-child(2),.shell>.pole.reveal:nth-child(2)
+{transition-delay:.09s}
+.bento .reveal:nth-child(3),.doors .reveal:nth-child(3),.sols .reveal:nth-child(3),
+.stats .reveal:nth-child(3),.quotes .reveal:nth-child(3),.related .reveal:nth-child(3),
+.solfeat .reveal:nth-child(3),.solfaq .reveal:nth-child(3),.shell>.pole.reveal:nth-child(3)
+{transition-delay:.18s}
+.bento .reveal:nth-child(4),.doors .reveal:nth-child(4),.sols .reveal:nth-child(4),
+.stats .reveal:nth-child(4),.solfeat .reveal:nth-child(4),.solfaq .reveal:nth-child(4)
+{transition-delay:.27s}
+.doors .reveal:nth-child(5),.sols .reveal:nth-child(5),.solfaq .reveal:nth-child(5)
+{transition-delay:.36s}
+.doors .reveal:nth-child(6),.sols .reveal:nth-child(6),.solfaq .reveal:nth-child(6)
+{transition-delay:.45s}
+
+/* directions par type de composant, comme sur le portfolio */
+.sec__hd.reveal:not(.in),.temo-hd.reveal:not(.in),.band__hd.reveal:not(.in),.plog__brand.reveal:not(.in){transform:translateY(-32px)}
+
+.split__img.reveal:not(.in){transform:translateX(-58px)}
+.split__txt.reveal:not(.in){transform:translateX(58px)}
+.split--rev .split__img.reveal:not(.in){transform:translateX(58px)}
+.split--rev .split__txt.reveal:not(.in){transform:translateX(-58px)}
+
+.vpanel__wrap.reveal:not(.in),.steps3__art.reveal:not(.in){transform:scale(.93)}
+
+.st.reveal:not(.in),.solstat.reveal:not(.in),.stp.reveal:not(.in){transform:scale(.85)}
+
+.hist__i.reveal:not(.in){transform:translateX(-46px)}

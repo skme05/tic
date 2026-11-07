@@ -1,0 +1,25 @@
+/* Sections qui se recouvrent au scroll
+   Source : style.css d'origine, lignes 1584-1606. */
+
+/* ═════════════ 19 · SECTIONS QUI SE RECOUVRENT AU SCROLL ═════════════ */
+/* le panneau video remonte et recouvre le manifeste epingle */
+.vpanel--cover{
+  position:relative;z-index:4;margin-top:-46vh;padding-top:96px;
+  border-radius:38px 38px 0 0;box-shadow:0 -40px 90px rgba(0,0,0,.72);
+  background:var(--night)
+}
+.vpanel--cover::before{
+  content:"";position:absolute;left:50%;top:18px;translate:-50% 0;
+  width:64px;height:4px;border-radius:4px;background:rgba(255,255,255,.22)
+}
+
+/* le footer remonte et recouvre la derniere section */
+.coverstack{position:relative}
+.coverstack>.cta{position:sticky;top:0}
+.coverstack::after{content:"";display:block;height:42vh}
+.foot{position:relative;z-index:6}
+.foot--cover{
+  margin-top:-42vh;
+  border-radius:38px 38px 0 0;box-shadow:0 -40px 90px rgba(0,0,0,.6)
+}
+.foot--cover .foot__v,.foot--cover::before{border-radius:38px 38px 0 0}

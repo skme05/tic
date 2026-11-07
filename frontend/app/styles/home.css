@@ -1,0 +1,35 @@
+/* Bundle « home » — Accueil : socle + intro vidéo, globe, nouveaux blocs
+   (manifeste, corridor en mouvement, chiffres, méthode, portes néon), bento,
+   plateformes. Les fichiers sont importés dans l'ordre de la feuille
+   d'origine : l'ordre compte (le responsive vient après les composants). */
+@import './base/tokens-base.css';
+@import './base/atoms.css';
+@import './components/intro-video.css';
+@import './layout/header.css';
+@import './sections/hero-globe.css';
+@import './base/section-titles.css';
+@import './sections/bento.css';
+@import './sections/dive-light.css';
+@import './sections/corridor-motion.css';
+@import './sections/why-tic.css';
+@import './sections/method-timeline.css';
+@import './sections/neon-doors.css';
+@import './sections/manifesto-v2.css';
+@import './components/cards.css';
+@import './layout/cta-video.css';
+@import './layout/footer.css';
+@import './pages/subpages.css';
+@import './base/reveal.css';
+@import './layout/coverstack.css';
+@import './responsive/breakpoints.css';
+@import './responsive/small-phones.css';
+@import './responsive/short-screens.css';
+@import './responsive/reduced-motion.css';
+@import './sections/medallions.css';
+@import './components/rails.css';
+@import './sections/platforms.css';
+@import './sections/testimonials.css';
+@import './components/walkthrough.css';
+@import './components/scenes-3d.css';
+@import './sections/testimonials-form-fix.css';
+@import './responsive/overrides.css';

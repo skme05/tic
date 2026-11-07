@@ -1,0 +1,39 @@
+/* « Pourquoi TIC » (accueil) — composant WhyTic. */
+.why{max-width:1240px;margin:0 auto;padding:110px 24px;box-sizing:border-box}
+.why__hd{text-align:center;margin-bottom:48px}
+.why__eyebrow{
+  margin:0 0 14px;font-size:12px;font-weight:700;letter-spacing:.22em;
+  text-transform:uppercase;color:#5B6472
+}
+.why__title{
+  margin:0 0 14px;font-family:var(--lab);font-weight:800;
+  font-size:clamp(32px,3.6vw,48px);line-height:1.05;letter-spacing:-.03em
+}
+.why__lead{margin:0;font-size:17px;color:#4A5260}
+.why__grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.why__card{
+  position:relative;overflow:hidden;padding:30px 28px 32px;
+  background:#fff;border:1px solid #E4E7EC;border-radius:20px;
+  transition:transform .3s,box-shadow .3s,border-color .3s
+}
+.why__card:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(15,17,21,.08);border-color:#D0D5DD}
+.why__bar{position:absolute;left:0;right:0;top:0;height:4px}
+.why__value{
+  margin:0 0 16px;color:var(--ink);font-family:var(--lab);font-weight:800;
+  font-size:52px;line-height:1;letter-spacing:-.03em
+}
+.why__text{margin:0;font-size:15px;line-height:1.55;color:#4A5260}
+
+/* Texte en dégradé du logo, version foncée lisible sur fond clair */
+.txt-spectrum{
+  background:linear-gradient(90deg,#1D5FAE,#1E8F5E 30%,#B88A00 52%,#D9631A 74%,#C9361C);
+  -webkit-background-clip:text;background-clip:text;color:transparent
+}
+
+@media (max-width:700px){
+  .why{padding:80px var(--pad)}
+  .why__value{font-size:44px}
+}
+@media (prefers-reduced-motion:reduce){
+  .why__card,.why__card:hover{transition:none;transform:none}
+}

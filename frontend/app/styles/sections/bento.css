@@ -1,0 +1,62 @@
+/* Bento des fonctionnalités
+   Source : style.css d'origine, lignes 372-431. */
+
+/* ══════════════════════════ 8 · BENTO FONCTIONNALITES ══════════════════════════ */
+.bento{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.bx{
+  position:relative;display:flex;flex-direction:column;gap:20px;overflow:hidden;
+  padding:28px;border:1px solid var(--line);border-radius: 5px;
+  transition:transform .4s cubic-bezier(.2,.8,.2,1),box-shadow .4s,border-color .4s
+}
+/* .sec--soft .bx{background:#fff} */
+.bx:hover{transform:translateY(-5px);box-shadow:var(--sh-l);}
+.bx--w{grid-column:span 2}
+.bx--tall{grid-row:span 2}
+.bx--row{flex-direction:row;align-items:center;gap:28px}
+.bx__t{flex:1 1 auto;min-width:0}
+.bx__t h3{font-size:19.5px;letter-spacing:-.03em}
+.bx__t p{margin-top:10px;font-size:14.5px;line-height:1.68}
+.bx__i{
+  width:40px;height:40px;border-radius:12px;display:grid;place-items:center;margin-bottom:16px;
+  background:var(--red-bg);color:var(--red)
+}
+.bx__art{
+  position:relative;border-radius:var(--r-l);background:var(--soft-2);
+  border:1px solid var(--line-2);padding:16px;overflow:hidden;flex:1 1 auto
+}
+.bx--row .bx__art{flex:0 0 46%;min-width:0}
+
+/* mini-UI dans les cartes */
+.mui{display:grid;gap:9px;font-size:11.5px}
+.mui__hd{display:flex;align-items:center;justify-content:space-between}
+.mui__hd b{color:var(--ink);font-size:12.5px;font-weight:700}
+.mui__pill{padding:3px 10px;border-radius:var(--r-f);background:#fff;border:1px solid var(--line);font-size:9.5px;color:var(--mute);font-weight:600}
+.mui__row{display:flex;align-items:center;gap:9px;padding:9px 11px;background:#fff;border:1px solid var(--line-2);border-radius:10px}
+.mui__row i{width:8px;height:8px;border-radius:50%;flex:0 0 8px;background:var(--c,var(--red))}
+.mui__row span{flex:1;min-width:0;color:var(--ink-2);font-weight:600;font-size:11.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.mui__row em{font-style:normal;font-size:10px;color:var(--mute);font-weight:600}
+.mui__bar{height:6px;border-radius:6px;background:var(--line-2);overflow:hidden}
+.mui__bar i{display:block;height:100%;border-radius:6px;background:linear-gradient(90deg,var(--red-l),var(--red))}
+.mui__bar--b i{background:linear-gradient(90deg,#4b95d6,var(--b))}
+.mui__bar--g i{background:linear-gradient(90deg,#8fd071,var(--g))}
+.mui__big{display:flex;align-items:baseline;gap:8px}
+.mui__big b{font:800 26px/1 var(--disp);color:var(--ink);letter-spacing:-.04em}
+.mui__big span{font-size:11px;color:var(--g);font-weight:700}
+.mui__legend{display:flex;flex-wrap:wrap;gap:6px 14px}
+.mui__legend li{display:flex;align-items:center;gap:7px;font-size:10.5px;color:var(--body);font-weight:600}
+.mui__legend i{width:7px;height:7px;border-radius:50%;background:var(--c,var(--red))}
+.mui__chart{width:100%;height:auto;display:block}
+.mui__ava{display:flex}
+.mui__ava span{
+  width:26px;height:26px;border-radius:50%;margin-left:-7px;display:grid;place-items:center;
+  background:var(--ink);color:#fff;font:700 9px/1 var(--sans);border:2px solid #fff
+}
+.mui__ava span:first-child{margin-left:0}
+.mui__ava span:nth-child(2){background:var(--b)}
+.mui__ava span:nth-child(3){background:var(--g)}
+.mui__ava span:nth-child(4){background:var(--o)}
+.mui__msg{display:flex;gap:9px;align-items:flex-start;padding:9px 11px;background:#fff;border:1px solid var(--line-2);border-radius:10px}
+.mui__msg u{width:24px;height:24px;border-radius:50%;flex:0 0 24px;display:grid;place-items:center;text-decoration:none;background:var(--red-bg);color:var(--red);font:700 9px/1 var(--sans)}
+.mui__msg div{min-width:0}
+.mui__msg b{display:block;color:var(--ink);font-size:11px;font-weight:700}
+.mui__msg em{font-style:normal;font-size:10px;color:var(--mute);display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}

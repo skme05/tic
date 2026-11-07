@@ -1,0 +1,45 @@
+/* Bandes défilantes (piste générique)
+   Source : style.css d'origine, lignes 1868-1910. */
+
+/* ═════════════ 16 · BANDES DEFILANTES (piste generique) ═════════════ */
+.rail{position:relative;overflow:hidden;--rail-gap:20px;--rail-fade:#fff}
+.rail::before,.rail::after{
+  content:"";position:absolute;top:-2px;bottom:-2px;z-index:2;
+  width:clamp(48px,12%,160px);pointer-events:none
+}
+.rail::before{left:-1px;background:linear-gradient(90deg,var(--rail-fade) 12%,transparent)}
+.rail::after{right:-1px;background:linear-gradient(270deg,var(--rail-fade) 12%,transparent)}
+.rail__track{
+  display:flex;align-items:stretch;gap:var(--rail-gap);width:max-content;padding:4px;
+  animation:railRun 46s linear infinite;will-change:transform
+}
+.rail--rev .rail__track{animation-direction:reverse}
+.rail:hover .rail__track,.rail:focus-within .rail__track,.rail.is-paused .rail__track{animation-play-state:paused}
+@keyframes railRun{
+  from{transform:translate3d(0,0,0)}
+  to{transform:translate3d(calc(-50% - var(--rail-gap) / 2),0,0)}
+}
+
+/* bandeau des organisations accompagnees */
+.band{padding:74px 0 78px;background:#fff;overflow:hidden}
+.band__hd{text-align:center;margin-bottom:38px}
+.band__hd p{
+  font:700 11px/1 var(--lab);letter-spacing:.2em;text-transform:uppercase;color:var(--mute)
+}
+.band__hd h2{margin-top:16px;font-size:clamp(22px,2.6vw,32px)}
+.band .rail{--rail-gap:18px}
+.band__i{
+  flex:0 0 auto;width:clamp(206px,19vw,258px);
+  display:grid;grid-template-columns:44px minmax(0,1fr);column-gap:15px;
+  align-items:center;padding:17px 20px;
+  background:#fff;border:1px solid var(--line);border-radius:var(--r-l);
+  box-shadow:var(--sh-s);transition:border-color .3s,box-shadow .3s,transform .3s
+}
+.band__i:hover{border-color:rgba(185,28,28,.3);box-shadow:var(--sh-m);transform:translateY(-3px)}
+.band__i img{
+  grid-row:1 / span 2;width:44px;height:44px;object-fit:contain;
+  filter:grayscale(1) contrast(1.05);opacity:.72;transition:filter .35s,opacity .35s
+}
+.band__i:hover img{filter:none;opacity:1}
+.band__i b{align-self:end;color:var(--ink);font:800 13.5px/1.3 var(--disp);letter-spacing:-.02em}
+.band__i span{align-self:start;margin-top:4px;font-size:11px;line-height:1.45;color:var(--mute)}

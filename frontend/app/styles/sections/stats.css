@@ -1,0 +1,16 @@
+/* Chiffres
+   Source : style.css d'origine, lignes 432-445. */
+
+/* ══════════════════════════ 9 · CHIFFRES ══════════════════════════ */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;align-items:end}
+.st{
+  position:relative;padding:28px;background:#fff;border:1px solid var(--line);border-radius: 5px;
+  transition:transform .4s cubic-bezier(.2,.8,.2,1),box-shadow .4s,border-color .4s
+}
+.st:nth-child(2){margin-bottom:0}
+.st:nth-child(odd){padding-bottom:44px}
+.st:hover{transform:translateY(-5px);box-shadow:var(--sh-l);}
+.st b{display:block;font:800 clamp(30px,3.4vw,42px)/1 var(--disp);color:var(--ink);letter-spacing:-.05em}
+.st p{margin-top:40px;font-size:13.5px;line-height:1.6}
+.st i{position:absolute;right:22px;top:22px;width:20px;height:20px;border-radius:50%;background:var(--red-bg);display:grid;place-items:center}
+.st i::after{content:"";width:7px;height:7px;border-radius:50%;background:var(--red)}

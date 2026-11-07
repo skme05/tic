@@ -1,0 +1,89 @@
+/* Retouches finales : mobile, portes, traversée
+   Source : style.css d'origine, lignes 2539-2625. */
+
+/* ═════════════ 24 · RETOUCHES CLIENT — MOBILE, PORTES, TRAVERSEE ═════════════ */
+
+/* Pied de page : `.foot__in{padding:90px 0 34px}` remettait a zero les
+   marges laterales du .shell — sur telephone le texte touchait le bord de
+   l'ecran. On rend au pied de page la meme marge laterale (--pad) que
+   toutes les autres sections. */
+.foot__in{padding:90px var(--pad) 34px}
+@media (max-width:700px){.foot__in{padding:70px var(--pad) 30px}}
+
+/* Entete : sans le menu (masque sous 1160px), les actions sont poussees a
+   droite par une marge automatique, et non plus par un ecart fixe de 55px
+   qui faisait deborder l'entete de 18px sur un ecran de 375px. */
+@media (max-width:1160px){.hdr__act{margin-left:auto}}
+@media (max-width:480px){.hdr__in{gap:10px}}
+@media (max-width:360px){.hdr__in{gap:8px}}
+
+/* Portes : l'inclinaison des portes de gauche et de droite (+-9deg) n'a de
+   sens que dans le couloir a trois colonnes ; en une ou deux colonnes elle
+   penchait parfois du mauvais cote. */
+@media (max-width:980px){
+  /* specificite (0,3,0) : doit battre .doors>*:nth-child(3n+1) (0,2,0) et
+     ses variantes :hover / .is-open ; l'apparition (.reveal) est conservee */
+  .doors>.door:nth-child(n),.doors>.door:nth-child(n):hover,.doors>.door:nth-child(n).is-open{transform:none}
+  .doors>.door.reveal:nth-child(n):not(.in){transform:translateY(42px)}
+}
+@media (max-width:700px){
+  /* Le battant ouvert masquait le debut des phrases. L'oeil est recentre et
+     le battant s'ouvre un peu plus : il reste visible, entrouvert sur le
+     cote, et le texte s'ecarte de lui. */
+  .door{perspective:1300px;perspective-origin:50% 50%}
+  .door:hover .door__leaf,.door:focus-visible .door__leaf,.door.is-open .door__leaf{transform:rotateY(-80deg)}
+  .door__room{padding-left:12%;padding-right:12px}
+  .door__room b,.door__room p{max-width:100%}
+}
+@media (min-width:701px) and (max-width:980px){
+  /* deux colonnes : portes plus etroites, meme risque de texte masque */
+  .door__room{padding-left:16%}
+}
+
+/* Fluidite : l'ombre portee du battant (80px de flou) etait animee en meme
+   temps que sa rotation — trop couteux sur telephone, d'ou des saccades.
+   Seule la rotation s'anime ; le navigateur la prepare a l'avance. */
+@media (hover:none) and (prefers-reduced-motion:no-preference){
+  .door__leaf{transition:transform 1s cubic-bezier(.22,.86,.2,1);will-change:transform}
+}
+@media (hover:none){
+  .door__leaf{box-shadow:inset 0 0 0 1px rgba(255,226,190,.09),inset -6px 0 14px rgba(0,0,0,.45),0 14px 34px rgba(0,0,0,.55)}
+  .door.is-open .door__leaf{box-shadow:inset 0 0 0 1px rgba(255,226,190,.08),0 14px 34px rgba(0,0,0,.55)}
+}
+
+/* Traversee : la lumiere ne grandit plus a partir d'un rectangle calque sur
+   la porte (le « carre » visible pendant l'immersion) mais d'un disque aux
+   bords fondus, centre sur la porte ; le voile final est entierement opaque
+   et deborde de l'ecran : rien de la page ne transparait, aucun bord. */
+.walk__room{
+  border-radius:50%;
+  background:radial-gradient(circle closest-side,
+    color-mix(in srgb,var(--c) 58%,#fff4e6) 0%,
+    color-mix(in srgb,var(--c) 78%,#110d09) 46%,
+    color-mix(in srgb,var(--c) 30%,#110d09) 74%,
+    transparent 100%);
+  box-shadow:none
+}
+.walk--out .walk__room{animation:roomBloom 1.5s cubic-bezier(.55,.05,.9,.4) both}
+@keyframes roomBloom{
+  from{transform:scale(var(--s0,.3));opacity:.85}
+  to{transform:scale(1.7);opacity:1}
+}
+.walk__flash{
+  inset:-60%;
+  background:radial-gradient(circle at var(--fx,50%) var(--fy,50%),
+    #fff 0%,color-mix(in srgb,var(--c) 55%,#fff) 22%,
+    color-mix(in srgb,var(--c) 80%,#000) 48%,color-mix(in srgb,var(--c) 60%,#000) 100%)
+}
+@keyframes flashIn{from{opacity:0}to{opacity:1}}
+
+/* Fond visible dans les coins arrondis du pied de page (signale sur
+   tablette) : la section contact reste collee en haut pendant que le pied
+   de page monte par-dessus. Quand elle etait moins haute que l'ecran, le
+   bloc d'espacement place sous elle laissait voir le fond clair de la page
+   dans les arrondis du pied de page. Elle occupe desormais au moins tout
+   l'ecran, contenu centre : le pied de page glisse toujours sur elle. */
+.coverstack>.cta{
+  min-height:100vh;min-height:100svh;
+  display:flex;flex-direction:column;justify-content:center
+}

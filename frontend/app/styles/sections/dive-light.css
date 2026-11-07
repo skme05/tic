@@ -1,0 +1,11 @@
+/* Lumière de plongée (globe -> révélation)
+   Source : style.css d'origine, lignes 446-454. */
+
+/* ═══════════════ 5c · LUMIERE DE PLONGEE (globe → révélation) ═══════════════ */
+.dive-light{
+  position:fixed;inset:0;z-index:80;pointer-events:none;opacity:0;will-change:opacity;
+  background:
+    radial-gradient(60% 55% at 50% 50%,#fff 0%,#fff 34%,rgba(255,250,240,.92) 54%,rgba(255,250,240,0) 78%),
+    #fff;
+}
+@media (prefers-reduced-motion: reduce){.dive-light{display:none}}

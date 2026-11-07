@@ -1,0 +1,11 @@
+/* Écrans courts / paysage
+   Source : style.css d'origine, lignes 1757-1765. */
+
+/* ══════════════════════ ECRANS COURTS / PAYSAGE (mobiles a plat) ══════════════════════ */
+@media (max-height:520px) and (orientation:landscape){
+  :root{--hdr:58px}
+  .hero__copy{top:calc(var(--hdr) + 1.5vh)}
+  .hero__scroll{display:none}
+  .intro__ui{padding:18px var(--pad)}
+  .intro__mid p{font-size:10px}
+}

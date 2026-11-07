@@ -1,0 +1,34 @@
+/* Mouvement réduit
+   Source : style.css d'origine, lignes 1766-1797. */
+
+/* ══════════════════════ MOUVEMENT REDUIT ══════════════════════ */
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .reveal{opacity:1;transform:none}
+  .hero{height:auto}
+  .hero__stage{position:relative;height:auto;min-height:100vh;padding-bottom:60px}
+  /* sans plongee animee, le hero s'arrete encore clair : on le fait glisser
+     vers la nuit avant la coupe, pour ne jamais heurter la section suivante */
+  .hero__stage::after{
+    content:"";position:absolute;left:0;right:0;bottom:0;height:34vh;pointer-events:none;
+    background:linear-gradient(to bottom,transparent,var(--night))
+  }
+  .hero__veil{display:none}
+  .hero__copy{position:relative;top:auto;left:auto;translate:none;transform:none;opacity:1;padding-top:calc(var(--hdr) + 40px)}
+  .hero__land,.hero__scroll,.hero__logo{display:none}
+  .rail__track{animation:none;transform:none}
+  .rail{overflow-x:auto;scroll-snap-type:x proximity}
+  .rail__track{width:auto}
+  .vpanel--cover{margin-top:0;padding-top:110px;border-radius:0;box-shadow:none}
+  .coverstack>.cta{position:static}
+  .coverstack::after{display:none}
+  .foot--cover{margin-top:0;border-radius:0;box-shadow:none}
+  .qsend__ship,.qsend__rotor,.qsend__beam{animation:none}
+  .qsend__done{transition:none}
+  html.is-crossing main,html.is-crossing .hdr{transform:none;filter:none}
+  .reveal-sec{height:auto}
+  .rs__stage{position:relative;height:auto;padding:100px 0}
+  .rs__txt .w{opacity:1}
+  .door__leaf,.door__spill,.door__room b,.door__room p,.door__go{transition:none}
+  .corr__dust,.hero__land__k i,.vpanel__k i,.hero__scroll i::after{animation:none}
+}

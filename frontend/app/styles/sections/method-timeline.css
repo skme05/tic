@@ -1,0 +1,59 @@
+/* « Votre projet démarre en 3 étapes simples » (accueil) — composant MethodTimeline. */
+.mtl{background:#F6F7F9}
+.mtl__in{max-width:1240px;margin:0 auto;padding:110px 24px;box-sizing:border-box}
+.mtl__hd{display:flex;flex-wrap:wrap;gap:40px;justify-content:space-between;align-items:flex-end;margin-bottom:56px}
+.mtl__intro{max-width:640px}
+.mtl__eyebrow{
+  margin:0 0 14px;font-size:12px;font-weight:700;letter-spacing:.22em;
+  text-transform:uppercase;color:#5B6472
+}
+.mtl__title{
+  margin:0 0 14px;font-family:var(--lab);font-weight:800;
+  font-size:clamp(32px,3.6vw,48px);line-height:1.05;letter-spacing:-.03em
+}
+.mtl__lead{margin:0;font-size:17px;color:#4A5260}
+
+/* carte « binôme dédié » */
+.mtl__duo{
+  max-width:360px;padding:22px 24px;display:flex;gap:14px;align-items:flex-start;
+  background:#fff;border:1px solid #E4E7EC;border-radius:20px
+}
+.mtl__avatars{flex:none;display:flex}
+.mtl__avatars span{width:34px;height:34px;border-radius:50%;border:2px solid #fff}
+.mtl__avatars span + span{margin-left:-10px}
+.mtl__duo-txt{display:flex;flex-direction:column;gap:4px}
+.mtl__duo-txt strong{color:var(--ink)}
+.mtl__duo-txt span{font-size:14px;line-height:1.5;color:#5B6472}
+
+/* ligne du parcours et son point lumineux (du bleu au rouge) */
+.mtl__line{position:relative;height:2px;background:#D0D5DD;margin:0 0 32px}
+.mtl__walker{
+  position:absolute;top:-5px;left:0;width:12px;height:12px;border-radius:50%;
+  background:#F4C531;box-shadow:0 0 16px 4px rgba(242,138,38,.5);
+  animation:mtlWalk 8s ease-in-out infinite
+}
+@keyframes mtlWalk{
+  0%{left:0;background:#1D5FAE}
+  50%{background:#F4C531}
+  100%{left:calc(100% - 12px);background:#E2452B}
+}
+
+/* les 3 étapes */
+.mtl__steps{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+.mtl__card{
+  padding:30px;background:#fff;border:1px solid #E4E7EC;border-radius:20px;
+  transition:transform .3s,box-shadow .3s,border-color .3s
+}
+.mtl__card:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(15,17,21,.08);border-color:#D0D5DD}
+.mtl__n{display:block;margin-bottom:14px;font-family:var(--lab);font-size:15px;font-weight:800}
+.mtl__h{margin:0 0 10px;font-family:var(--lab);font-size:22px;letter-spacing:-.02em}
+.mtl__p{margin:0;font-size:15px;line-height:1.6;color:#5B6472}
+
+@media (max-width:700px){
+  .mtl__in{padding:80px var(--pad)}
+  .mtl__hd{gap:24px;margin-bottom:40px}
+}
+@media (prefers-reduced-motion:reduce){
+  .mtl__walker{display:none}
+  .mtl__card,.mtl__card:hover{transition:none;transform:none}
+}

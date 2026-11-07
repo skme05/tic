@@ -1,0 +1,9 @@
+/* Plateformes qui défilent
+   Source : style.css d'origine, lignes 1911-1917. */
+
+/* ═════════════ 17 · PLATEFORMES QUI DEFILENT ═════════════ */
+.solrail{display:grid;gap:20px}
+.solrail .rail{--rail-fade:var(--soft)}
+.sec .solrail .rail{--rail-fade:#fff}
+.sec--soft .solrail .rail{--rail-fade:var(--soft)}
+.solrail .sol{flex:0 0 auto;width:clamp(250px,23vw,296px)}

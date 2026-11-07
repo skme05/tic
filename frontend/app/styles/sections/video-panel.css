@@ -1,0 +1,36 @@
+/* Panneau vidéo
+   Source : style.css d'origine, lignes 582-615. */
+
+/* ══════════════════════════ 11 · PANNEAU VIDEO ══════════════════════════ */
+.vpanel{position:relative;background:var(--night);padding:0 0 120px;overflow:hidden}
+.vpanel--top{padding-top:110px}
+.vpanel__wrap{position:relative;border-radius:var(--r-xl);overflow:hidden;box-shadow:0 50px 120px rgba(0,0,0,.6)}
+.vpanel__wrap video{width:100%;height:clamp(340px,62vh,660px);object-fit:cover;display:block;background:#05070c}
+.vpanel__wrap::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(to top,rgba(5,7,12,.88) 0%,rgba(5,7,12,.28) 42%,transparent 70%)
+}
+.vpanel__ov{position:absolute;inset:auto 0 0 0;z-index:2;padding:clamp(26px,4vw,54px)}
+.vpanel__ov h2{color:#fff;font-size:clamp(24px,3.4vw,42px);max-width:20ch}
+.vpanel__ov p{margin-top:16px;max-width:52ch;color:rgba(255,255,255,.7);font-size:15.5px}
+.vpanel__ov .btn{margin-top:26px}
+.vpanel__k{
+  position:absolute;left:clamp(26px,4vw,54px);top:clamp(26px,4vw,54px);z-index:2;
+  display:inline-flex;align-items:center;gap:9px;padding:8px 15px;border-radius:var(--r-f);
+  background:rgba(0,0,0,.42);border:1px solid rgba(255,255,255,.2);
+  -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+  font:700 10.5px/1 var(--lab);letter-spacing:.22em;text-transform:uppercase;color:#fff
+}
+.vpanel__k i{width:7px;height:7px;border-radius:50%;background:#ff4b4b;animation:ping 2s ease-out infinite}
+.vmute{
+  position:absolute;right:clamp(20px,3vw,34px);top:clamp(20px,3vw,34px);z-index:3;
+  width:44px;height:44px;border-radius:50%;display:grid;place-items:center;
+  background:rgba(0,0,0,.42);border:1px solid rgba(255,255,255,.22);color:#fff;
+  -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);transition:background-color .25s,transform .25s
+}
+.vmute:hover{background:rgba(0,0,0,.66);transform:scale(1.06)}
+/* transition nuit → jour */
+.vpanel::after{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:120px;
+  background:linear-gradient(to bottom,transparent,#fff);z-index:1;pointer-events:none
+}

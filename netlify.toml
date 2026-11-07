@@ -1,0 +1,48 @@
+# Déploiement Netlify du frontend React (pages pré-rendues, hébergement statique)
+[build]
+  base = "frontend"
+  command = "npm ci && npm run build"
+  publish = "build/client"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# Quand l'API Django sera en ligne sur un autre serveur, la relayer sous /api
+# (même domaine : pas de CORS, cookies de session simples) :
+# [[redirects]]
+#   from = "/api/*"
+#   to = "https://api.tic-solutions.com/api/:splat"
+#   status = 200
+#   force = true
+
+# Les redirections des anciennes adresses en .html sont générées dans
+# build/client/_redirects par frontend/scripts/postbuild.mjs.
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    X-Frame-Options = "DENY"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self'; form-action 'self'; frame-ancestors 'none'; base-uri 'self'"
+
+# Fichiers compilés (nom avec empreinte) : cache navigateur d'un an
+[[headers]]
+  for = "/assets/*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+[[headers]]
+  for = "/assets/*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Images et vidéos (noms sans empreinte) : une semaine
+[[headers]]
+  for = "/assets/img/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+[[headers]]
+  for = "/assets/video/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
