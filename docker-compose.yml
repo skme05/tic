@@ -1,0 +1,22 @@
+# Site TIC — déploiement Docker
+#   git clone … && cd tic
+#   docker compose up -d --build      → http://<serveur>:4000
+services:
+  tic:
+    build:
+      context: .
+      args:
+        # adresse publique du site (SEO, sitemap)
+        VITE_SITE_URL: ${VITE_SITE_URL:-https://infinitecorridor.io}
+        # API Django (formulaires, espace client) — vide tant qu'elle n'existe pas
+        VITE_API_URL: ${VITE_API_URL:-}
+    image: tic-site:latest
+    container_name: tic
+    restart: always
+    ports:
+      - "4000:4000"
+    read_only: true
+    tmpfs:
+      - /tmp
+    security_opt:
+      - no-new-privileges:true
