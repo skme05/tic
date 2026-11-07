@@ -20,8 +20,8 @@ const COMMITMENTS = [
   },
   {
     kicker: 'Engagement',
-    title: 'Vos idées prennent vie',
-    text: "Nous concevons des solutions et donnons vie à vos projets, pour des entreprises qui n'attendent plus : cycles courts, avancées visibles chaque semaine.",
+    title: "De l'idée à la solution",
+    text: 'Nous concevons et donnons vie à des solutions taillées pour vos enjeux, avec des avancées concrètes à chaque étape.',
     color: '#1E8F5E',
     viz: 'deploy',
   },
