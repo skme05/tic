@@ -6,8 +6,8 @@
    La couleur des traits et de la lueur passe par les 5 couleurs TIC.
    ========================================================================== */
 html.is-loading,html.is-loading body{overflow:hidden}
-/* déjà vu pendant la visite : masqué avant même le chargement de React */
-html.tic-seen .ldr{display:none}
+/* loader désactivé (tests automatiques) : masqué avant le chargement de React */
+html.tic-noloader .ldr{display:none}
 
 .ldr{
   position:fixed;inset:0;z-index:1000001;overflow:hidden;background:#0B0E14;color:#E6E9EE;font-family:var(--sans);

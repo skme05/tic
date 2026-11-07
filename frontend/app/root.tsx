@@ -10,7 +10,7 @@ import { rails } from '~/features/rails/rails-effect';
 import { doors } from '~/features/doors/doors-effect';
 import { walkthrough } from '~/features/walkthrough/walkthrough-effect';
 import siteCss from '~/styles/site.css?url';
-import { LOADER_KEY, SiteLoader } from '~/features/loader/SiteLoader';
+import { LOADER_OFF, SiteLoader } from '~/features/loader/SiteLoader';
 import { CursorCorridor } from '~/features/cursor/CursorCorridor';
 
 export const links: Route.LinksFunction = () => [
@@ -41,8 +41,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#0f1115" />
-        {/* loader déjà vu pendant la visite : masqué avant tout rendu */}
-        <script dangerouslySetInnerHTML={{ __html: `try{if(sessionStorage.getItem('${LOADER_KEY}')==='1')document.documentElement.classList.add('tic-seen')}catch(e){}` }} />
+        {/* loader désactivé (tests automatiques) : masqué avant tout rendu */}
+        <script dangerouslySetInnerHTML={{ __html: `try{if(sessionStorage.getItem('${LOADER_OFF}')==='1')document.documentElement.classList.add('tic-noloader')}catch(e){}` }} />
         <Meta />
         <Links />
       </head>

@@ -9,12 +9,16 @@ import { useEffect, useState, type CSSProperties, type ReactNode } from 'react';
    construction ; à la fin on « entre » dans le couloir.
 
    Toute l'animation est en CSS (styles/components/site-loader.css) : elle se
-   joue et se termine même sans JavaScript. Le script ne sert qu'à : ne
-   l'afficher qu'une fois par visite, bloquer le défilement, et permettre de
-   la passer (bouton, Échap, Entrée).
+   joue et se termine même sans JavaScript. Il s'affiche à chaque chargement
+   complet de page (actualisation, arrivée sur le site) ; la navigation par
+   les liens du site ne le rejoue pas (la page n'est pas rechargée).
+   Le script ne sert qu'à bloquer le défilement et permettre de le passer
+   (bouton, Échap, Entrée).
+   LOADER_OFF : réglage facultatif (sessionStorage) qui désactive le loader,
+   utilisé par les tests automatiques.
    ========================================================================== */
 
-export const LOADER_KEY = 'tic_loader_2026';
+export const LOADER_OFF = 'tic_loader_off';
 const DURATION = 4300; /* fin de l'animation d'entrée (ms) */
 
 /* couloir en perspective à un point de fuite (repère 1600 × 900) */
@@ -71,20 +75,15 @@ export function SiteLoader() {
   const [done, setDone] = useState(false);
 
   useEffect(() => {
-    let seen = false;
+    let off = false;
     try {
-      seen = sessionStorage.getItem(LOADER_KEY) === '1';
+      off = sessionStorage.getItem(LOADER_OFF) === '1';
     } catch {
       /* stockage indisponible : on joue le loader */
     }
-    if (seen || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    if (off || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       setGone(true);
       return;
-    }
-    try {
-      sessionStorage.setItem(LOADER_KEY, '1');
-    } catch {
-      /* ignoré */
     }
     const root = document.documentElement;
     root.classList.add('is-loading');
