@@ -20,8 +20,8 @@ const COMMITMENTS = [
   },
   {
     kicker: 'Engagement',
-    title: "Pour ceux qui n'attendent plus",
-    text: "Nous écrivons du code pour des entreprises qui n'attendent plus : des cycles courts, des livraisons visibles chaque semaine.",
+    title: 'Vos idées prennent vie',
+    text: "Nous concevons des solutions et donnons vie à vos projets, pour des entreprises qui n'attendent plus : cycles courts, avancées visibles chaque semaine.",
     color: '#1E8F5E',
     viz: 'deploy',
   },
