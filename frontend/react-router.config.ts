@@ -1,6 +1,7 @@
 import type { Config } from '@react-router/dev/config';
 import { services } from './app/content/services';
 import { solutions } from './app/content/solutions';
+import { poles } from './app/content/poles';
 
 /* Site vitrine : chaque page est PRÉ-RENDUE en HTML au moment du build
    (SEO, affichage immédiat, hébergement statique sur Netlify), puis React
@@ -21,6 +22,7 @@ export default {
       '/mentions-legales',
       '/confidentialite',
       '/404',
+      ...poles.map((p) => `/expertise/${p.slug}`),
       ...services.map((s) => `/services/${s.slug}`),
       ...solutions.map((s) => `/solutions/${s.slug}`),
     ];

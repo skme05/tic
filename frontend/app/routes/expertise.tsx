@@ -1,3 +1,4 @@
+import { Link } from 'react-router';
 import type { Route } from './+types/expertise';
 import { seo } from '~/lib/seo';
 import { PageHero } from '~/components/sections/PageHero';
@@ -50,6 +51,9 @@ export default function ExpertisePage() {
               <li>Automatisation documentaire</li>
               <li>Cloud & infogérance</li>
             </ul>
+            <Link viewTransition to="/expertise/digital-ia" className="pole__more">
+              Découvrir le pôle <span aria-hidden="true">→</span>
+            </Link>
           </div>
         </article>
         <article className="pole reveal" id="solutions-metiers">
@@ -68,6 +72,9 @@ export default function ExpertisePage() {
               <li>E-garage</li>
               <li>Conseil & refonte de processus</li>
             </ul>
+            <Link viewTransition to="/expertise/solutions-metiers" className="pole__more">
+              Découvrir le pôle <span aria-hidden="true">→</span>
+            </Link>
           </div>
         </article>
         <article className="pole reveal" id="capital-humain">
@@ -86,6 +93,9 @@ export default function ExpertisePage() {
               <li>E-Connaissance (formation)</li>
               <li>Support RH</li>
             </ul>
+            <Link viewTransition to="/expertise/capital-humain" className="pole__more">
+              Découvrir le pôle <span aria-hidden="true">→</span>
+            </Link>
           </div>
         </article>
       </div>

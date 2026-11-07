@@ -24,9 +24,9 @@ export const mainNav: NavItem[] = [
     label: 'Expertise',
     to: '/expertise',
     menu: [
-      { title: 'Pôle Digital & IA', text: 'Web, mobile, data et intelligence artificielle', to: '/expertise#digital-ia' },
-      { title: 'Solutions Métiers & Conseil', text: 'ERP, processus et accompagnement', to: '/expertise#solutions-metiers' },
-      { title: 'Capital Humain', text: 'Paie, RH et gestion des talents', to: '/expertise#capital-humain' },
+      { title: 'Pôle Digital & IA', text: 'Web, mobile, data et intelligence artificielle', to: '/expertise/digital-ia', color: '#1D5FAE' },
+      { title: 'Solutions Métiers & Conseil', text: 'ERP, processus et accompagnement', to: '/expertise/solutions-metiers', color: '#1E8F5E' },
+      { title: 'Capital Humain', text: 'Paie, RH et gestion des talents', to: '/expertise/capital-humain', color: '#D9531E' },
     ],
   },
   {

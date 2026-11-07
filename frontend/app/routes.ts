@@ -7,6 +7,7 @@ export default [
   index('routes/home.tsx'),
   route('about', 'routes/about.tsx'),
   route('expertise', 'routes/expertise.tsx'),
+  route('expertise/:slug', 'routes/pole.tsx'),
   route('innovation', 'routes/innovation.tsx'),
   route('solutions', 'routes/solutions.tsx'),
   route('solutions/:slug', 'routes/solution.tsx'),
