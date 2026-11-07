@@ -55,7 +55,7 @@ export default function PolePage({ loaderData }: Route.ComponentProps) {
           <div className="pl__hd reveal">
             <p className="pl__k">Ce que couvre le pôle</p>
             <h2>
-              Six terrains, <em>une équipe</em>
+              Nos terrains, <em>une équipe</em>
             </h2>
             <p>{pole.intro}</p>
           </div>

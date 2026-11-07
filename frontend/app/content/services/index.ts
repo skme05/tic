@@ -1,4 +1,4 @@
-/* Les 6 portes (expertises). Pour ajouter une porte : créer son fichier
+/* Les portes (expertises). Pour ajouter une porte : créer son fichier
    dans ce dossier puis l'ajouter à la liste ci-dessous. */
 import type { Service } from '../types';
 import { service as developpementApplications } from './developpement-applications';

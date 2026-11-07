@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 import { services } from '~/content/services';
 
 /* ==========================================================================
-   « Six portes, une même exigence » — les 6 expertises en cartes (préfixe .svc)
+   « Nos portes, une même exigence » — les expertises en cartes (préfixe .svc)
    - deux portes phares (grandes cartes avec points clés) puis quatre cartes ;
    - chaque carte porte la couleur de sa porte (lueur dans le coin, trame) ;
    - survol / focus : le plan d'architecte du couloir TIC se dessine trait
@@ -120,7 +120,7 @@ export function ServiceGrid({
   eyebrow = 'Le corridor',
   title = (
     <>
-      Six portes, une même <em>exigence</em>
+      Nos portes, une même <em>exigence</em>
     </>
   ),
   lead = 'Chaque porte a sa couleur et son expertise. Survolez-la : le plan du couloir se dessine derrière elle.',

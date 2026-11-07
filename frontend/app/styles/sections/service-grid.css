@@ -1,5 +1,5 @@
 /* ==========================================================================
-   « Six portes, une même exigence » — composant ServiceGrid (préfixe .svc)
+   « Nos portes, une même exigence » — composant ServiceGrid (préfixe .svc)
    Thème clair par défaut ; thème sombre selon le réglage de l'appareil
    (prefers-color-scheme) ou data-theme="dark" sur <html> (data-theme="light"
    force le clair). Seuls les jetons --svc-* changent d'un thème à l'autre.

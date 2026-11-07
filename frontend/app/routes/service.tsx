@@ -11,7 +11,7 @@ import { Arrow } from '~/components/ui/Arrow';
 import { useDomEffects } from '~/lib/hooks/useDomEffects';
 import css from '~/styles/site.css?url';
 
-/* Gabarit des 6 pages « porte » (expertises). Le contenu de chaque page est
+/* Gabarit des pages « porte » (expertises). Le contenu de chaque page est
    dans app/content/services/<slug>.ts. */
 
 export function loader({ params }: Route.LoaderArgs) {

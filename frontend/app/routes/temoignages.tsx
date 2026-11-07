@@ -27,9 +27,9 @@ export default function TemoignagesPage() {
       eyebrow="Ils nous font confiance"
       color="#E2452B"
       title={<>Résultats réels, impact <em>réel</em></>}
-      lead="Six organisations, six contextes différents, une même exigence : que ça fonctionne en production."
+      lead="Des organisations, des contextes différents, une même exigence : que ça fonctionne en production."
       image="/assets/img/equipe-presentation.webp"
-      badge={{ k: 'Témoignages', v: '6 organisations' }}
+      badge={{ k: 'Témoignages', v: 'Ils ont franchi la porte' }}
     >
       <a href="#deposer" className="btn btn--red btn--lg">
         Laisser un témoignage <i className="arw"></i>

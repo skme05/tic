@@ -110,7 +110,7 @@ export function LabShowcase() {
             </li>
             <li>
               <b>Industrialiser</b>
-              <span>ce qui marche passe dans nos six portes</span>
+              <span>ce qui marche rejoint nos portes</span>
             </li>
           </ol>
           <Link viewTransition to="/innovation" className="btn btn--red btn--lg">

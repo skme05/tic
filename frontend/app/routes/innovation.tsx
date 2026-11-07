@@ -103,7 +103,7 @@ export default function InnovationPage() {
       eyebrow="Du Lab aux portes"
       title={
         <>
-          Le Lab alimente les <em>six portes</em>
+          Le Lab alimente toutes nos <em>portes</em>
         </>
       }
       lead="Ce que nous validons au Lab finit par renforcer chacune de nos expertises."

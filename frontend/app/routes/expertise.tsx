@@ -24,10 +24,10 @@ export default function ExpertisePage() {
     <PageHero
       crumbs={[{ label: 'Accueil', to: '/' }, { label: 'Expertise' }]}
       eyebrow="Nos expertises"
-      title={<>Trois pôles. Six <em>portes</em>.</>}
+      title={<>Nos pôles, nos <em>portes</em></>}
       lead="Nos expertises sont organisées en trois pôles complémentaires. Chacun mobilise des équipes dédiées et des plateformes déjà éprouvées en production."
       image="/assets/img/equipe-presentation.webp"
-      badge={{ k: 'Organisation', v: '3 pôles · 6 portes' }}
+      badge={{ k: 'Organisation', v: 'Pôles, portes et solutions' }}
     >
       <a href="#digital-ia" className="btn btn--red btn--lg">
         Découvrir les pôles <i className="arw"></i>
