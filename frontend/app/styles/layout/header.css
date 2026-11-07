@@ -119,19 +119,29 @@ li.nav__thumb,li.nav__hover{display:none}
 
   /* filet TIC à la base de la barre */
   .nav>ul::after{
-    content:"";position:absolute;left:22px;right:22px;bottom:-1px;height:3px;z-index:1;pointer-events:none;
-    background:linear-gradient(90deg,#1D5FAE,#22A06B,#F4C531,#F28A26,#E2452B);
-    clip-path:polygon(0 100%,50% 0,100% 100%); /* fin aux extrémités, plus épais au centre */
-    opacity:.5;transition:opacity .35s,filter .35s
+    content:"";position:absolute;left:16px;right:16px;bottom:-2px;height:3px;z-index:1;pointer-events:none;
+    background:
+      linear-gradient(90deg,transparent 0 40%,rgba(255,255,255,.95) 50%,transparent 60% 100%) 0 0/250% 100% no-repeat,
+      linear-gradient(90deg,#1D5FAE,#22A06B,#F4C531,#F28A26,#E2452B);
+    /* fin aux extrémités, pleine épaisseur au centre */
+    clip-path:polygon(0 50%,14% 0,86% 0,100% 50%,86% 100%,14% 100%);
+    transform-origin:center;
+    animation:navTrace 1.3s cubic-bezier(.6,0,.2,1) .3s both,navSweep 5s ease-in-out 1.8s infinite;
+    transition:filter .35s,transform .35s
   }
+  @keyframes navTrace{from{transform:scaleX(0)}}
+  @keyframes navSweep{0%{background-position:150% 0,0 0}45%,100%{background-position:-50% 0,0 0}}
+  .nav>ul:hover::after{transform:scaleY(1.5);filter:drop-shadow(0 0 5px rgba(244,197,49,.75)) drop-shadow(0 0 2px rgba(29,95,174,.4))}
   .nav>ul::before{ /* éclat sous l'élément survolé */
     content:"";position:absolute;bottom:-3px;left:0;height:7px;z-index:1;pointer-events:none;
     width:var(--hw,0);transform:translateX(var(--hx,0));
     background:linear-gradient(90deg,transparent,#F4C531 30%,#F28A26 60%,transparent);
     filter:blur(3px);opacity:0;transition:transform .45s cubic-bezier(.3,.9,.25,1),width .45s cubic-bezier(.3,.9,.25,1),opacity .3s
   }
-  .nav>ul:hover::after{opacity:1;filter:drop-shadow(0 0 4px rgba(244,197,49,.55))}
   .nav>ul[data-hover]::before{opacity:.9}
+}
+@media (min-width:1161px) and (prefers-reduced-motion:reduce){
+  .nav>ul::after{animation:none}
 }
 
 /* sous-menus aux couleurs de chaque entrée */
