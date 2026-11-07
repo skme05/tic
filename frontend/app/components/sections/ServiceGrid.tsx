@@ -62,7 +62,7 @@ const H = 300;
 const P = (x: number, y: number, s: number) => [VP.x + (x - VP.x) * s, VP.y + (y - VP.y) * s] as const;
 const f = (n: number) => n.toFixed(1);
 
-function CorridorPlan({ label }: { label: string }) {
+export function CorridorPlan({ label, className = 'svc__plan' }: { label: string; className?: string }) {
   let k = 0;
   const st = () => ({ '--k': k++ }) as CSSProperties;
   const els: ReactNode[] = [];
@@ -103,7 +103,7 @@ function CorridorPlan({ label }: { label: string }) {
   const [cx0, cy0] = P(0, 0, 0.34);
   const [cx1] = P(W, 0, 0.34);
   return (
-    <svg className="svc__plan" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <svg className={className} viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
       {els}
       <line className="svc__axis" x1={VP.x} y1={H} x2={VP.x} y2={0} />
       <circle className="svc__vp" cx={VP.x} cy={VP.y} r="2.5" />

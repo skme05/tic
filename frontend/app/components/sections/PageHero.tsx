@@ -1,18 +1,35 @@
 import { useEffect, useRef, type CSSProperties, type ReactNode } from 'react';
-import { Link } from 'react-router';
+import { Link, useLocation } from 'react-router';
+import { CorridorPlan } from '~/components/sections/ServiceGrid';
 
 /* ==========================================================================
-   En-tête des pages intérieures — « la porte du couloir » (préfixe .ph)
-   - à gauche : fil d'Ariane, étiquette, titre, texte, actions ;
-   - à droite : la photo dans une porte en arche aux couleurs TIC, dont les
-     deux battants s'ouvrent à l'arrivée ; derrière, d'autres portes
-     s'alignent vers le point de fuite (le couloir infini) au-dessus d'un
-     sol en perspective qui défile doucement.
-   Parallaxe légère à la souris (--mx / --my). Styles : styles/sections/page-hero.css
+   En-tête des pages intérieures (préfixe .ph) — 5 mises en scène du couloir :
+   - door    : la photo dans une porte en arche, portes en enfilade derrière ;
+   - wall    : la photo en mur de couloir fuyant, bord aux couleurs TIC ;
+   - slides  : texte centré, photo panoramique révélée par des portes coulissantes ;
+   - plan    : papier de plan bleu, photo bichromie et couloir tracé en direct ;
+   - tunnel  : texte centré au cœur d'un couloir de cadres qui avance sans fin.
+   Sans `variant`, le style est tiré au hasard à partir de l'adresse de la
+   page : chaque page a « son » en-tête, stable d'une visite à l'autre (même
+   rendu pré-calculé et dans le navigateur).
+   Styles : styles/sections/page-hero.css
    ========================================================================== */
 export interface Crumb {
   label: string;
   to?: string;
+}
+
+export const HERO_VARIANTS = ['door', 'wall', 'slides', 'plan', 'tunnel'] as const;
+export type HeroVariant = (typeof HERO_VARIANTS)[number];
+
+/* hachage stable de l'adresse → variante */
+function pickVariant(path: string): HeroVariant {
+  let h = 2166136261;
+  for (const ch of path.replace(/\/+$/, '') || '/') {
+    h ^= ch.charCodeAt(0);
+    h = Math.imul(h, 16777619);
+  }
+  return HERO_VARIANTS[(h >>> 0) % HERO_VARIANTS.length];
 }
 
 interface PageHeroProps {
@@ -24,17 +41,22 @@ interface PageHeroProps {
   imageAlt?: string;
   /** couleur d'accent (étiquette, lueur) — bleu TIC par défaut */
   color?: string;
-  /** petite carte posée sur la porte */
+  /** petite carte posée sur le visuel */
   badge?: { k: string; v: string };
   /** version plus basse (pages formulaire) */
   compact?: boolean;
+  /** imposer une mise en scène (sinon : tirée de l'adresse) */
+  variant?: HeroVariant;
   /** actions (boutons) */
   children?: ReactNode;
 }
 
-export function PageHero({ crumbs, eyebrow, title, lead, image, imageAlt = '', color = '#1D5FAE', badge, compact, children }: PageHeroProps) {
+export function PageHero({ crumbs, eyebrow, title, lead, image, imageAlt = '', color = '#1D5FAE', badge, compact, variant, children }: PageHeroProps) {
   const ref = useRef<HTMLElement>(null);
+  const { pathname } = useLocation();
+  const v = variant ?? pickVariant(pathname);
 
+  /* parallaxe légère à la souris */
   useEffect(() => {
     const el = ref.current;
     if (!el || !matchMedia('(pointer:fine)').matches || matchMedia('(prefers-reduced-motion:reduce)').matches) return;
@@ -60,9 +82,33 @@ export function PageHero({ crumbs, eyebrow, title, lead, image, imageAlt = '', c
     };
   }, []);
 
+  const label = (badge?.k ?? eyebrow ?? 'Porte').toUpperCase();
+  const badgeEl = badge && (
+    <span className="ph__badge">
+      <span className="ph__dot"></span>
+      <span>
+        <small>{badge.k}</small>
+        <b>{badge.v}</b>
+      </span>
+    </span>
+  );
+  const img = <img src={image} alt={imageAlt} loading="eager" decoding="async" />;
+
   return (
-    <section ref={ref} className={'ph' + (compact ? ' ph--compact' : '')} style={{ '--c': color } as CSSProperties}>
+    <section
+      ref={ref}
+      className={`ph ph--${v}` + (compact ? ' ph--compact' : '')}
+      data-variant={v}
+      style={{ '--c': color } as CSSProperties}
+    >
       <span className="ph__aura" aria-hidden="true"></span>
+      {v === 'tunnel' && (
+        <span className="ph__tunnel" aria-hidden="true">
+          {[0, 1, 2, 3, 4, 5, 6].map((i) => (
+            <i key={i} style={{ '--i': i } as CSSProperties}></i>
+          ))}
+        </span>
+      )}
       <div className="ph__in">
         <div className="ph__copy">
           <nav className="ph__crumbs ph__enter" aria-label="Fil d'Ariane">
@@ -97,31 +143,65 @@ export function PageHero({ crumbs, eyebrow, title, lead, image, imageAlt = '', c
               {children}
             </div>
           )}
-        </div>
-
-        <div className="ph__stage" aria-hidden={imageAlt ? undefined : true}>
-          <span className="ph__floor"></span>
-          <span className="ph__vanish"></span>
-          <span className="ph__arch" style={{ '--i': 3 } as CSSProperties}></span>
-          <span className="ph__arch" style={{ '--i': 2 } as CSSProperties}></span>
-          <span className="ph__arch" style={{ '--i': 1 } as CSSProperties}></span>
-          <figure className="ph__door">
-            <img src={image} alt={imageAlt} loading="eager" decoding="async" />
-            <span className="ph__leaf ph__leaf--l"></span>
-            <span className="ph__leaf ph__leaf--r"></span>
-            <span className="ph__frame"></span>
-          </figure>
-          {badge && (
-            <span className="ph__badge">
-              <span className="ph__dot"></span>
-              <span>
-                <small>{badge.k}</small>
-                <b>{badge.v}</b>
-              </span>
-            </span>
+          {v === 'tunnel' && badgeEl && (
+            <div className="ph__enter ph__tunnel-badge" style={{ '--d': '.36s' } as CSSProperties}>
+              <span className="ph__avatar">{img}</span>
+              {badgeEl}
+            </div>
           )}
         </div>
+
+        {v === 'door' && (
+          <div className="ph__stage" aria-hidden={imageAlt ? undefined : true}>
+            <span className="ph__floor"></span>
+            <span className="ph__vanish"></span>
+            <span className="ph__arch" style={{ '--i': 3 } as CSSProperties}></span>
+            <span className="ph__arch" style={{ '--i': 2 } as CSSProperties}></span>
+            <span className="ph__arch" style={{ '--i': 1 } as CSSProperties}></span>
+            <figure className="ph__door">
+              {img}
+              <span className="ph__leaf ph__leaf--l"></span>
+              <span className="ph__leaf ph__leaf--r"></span>
+              <span className="ph__frame"></span>
+            </figure>
+            {badgeEl}
+          </div>
+        )}
+
+        {v === 'slides' && (
+          <div className="ph__slides" aria-hidden={imageAlt ? undefined : true}>
+            <figure className="ph__pano">
+              {img}
+              {[0, 1, 2, 3, 4, 5].map((i) => (
+                <span key={i} className="ph__slat" style={{ '--i': i } as CSSProperties}></span>
+              ))}
+            </figure>
+            {badgeEl}
+          </div>
+        )}
+
+        {v === 'plan' && (
+          <div className="ph__sheet" aria-hidden={imageAlt ? undefined : true}>
+            <figure className="ph__print">
+              {img}
+              <CorridorPlan label={label} className="ph__trace" />
+            </figure>
+            <span className="ph__cart">
+              <b>TIC · {label}</b>
+              <span>Éch. 1:50 — Abidjan</span>
+            </span>
+            {badgeEl}
+          </div>
+        )}
       </div>
+
+      {v === 'wall' && (
+        <div className="ph__wall" aria-hidden={imageAlt ? undefined : true}>
+          <figure className="ph__wallimg">{img}</figure>
+          <span className="ph__walledge"></span>
+          {badgeEl}
+        </div>
+      )}
     </section>
   );
 }
