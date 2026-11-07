@@ -7,6 +7,7 @@ import { CorridorMotion } from '~/components/sections/CorridorMotion';
 import { Manifesto } from '~/components/sections/Manifesto';
 import { CtaContact } from '~/components/sections/CtaContact';
 import { TeamRoles } from '~/components/sections/TeamRoles';
+import { NameStory } from '~/components/sections/NameStory';
 import { Terrain } from '~/components/sections/Terrain';
 import { useDomEffects } from '~/lib/hooks/useDomEffects';
 import css from '~/styles/about.css?url';
@@ -36,6 +37,7 @@ export default function AboutPage() {
         Travailler avec nous <i className="arw"></i>
       </Link>
     </PageHero>
+    <NameStory />
     <TeamRoles />
     <Manifesto
       eyebrow="Notre manifeste"

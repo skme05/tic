@@ -1,0 +1,71 @@
+/* ==========================================================================
+   « Notre histoire » — composant NameStory (préfixe .story)
+   ========================================================================== */
+.story{position:relative;background:#FBFBFD;padding:104px 0 96px;overflow:hidden}
+.story__in{max-width:1240px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:64px;align-items:center}
+
+/* ── texte ── */
+.story__k{margin:0 0 12px;font:700 11.5px/1 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:#1D5FAE}
+.story__txt h2{margin:0 0 16px;font-size:clamp(32px,4vw,50px);text-wrap:balance}
+.story__lead{margin:0 0 30px;max-width:52ch;font-size:17px;line-height:1.7;color:var(--body)}
+.story__beats{margin:0 0 30px;padding:0;list-style:none;display:flex;flex-direction:column;gap:20px}
+.story__beats li{position:relative;display:flex;gap:18px}
+.story__beats li:not(:last-child)::after{content:"";position:absolute;left:19px;top:44px;bottom:-16px;width:1px;
+  background:repeating-linear-gradient(180deg,#C9D3E2 0 4px,transparent 4px 8px)}
+.story__n{display:grid;place-items:center;flex:0 0 auto;width:40px;height:40px;border-radius:12px;background:#fff;border:1px solid #DDE3EC;
+  font:700 12px/1 ui-monospace,SFMono-Regular,Menlo,monospace;color:#1D5FAE}
+.story__beats li:nth-child(2) .story__n{color:#B88A00}
+.story__beats li:nth-child(3) .story__n{color:#fff;background:linear-gradient(135deg,#1D5FAE,#22A06B,#F4C531,#F28A26,#E2452B);border:0}
+.story__beats b{display:block;margin:8px 0 4px;font:700 17px/1.25 var(--lab);color:var(--ink)}
+.story__beats p{margin:0;font-size:14.5px;line-height:1.65;color:var(--body)}
+.story__quote{position:relative;margin:0;padding:20px 22px 20px 26px;border-radius:18px;background:#fff;border:1px solid #E4E7EC;
+  font:600 17px/1.5 var(--lab);color:var(--ink)}
+.story__quote::before{content:"";position:absolute;left:0;top:16px;bottom:16px;width:4px;border-radius:0 4px 4px 0;
+  background:linear-gradient(180deg,#1D5FAE,#22A06B,#F4C531,#F28A26,#E2452B)}
+
+/* ── illustration ── */
+.story__art{position:relative;margin:0;border-radius:28px;overflow:hidden;background:#0B0E14;box-shadow:0 34px 70px rgba(15,17,21,.2);aspect-ratio:600/470}
+.story__art::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px) 0 0/40px 40px,linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px) 0 0/40px 40px}
+.story__svg{position:absolute;inset:0 0 50px;width:100%;height:calc(100% - 50px)}
+.story__lines :is(line,rect,path){fill:none;stroke:#7FA8E8;stroke-width:1.2;stroke-dasharray:1;stroke-dashoffset:1;opacity:.85}
+.story__art.in .story__lines :is(line,rect,path){animation:storyDraw 1s cubic-bezier(.6,0,.2,1) forwards;animation-delay:calc(var(--k) * 70ms)}
+@keyframes storyDraw{to{stroke-dashoffset:0}}
+.story__axis{stroke:#7FA8E8;stroke-width:1;stroke-dasharray:5 5;opacity:0;transition:opacity .8s 1.4s}
+.story__art.in .story__axis{opacity:.5}
+/* le soleil aligné au bout du couloir */
+.story__sun{opacity:0;transform-origin:300px 178px;transform:scale(.4)}
+.story__art.in .story__sun{animation:storySun 1.4s cubic-bezier(.2,.8,.2,1) 1.2s forwards,storyPulse 4s ease-in-out 2.6s infinite}
+@keyframes storySun{to{opacity:1;transform:scale(1)}}
+@keyframes storyPulse{50%{transform:scale(1.12)}}
+.story__beam{fill:url(#storySun);opacity:0;transition:opacity 1.2s 1.6s}
+.story__art.in .story__beam{opacity:.35}
+/* les portes s'allument une à une */
+.story__door{fill:var(--c);opacity:0;filter:drop-shadow(0 0 6px var(--c))}
+.story__art.in .story__door{animation:storyDoor .6s ease-out forwards;animation-delay:calc(2s + var(--i) * .35s)}
+@keyframes storyDoor{to{opacity:.55}}
+.story__cote line{stroke:#F4C531;stroke-width:1;opacity:.8}
+.story__cote text{fill:#DCE6F5;font:600 9.5px/1 var(--sans);letter-spacing:.16em}
+.story__cote{opacity:0;transition:opacity .8s 1.6s}
+.story__art.in .story__cote{opacity:1}
+.story__art figcaption{position:absolute;left:0;right:0;bottom:0;height:50px;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:0 20px;
+  border-top:1px solid rgba(255,255,255,.08);font-size:12.5px;color:#9AA3B1}
+.story__art figcaption span:first-child{display:inline-flex;align-items:center;gap:8px;color:#E6E9EE}
+.story__art figcaption i{width:8px;height:8px;border-radius:50%;background:#F4C531;box-shadow:0 0 8px #F4C531}
+
+@media (max-width:1050px){
+  .story__in{grid-template-columns:1fr;gap:44px}
+  .story__art{max-width:640px;width:100%;margin:0 auto}
+}
+@media (max-width:600px){
+  .story{padding:64px 0}
+  .story__in{padding:0 var(--pad)}
+  .story__art figcaption span:last-child{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  .story__lines :is(line,rect,path){stroke-dashoffset:0}
+  .story__art.in .story__lines :is(line,rect,path),.story__art.in .story__sun,.story__art.in .story__door{animation:none}
+  .story__sun{opacity:1;transform:none}
+  .story__door{opacity:.55}
+}
+.story .story__quote em{font-style:normal;background:linear-gradient(90deg,#1D5FAE,#22A06B,#F4C531,#F28A26,#E2452B);-webkit-background-clip:text;background-clip:text;color:transparent}
