@@ -39,7 +39,7 @@ export default function ServicePage({ loaderData }: Route.ComponentProps) {
         <div className="shell">
           <span className="dhead__n">{service.number}</span> <h1>{service.name}</h1>
           <p>{service.lead}</p>{' '}
-          <Link to="/contact" className="btn btn--red btn--lg">
+          <Link viewTransition to="/contact" className="btn btn--red btn--lg">
             Discutons-en <Arrow />
           </Link>
         </div>
@@ -58,7 +58,7 @@ export default function ServicePage({ loaderData }: Route.ComponentProps) {
                 <li key={b}>{b}</li>
               ))}
             </ul>{' '}
-            <Link to="/contact" className="btn btn--red btn--lg">
+            <Link viewTransition to="/contact" className="btn btn--red btn--lg">
               Demander un devis <Arrow />
             </Link>
           </div>

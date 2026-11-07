@@ -43,7 +43,7 @@ export function CtaContact() {
               </b>
             </div>
           </div>
-          <Link className="btn btn--white btn--lg" to="/contact">
+          <Link viewTransition className="btn btn--white btn--lg" to="/contact">
             Démarrer la conversation <Arrow />
           </Link>
         </div>

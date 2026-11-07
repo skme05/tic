@@ -87,7 +87,7 @@ export default function SolutionPage({ loaderData }: Route.ComponentProps) {
           <div className="dhead__copy">
             <span className="dhead__n">{s.tag}</span> <h1>{s.name}</h1>
             <p>{s.lead}</p>{' '}
-            <Link to="/contact" className="btn btn--red btn--lg">
+            <Link viewTransition to="/contact" className="btn btn--red btn--lg">
               Demander un devis <Arrow />
             </Link>
           </div>
@@ -101,7 +101,7 @@ export default function SolutionPage({ loaderData }: Route.ComponentProps) {
               {sec.label}
             </a>
           ))}{' '}
-          <Link to="/contact" className="solnav__cta">
+          <Link viewTransition to="/contact" className="solnav__cta">
             Devis
           </Link>
         </div>
@@ -118,7 +118,7 @@ export default function SolutionPage({ loaderData }: Route.ComponentProps) {
                 <li key={b}>{b}</li>
               ))}
             </ul>{' '}
-            <Link to="/demarrer-un-projet" className="btn btn--red btn--lg">
+            <Link viewTransition to="/demarrer-un-projet" className="btn btn--red btn--lg">
               Démarrer un projet <Arrow />
             </Link>
           </div>
@@ -213,7 +213,7 @@ export default function SolutionPage({ loaderData }: Route.ComponentProps) {
               <h3>Envie de voir une démo adaptée à votre métier ?</h3>
               <p>Nous préparons un scénario sur vos processus réels, pas une démo générique.</p>
             </div>{' '}
-            <Link to="/demarrer-un-projet" className="btn btn--red btn--lg">
+            <Link viewTransition to="/demarrer-un-projet" className="btn btn--red btn--lg">
               Lancer un projet <Arrow />
             </Link>
           </div>

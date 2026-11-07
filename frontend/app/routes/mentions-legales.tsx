@@ -54,7 +54,7 @@ export default function LegalNoticePage() {
         <h2>Données personnelles</h2>
         <p>
           Le traitement des informations que vous nous transmettez est décrit dans notre{' '}
-          <Link to="/confidentialite">politique de confidentialité</Link>
+          <Link viewTransition to="/confidentialite">politique de confidentialité</Link>
           .
         </p>
       </div>

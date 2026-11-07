@@ -25,7 +25,7 @@ tic/
 │   │   │   │                 CorridorMotion, WhyTic, MethodTimeline, MethodSteps, RelatedCards
 │   │   │   └── ui/           Petits éléments : Arrow, icônes, Rich (texte riche sûr)
 │   │   ├── features/         Fonctionnalités autonomes
-│   │   │   ├── contact/, project-wizard/, testimonials/, client-portal/, intro/
+│   │   │   ├── loader/ (loader architectural), contact/, project-wizard/, testimonials/, client-portal/
 │   │   │   └── scenes-3d/, text-reveal/, doors/, rails/, reveal/,
 │   │   │       videos/, walkthrough/   moteurs d'animation (voir plus bas)
 │   │   ├── lib/
@@ -77,3 +77,14 @@ Le CSS d'origine (2 624 lignes) a été découpé en fichiers par composant (`st
 fichiers **dans l'ordre d'origine** (l'ordre compte : les règles responsive viennent après les
 composants). Les nouveaux blocs ont des classes préfixées (`.hs`, `.mf`, `.ndoor`, `.cmo`, `.why`,
 `.mtl`) pour ne rien casser autour d'eux.
+
+## Animations d'entrée et de sortie
+
+- **Loader** (`features/loader/SiteLoader.tsx`) : le corridor se construit comme un plan
+  d'architecte, puis on y entre. Animation 100 % CSS (fonctionne sans JavaScript), une fois
+  par visite, ignorée si le visiteur réduit les animations.
+- **Changement de page** : chaque `<Link viewTransition>` passe par l'API View Transitions ;
+  l'ancienne page sort, la nouvelle entre (`styles/base/atoms.css`). Navigateurs sans support :
+  changement instantané.
+- **Sections** : `.reveal` apparaît en entrant à l'écran et s'efface en sortant
+  (`features/reveal`) ; le hero se retire au défilement (variable CSS `--out`).

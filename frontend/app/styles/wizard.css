@@ -3,6 +3,7 @@
    l'ordre compte (les règles responsive viennent après les composants). */
 @import './base/tokens-base.css';
 @import './base/atoms.css';
+@import './components/site-loader.css';
 @import './layout/header.css';
 @import './base/section-titles.css';
 @import './sections/stats.css';

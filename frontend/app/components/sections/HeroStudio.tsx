@@ -8,8 +8,8 @@ import { prefersReducedMotion } from '~/lib/dom/scope';
    Gauche : titre, accroche, actions, plateformes en production.
    Droite : éléments d'interface flottants (panneau-porte aux couleurs du
    logo, disque ∞, fenêtre de code, graphique, tuiles reliées).
-   Animations : entrée en cascade, flottement, parallaxe à la souris,
-   curseur sur un arc, point qui circule sur le fil, barres du graphique.
+   Animations : entrée en cascade, SORTIE au défilement, flottement,
+   parallaxe à la souris, curseur sur un arc, fil et point, graphique.
    Styles : styles/sections/hero-studio.css (préfixe .hs).
    ========================================================================== */
 
@@ -24,9 +24,28 @@ export function HeroStudio() {
     if (prefersReducedMotion()) return;
     setMotion(true);
     const el = ref.current;
-    if (!el || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
-    /* parallaxe : la position de la souris (-1 → 1) est écrite en variables CSS */
+    if (!el) return;
     let raf = 0;
+    let rafScroll = 0;
+
+    /* SORTIE : quand on fait défiler la page, le texte remonte et s'efface,
+       les éléments de la composition s'écartent selon leur profondeur.
+       --out va de 0 (hero en place) à 1 (hero sorti). */
+    const onScroll = () => {
+      cancelAnimationFrame(rafScroll);
+      rafScroll = requestAnimationFrame(() => {
+        /* la sortie commence quand le tiers du hero est passé, et se termine
+           quand son bas quitte l'écran (identique sur ordinateur et mobile) */
+        const h = el.offsetHeight || 1;
+        const start = h * 0.35;
+        el.style.setProperty('--out', Math.min(1, Math.max(0, (window.scrollY - start) / (h * 0.6))).toFixed(3));
+      });
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    /* PARALLAXE : la position de la souris (-1 → 1) en variables CSS */
+    const fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
     const onMove = (e: MouseEvent) => {
       cancelAnimationFrame(raf);
       raf = requestAnimationFrame(() => {
@@ -34,9 +53,11 @@ export function HeroStudio() {
         el.style.setProperty('--my', ((e.clientY / window.innerHeight) * 2 - 1).toFixed(3));
       });
     };
-    window.addEventListener('mousemove', onMove, { passive: true });
+    if (fine) window.addEventListener('mousemove', onMove, { passive: true });
     return () => {
       cancelAnimationFrame(raf);
+      cancelAnimationFrame(rafScroll);
+      window.removeEventListener('scroll', onScroll);
       window.removeEventListener('mousemove', onMove);
     };
   }, []);
@@ -54,27 +75,27 @@ export function HeroStudio() {
           </p>
           <h1 className="hs__title" id="hs-title">
             <span className="hs__line hs__enter" style={{ '--d': '.12s' }}>
-              Le logiciel
+              De meilleures
               <svg className="hs__sparkle" viewBox="0 0 40 40" aria-hidden="true">
                 <path d="M20 0 C21.5 13 27 18.5 40 20 C27 21.5 21.5 27 20 40 C18.5 27 13 21.5 0 20 C13 18.5 18.5 13 20 0Z" />
               </svg>
             </span>
             <span className="hs__line hs__enter" style={{ '--d': '.2s' }}>
-              qui fait avancer
+              <span className="hs__mark">perspectives</span>
             </span>
-            <span className="hs__line hs__enter" style={{ '--d': '.28s' }}>
-              <span className="hs__mark">l'Afrique</span>
+            <span className="hs__line hs__line--soft hs__enter" style={{ '--d': '.28s' }}>
+              pour la croissance de votre activité
             </span>
           </h1>
           <p className="hs__lead hs__enter" style={{ '--d': '.4s' }}>
-            Nous concevons, développons et maintenons les plateformes numériques des entreprises et institutions africaines. Un corridor,
-            une porte par expertise.
+            The Infinite Corridor Software Solutions accompagne entreprises et institutions dans leur transformation numérique avec des
+            solutions technologiques sur mesure, innovantes et durables.
           </p>
           <div className="hs__cta hs__enter" style={{ '--d': '.5s' }}>
-            <Link to="/demarrer-un-projet" className="hs__btn">
+            <Link viewTransition to="/demarrer-un-projet" className="hs__btn">
               Démarrer un projet <i className="arw"></i>
             </Link>
-            <Link to="/solutions" className="hs__link">
+            <Link viewTransition to="/solutions" className="hs__link">
               Voir nos solutions <span aria-hidden="true">→</span>
             </Link>
           </div>
@@ -83,7 +104,7 @@ export function HeroStudio() {
             <ul>
               {platforms.map((s) => (
                 <li key={s.slug}>
-                  <Link to={`/solutions/${s.slug}`}>{s.menuLabel ?? s.name}</Link>
+                  <Link viewTransition to={`/solutions/${s.slug}`}>{s.menuLabel ?? s.name}</Link>
                 </li>
               ))}
             </ul>

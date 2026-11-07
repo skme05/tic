@@ -12,7 +12,7 @@ export function RelatedCards({ items }: { items: RelatedItem[] }) {
   return (
     <div className="related reveal">
       {items.map((it) => (
-        <Link key={it.to} to={it.to}>
+        <Link viewTransition key={it.to} to={it.to}>
           <i>{it.tag}</i>
           <b>{it.name}</b>
           <span>{it.text}</span>

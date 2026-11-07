@@ -10,6 +10,7 @@ import { rails } from '~/features/rails/rails-effect';
 import { doors } from '~/features/doors/doors-effect';
 import { walkthrough } from '~/features/walkthrough/walkthrough-effect';
 import siteCss from '~/styles/site.css?url';
+import { LOADER_KEY, SiteLoader } from '~/features/loader/SiteLoader';
 
 export const links: Route.LinksFunction = () => [
   { rel: 'icon', href: '/favicon-32.png', sizes: '32x32', type: 'image/png' },
@@ -41,6 +42,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#0f1115" />
+        {/* loader déjà vu pendant la visite : masqué avant tout rendu */}
+        <script dangerouslySetInnerHTML={{ __html: `try{if(sessionStorage.getItem('${LOADER_KEY}')==='1')document.documentElement.classList.add('tic-seen')}catch(e){}` }} />
         <Meta />
         <Links />
       </head>
@@ -64,6 +67,7 @@ export default function App() {
 
   return (
     <>
+      <SiteLoader />
       <a className="skip" href="#top">
         Aller au contenu
       </a>

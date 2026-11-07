@@ -47,7 +47,7 @@ export function Header({ forceSolid = false }: { forceSolid?: boolean }) {
   return (
     <header className={'hdr' + (solid || forceSolid ? ' is-solid' : '')} id="hdr">
       <div className="shell hdr__in">
-        <Link className="brand" to="/">
+        <Link viewTransition className="brand" to="/">
           <img src="/assets/img/logo-tic.webp" width="600" height="138" alt="TIC — The Infinite Corridor Software Solutions" />
         </Link>
 
@@ -63,7 +63,7 @@ export function Header({ forceSolid = false }: { forceSolid?: boolean }) {
                 />
               ) : (
                 <li key={item.to}>
-                  <NavLink className={({ isActive }) => 'nav__l' + (isActive ? ' is-on' : '')} to={item.to} end={item.to === '/'}>
+                  <NavLink viewTransition className={({ isActive }) => 'nav__l' + (isActive ? ' is-on' : '')} to={item.to} end={item.to === '/'}>
                     {item.label}
                   </NavLink>
                 </li>
@@ -73,10 +73,10 @@ export function Header({ forceSolid = false }: { forceSolid?: boolean }) {
         </nav>
 
         <div className="hdr__act">
-          <NavLink className={({ isActive }) => 'signin' + (isActive ? ' is-on' : '')} to="/espace-client">
+          <NavLink viewTransition className={({ isActive }) => 'signin' + (isActive ? ' is-on' : '')} to="/espace-client">
             Espace client
           </NavLink>
-          <Link className="btn btn--ink" to="/contact">
+          <Link viewTransition className="btn btn--ink" to="/contact">
             Nous contacter
           </Link>
         </div>
@@ -125,7 +125,7 @@ function DropItem({ item, open, setOpen }: { item: NavItem; open: boolean; setOp
         if (!e.currentTarget.contains(e.relatedTarget as Node | null)) scheduleClose();
       }}
     >
-      <NavLink className={({ isActive }) => 'nav__l' + (isActive ? ' is-on' : '')} to={item.to}>
+      <NavLink viewTransition className={({ isActive }) => 'nav__l' + (isActive ? ' is-on' : '')} to={item.to}>
         {item.label}
       </NavLink>
       <button
@@ -152,13 +152,13 @@ function DropItem({ item, open, setOpen }: { item: NavItem; open: boolean; setOp
                 const sol = getSolution(slug);
                 if (!sol) return null;
                 return (
-                  <Link key={slug} to={`/solutions/${slug}`}>
+                  <Link viewTransition key={slug} to={`/solutions/${slug}`}>
                     {sol.menuLabel ?? sol.name}
                   </Link>
                 );
               })}
               {i === item.columns!.length - 1 && (
-                <Link className="menu__all" to={item.to}>
+                <Link viewTransition className="menu__all" to={item.to}>
                   Toutes nos solutions →
                 </Link>
               )}
@@ -168,7 +168,7 @@ function DropItem({ item, open, setOpen }: { item: NavItem; open: boolean; setOp
       ) : (
         <div className="menu">
           {item.menu!.map((sub) => (
-            <Link key={sub.to} to={sub.to}>
+            <Link viewTransition key={sub.to} to={sub.to}>
               <b>{sub.title}</b>
               <span>{sub.text}</span>
             </Link>

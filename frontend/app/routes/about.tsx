@@ -31,7 +31,7 @@ export default function AboutPage() {
           The Infinite Corridor Software Solutions est une société d'ingénierie logicielle basée à Abidjan. Nous concevons, développons et maintenons les plateformes numériques des entreprises et institutions africaines.
         </p>
         {' '}
-        <Link to="/contact" className="btn btn--red btn--lg">
+        <Link viewTransition to="/contact" className="btn btn--red btn--lg">
           Travailler avec nous{' '}
           <i className="arw"></i>
         </Link>
@@ -159,7 +159,7 @@ export default function AboutPage() {
               Nos équipes travaillent ensemble à Cocody : développeurs, designers, architectes et chefs de projet dans la même pièce.
             </p>
             {' '}
-            <Link to="/contact" className="btn btn--white">
+            <Link viewTransition to="/contact" className="btn btn--white">
               Venir nous rencontrer{' '}
               <i className="arw"></i>
             </Link>
@@ -248,7 +248,7 @@ export default function AboutPage() {
             <li>Support et maintenance applicative sur le long terme</li>
           </ul>
           {' '}
-          <Link to="/expertise" className="btn btn--red btn--lg">
+          <Link viewTransition to="/expertise" className="btn btn--red btn--lg">
             Voir nos expertises{' '}
             <i className="arw"></i>
           </Link>

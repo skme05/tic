@@ -101,7 +101,7 @@ export default function TemoignagesPage() {
             <h2>Le prochain témoignage sera peut-être le vôtre</h2>
             <p>Parlons de votre projet : cadrage gratuit, devis chiffré, aucune obligation.</p>
             {' '}
-            <Link to="/contact" className="btn btn--white">
+            <Link viewTransition to="/contact" className="btn btn--white">
               Prendre rendez-vous{' '}
               <i className="arw"></i>
             </Link>

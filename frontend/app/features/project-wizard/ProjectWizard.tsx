@@ -428,12 +428,12 @@ export function ProjectWizard() {
                 Nous revenons vers vous sous 24 heures ouvrées avec un premier avis et une proposition de rendez-vous.
               </p>
               <div className="wdone__actions">
-                <Link to="/solutions" className="btn btn--red btn--lg">
+                <Link viewTransition to="/solutions" className="btn btn--red btn--lg">
                   Découvrir nos solutions{' '}
                   <i className="arw"></i>
                 </Link>
                 {' '}
-                <Link to="/" className="btn btn--ghost btn--lg">Retour à l'accueil</Link>
+                <Link viewTransition to="/" className="btn btn--ghost btn--lg">Retour à l'accueil</Link>
               </div>
             </div>
             <div className="wnav" id="wNav" hidden={done}>

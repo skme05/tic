@@ -31,7 +31,7 @@ export function Footer({ cover = true }: { cover?: boolean }) {
             <p>
               {site.legalName} — {site.tagline}
             </p>
-            <Link className="btn btn--red" to="/demarrer-un-projet">
+            <Link viewTransition className="btn btn--red" to="/demarrer-un-projet">
               Démarrer un projet <Arrow />
             </Link>
             <div className="foot__soc">
@@ -58,7 +58,7 @@ export function Footer({ cover = true }: { cover?: boolean }) {
           <nav className="foot__col" aria-label="Le corridor">
             <h2 className="foot__h">Le corridor</h2>
             {services.map((s) => (
-              <Link key={s.slug} to={`/services/${s.slug}`}>
+              <Link viewTransition key={s.slug} to={`/services/${s.slug}`}>
                 {s.name}
               </Link>
             ))}
@@ -66,7 +66,7 @@ export function Footer({ cover = true }: { cover?: boolean }) {
           <nav className="foot__col" aria-label="Explorer">
             <h2 className="foot__h">Explorer</h2>
             {exploreNav.map((l) => (
-              <Link key={l.to} to={l.to}>
+              <Link viewTransition key={l.to} to={l.to}>
                 {l.label}
               </Link>
             ))}
@@ -94,7 +94,7 @@ export function Footer({ cover = true }: { cover?: boolean }) {
           <ul>
             {legalNav.map((l) => (
               <li key={l.to}>
-                <Link to={l.to}>{l.label}</Link>
+                <Link viewTransition to={l.to}>{l.label}</Link>
               </li>
             ))}
             <li>

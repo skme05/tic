@@ -116,7 +116,7 @@ export function ClientPortal() {
             </div>
             <form id="loginForm" noValidate onSubmit={onLogin}>
               <p className="plog__err" id="loginErr" role="alert" hidden={!error}>
-                Connexion impossible : vérifiez vos identifiants ou <Link to="/contact">contactez-nous</Link>.
+                Connexion impossible : vérifiez vos identifiants ou <Link viewTransition to="/contact">contactez-nous</Link>.
               </p>
               {clientPortalIsDemo && (
                 <p className="plog__demo" role="note">
@@ -159,8 +159,8 @@ export function ClientPortal() {
               </button>
             </form>
             <p className="plog__note">
-              Vos accès vous seront communiqués par votre chef de projet. · <Link to="/demarrer-un-projet">Démarrer un projet</Link> ·{' '}
-              <Link to="/contact">Aide</Link>
+              Vos accès vous seront communiqués par votre chef de projet. · <Link viewTransition to="/demarrer-un-projet">Démarrer un projet</Link> ·{' '}
+              <Link viewTransition to="/contact">Aide</Link>
             </p>
           </div>
         </div>
@@ -179,7 +179,7 @@ export function ClientPortal() {
                 <p>Voici l’avancement de vos projets confiés à TIC.</p>
               </div>
               <div className="port__actions">
-                <Link to="/demarrer-un-projet" className="btn btn--ghost">
+                <Link viewTransition to="/demarrer-un-projet" className="btn btn--ghost">
                   + Nouveau projet
                 </Link>{' '}
                 <button className="btn btn--ink" type="button" id="logoutBtn" onClick={onLogout}>
@@ -222,7 +222,7 @@ export function ClientPortal() {
                 </nav>
                 <div className="psupport">
                   <b>Votre chef de projet</b> <p>Une question sur l’avancement ? Réponse sous 24&nbsp;h ouvrées.</p>{' '}
-                  <Link to="/contact">
+                  <Link viewTransition to="/contact">
                     Contacter l’équipe <i className="arw arw--sm"></i>
                   </Link>
                 </div>

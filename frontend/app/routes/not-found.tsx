@@ -22,12 +22,12 @@ export default function NotFoundPage() {
           La page demandée a été déplacée ou n'a jamais existé. Reprenons depuis l'entrée du corridor.
         </p>
         <p className="legal__actions">
-          <Link to="/" className="btn btn--red btn--lg">
+          <Link viewTransition to="/" className="btn btn--red btn--lg">
             Retour à l'accueil{' '}
             <i className="arw"></i>
           </Link>
           {' '}
-          <Link to="/contact" className="btn btn--ghost btn--lg">Nous contacter</Link>
+          <Link viewTransition to="/contact" className="btn btn--ghost btn--lg">Nous contacter</Link>
         </p>
       </div>
     </section>

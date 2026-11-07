@@ -170,7 +170,7 @@ export default function ExpertisePage() {
           </p>
         </div>
         <div className="doors">
-          <Link to="/services/web-design" className="door reveal" style={{ "--c": "#175F9E" }}>
+          <Link viewTransition to="/services/web-design" className="door reveal" style={{ "--c": "#175F9E" }}>
             <span className="door__frame"></span>
             {' '}
             <div className="door__room">
@@ -215,7 +215,7 @@ export default function ExpertisePage() {
             <span className="door__sill"></span>
           </Link>
           {' '}
-          <Link to="/services/ui-ux-design" className="door reveal" style={{ "--c": "#63B843" }}>
+          <Link viewTransition to="/services/ui-ux-design" className="door reveal" style={{ "--c": "#63B843" }}>
             <span className="door__frame"></span>
             {' '}
             <div className="door__room">
@@ -260,7 +260,7 @@ export default function ExpertisePage() {
             <span className="door__sill"></span>
           </Link>
           {' '}
-          <Link to="/services/migration-site-web" className="door reveal" style={{ "--c": "#F5C400" }}>
+          <Link viewTransition to="/services/migration-site-web" className="door reveal" style={{ "--c": "#F5C400" }}>
             <span className="door__frame"></span>
             {' '}
             <div className="door__room">
@@ -305,7 +305,7 @@ export default function ExpertisePage() {
             <span className="door__sill"></span>
           </Link>
           {' '}
-          <Link to="/services/developpement-applications" className="door reveal" style={{ "--c": "#F5891F" }}>
+          <Link viewTransition to="/services/developpement-applications" className="door reveal" style={{ "--c": "#F5891F" }}>
             <span className="door__frame"></span>
             {' '}
             <div className="door__room">
@@ -348,7 +348,7 @@ export default function ExpertisePage() {
             <span className="door__sill"></span>
           </Link>
           {' '}
-          <Link to="/services/integration-hubspot" className="door reveal" style={{ "--c": "#D9201B" }}>
+          <Link viewTransition to="/services/integration-hubspot" className="door reveal" style={{ "--c": "#D9201B" }}>
             <span className="door__frame"></span>
             {' '}
             <div className="door__room">
@@ -391,7 +391,7 @@ export default function ExpertisePage() {
             <span className="door__sill"></span>
           </Link>
           {' '}
-          <Link to="/services/email-marketing" className="door reveal" style={{ "--c": "#8B5CF6" }}>
+          <Link viewTransition to="/services/email-marketing" className="door reveal" style={{ "--c": "#8B5CF6" }}>
             <span className="door__frame"></span>
             {' '}
             <div className="door__room">

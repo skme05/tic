@@ -46,7 +46,7 @@ export default function InnovationPage() {
             <li>Publications internes et transfert vers les projets clients</li>
           </ul>
           {' '}
-          <Link to="/contact" className="btn btn--red btn--lg">
+          <Link viewTransition to="/contact" className="btn btn--red btn--lg">
             Proposer un sujet{' '}
             <i className="arw"></i>
           </Link>
@@ -74,7 +74,7 @@ export default function InnovationPage() {
             <li>Décision go / no-go documentée et chiffrée</li>
           </ul>
           {' '}
-          <Link to="/contact" className="btn btn--red btn--lg">
+          <Link viewTransition to="/contact" className="btn btn--red btn--lg">
             Lancer un prototype{' '}
             <i className="arw"></i>
           </Link>
@@ -123,7 +123,7 @@ export default function InnovationPage() {
           <p>Ce que nous validons au Lab finit par renforcer chacune de nos expertises.</p>
         </div>
         <div className="doors">
-          <Link to="/services/web-design" className="door reveal" style={{ "--c": "#175F9E" }}>
+          <Link viewTransition to="/services/web-design" className="door reveal" style={{ "--c": "#175F9E" }}>
             <span className="door__frame"></span>
             {' '}
             <div className="door__room">
@@ -168,7 +168,7 @@ export default function InnovationPage() {
             <span className="door__sill"></span>
           </Link>
           {' '}
-          <Link to="/services/ui-ux-design" className="door reveal" style={{ "--c": "#63B843" }}>
+          <Link viewTransition to="/services/ui-ux-design" className="door reveal" style={{ "--c": "#63B843" }}>
             <span className="door__frame"></span>
             {' '}
             <div className="door__room">
@@ -213,7 +213,7 @@ export default function InnovationPage() {
             <span className="door__sill"></span>
           </Link>
           {' '}
-          <Link to="/services/migration-site-web" className="door reveal" style={{ "--c": "#F5C400" }}>
+          <Link viewTransition to="/services/migration-site-web" className="door reveal" style={{ "--c": "#F5C400" }}>
             <span className="door__frame"></span>
             {' '}
             <div className="door__room">
@@ -258,7 +258,7 @@ export default function InnovationPage() {
             <span className="door__sill"></span>
           </Link>
           {' '}
-          <Link to="/services/developpement-applications" className="door reveal" style={{ "--c": "#F5891F" }}>
+          <Link viewTransition to="/services/developpement-applications" className="door reveal" style={{ "--c": "#F5891F" }}>
             <span className="door__frame"></span>
             {' '}
             <div className="door__room">
@@ -301,7 +301,7 @@ export default function InnovationPage() {
             <span className="door__sill"></span>
           </Link>
           {' '}
-          <Link to="/services/integration-hubspot" className="door reveal" style={{ "--c": "#D9201B" }}>
+          <Link viewTransition to="/services/integration-hubspot" className="door reveal" style={{ "--c": "#D9201B" }}>
             <span className="door__frame"></span>
             {' '}
             <div className="door__room">
@@ -344,7 +344,7 @@ export default function InnovationPage() {
             <span className="door__sill"></span>
           </Link>
           {' '}
-          <Link to="/services/email-marketing" className="door reveal" style={{ "--c": "#8B5CF6" }}>
+          <Link viewTransition to="/services/email-marketing" className="door reveal" style={{ "--c": "#8B5CF6" }}>
             <span className="door__frame"></span>
             {' '}
             <div className="door__room">

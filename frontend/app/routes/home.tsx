@@ -10,7 +10,6 @@ import { CorridorMotion } from '~/components/sections/CorridorMotion';
 import { TestimonialsRail } from '~/features/testimonials/TestimonialsRail';
 import { TestimonialForm } from '~/features/testimonials/TestimonialForm';
 import { CtaContact } from '~/components/sections/CtaContact';
-import { Intro } from '~/features/intro/Intro';
 import { organizationJsonLd } from '~/lib/seo';
 import css from '~/styles/home.css?url';
 
@@ -21,7 +20,6 @@ export const meta: Route.MetaFunction = () => [...seo({ path: "/", description: 
 export default function HomePage() {
   return (
     <>
-      <Intro />
     <HeroStudio />
     <Manifesto />
     <CorridorMotion />
@@ -277,25 +275,25 @@ export default function HomePage() {
         <div className="solrail reveal">
           <div className="rail">
             <div className="rail__track" data-speed="46">
-              <Link to="/solutions/odoo" className="sol">
+              <Link viewTransition to="/solutions/odoo" className="sol">
                 <b>Odoo</b>
                 <span>Intégration et personnalisation de l'ERP open source.</span>
                 <u>Découvrir →</u>
               </Link>
               {' '}
-              <Link to="/solutions/paie" className="sol">
+              <Link viewTransition to="/solutions/paie" className="sol">
                 <b>Paie</b>
                 <span>Gestion complète de la paie et des déclarations sociales.</span>
                 <u>Découvrir →</u>
               </Link>
               {' '}
-              <Link to="/solutions/fne" className="sol">
+              <Link viewTransition to="/solutions/fne" className="sol">
                 <b>Facture normalisée</b>
                 <span>Facturation électronique conforme à la réglementation.</span>
                 <u>Découvrir →</u>
               </Link>
               {' '}
-              <Link to="/solutions/school-manager" className="sol">
+              <Link viewTransition to="/solutions/school-manager" className="sol">
                 <b>School Manager</b>
                 <span>Inscriptions, notes et suivi complet de la scolarité.</span>
                 <u>Découvrir →</u>
@@ -304,25 +302,25 @@ export default function HomePage() {
           </div>
           <div className="rail rail--rev">
             <div className="rail__track" data-speed="46">
-              <Link to="/solutions/e-clinique" className="sol">
+              <Link viewTransition to="/solutions/e-clinique" className="sol">
                 <b>E-clinique</b>
                 <span>Dossier patient, rendez-vous et facturation médicale.</span>
                 <u>Découvrir →</u>
               </Link>
               {' '}
-              <Link to="/solutions/e-garage" className="sol">
+              <Link viewTransition to="/solutions/e-garage" className="sol">
                 <b>E-garage</b>
                 <span>Ateliers, interventions et suivi de parc automobile.</span>
                 <u>Découvrir →</u>
               </Link>
               {' '}
-              <Link to="/solutions/e-connaissance" className="sol">
+              <Link viewTransition to="/solutions/e-connaissance" className="sol">
                 <b>E-Connaissance</b>
                 <span>Base de savoir et formation en ligne pour vos équipes.</span>
                 <u>Découvrir →</u>
               </Link>
               {' '}
-              <Link to="/solutions/scraper-pro" className="sol">
+              <Link viewTransition to="/solutions/scraper-pro" className="sol">
                 <b>Scraper Pro</b>
                 <span>Collecte et structuration de données à grande échelle.</span>
                 <u>Découvrir →</u>
@@ -343,7 +341,7 @@ export default function HomePage() {
             Un espace dédié à l'exploration : prototypage rapide, veille technologique et recherche appliquée. Nous testons aujourd'hui les usages de demain, puis nous les industrialisons avec vous.
           </p>
           {' '}
-          <Link to="/innovation" className="btn btn--red btn--lg">
+          <Link viewTransition to="/innovation" className="btn btn--red btn--lg">
             Découvrir le Lab{' '}
             <i className="arw"></i>
           </Link>

@@ -116,7 +116,7 @@ export function ContactForm() {
           <label className="cpanel__consent">
             <input type="checkbox" name="consent" required />
             <span>
-              J’accepte que TIC utilise ces infos pour me répondre (<Link to="/confidentialite">confidentialité</Link>).
+              J’accepte que TIC utilise ces infos pour me répondre (<Link viewTransition to="/confidentialite">confidentialité</Link>).
             </span>
           </label>
           <button className="btn btn--red btn--lg" type="submit" id="contactSend" disabled={status === 'sending'}>

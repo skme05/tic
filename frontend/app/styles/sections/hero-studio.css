@@ -6,7 +6,7 @@
    --z : profondeur de chaque calque ; --d : délai d'entrée.
    ========================================================================== */
 .hs{
-  --mx:0;--my:0;
+  --mx:0;--my:0;--out:0;
   position:relative;overflow:hidden;
   background:
     radial-gradient(42% 50% at 85% 40%,rgba(29,95,174,.07),transparent 70%),
@@ -14,8 +14,8 @@
     #FBFBFD
 }
 .hs__in{
-  max-width:1280px;margin:0 auto;padding:calc(var(--hdr) + 40px) 24px 70px;box-sizing:border-box;
-  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:40px;align-items:center;min-height:100vh
+  max-width:1280px;margin:0 auto;padding:calc(var(--hdr) + 28px) 24px 28px;box-sizing:border-box;
+  display:grid;grid-template-columns:minmax(0,1.12fr) minmax(0,.88fr);gap:44px;align-items:center
 }
 
 /* ── entrée en cascade ── */
@@ -33,8 +33,8 @@
 @keyframes hsPing{from{transform:scale(.4);opacity:1}to{transform:scale(2.2);opacity:0}}
 
 .hs__title{
-  margin:0 0 28px;color:var(--ink);font-family:var(--lab);font-weight:800;
-  font-size:clamp(44px,5.7vw,84px);line-height:1;letter-spacing:-.045em
+  margin:0 0 24px;color:var(--ink);font-family:var(--lab);font-weight:800;
+  font-size:clamp(36px,4.3vw,64px);line-height:1.07;letter-spacing:-.02em
 }
 .hs__line{display:block;position:relative;width:max-content;max-width:100%}
 .hs__sparkle{
@@ -47,6 +47,7 @@
   55%{transform:scale(1.15) rotate(90deg);opacity:1}
 }
 .hs__mark{position:relative;z-index:0;white-space:nowrap}
+.hs__line--soft{font-weight:700;color:#3B4350;width:auto}
 .hs__mark::after{ /* surlignage dessiné sous « l'Afrique » */
   content:"";position:absolute;left:-.02em;right:-.04em;bottom:.08em;height:.2em;z-index:-1;border-radius:.1em;
   background:linear-gradient(90deg,#1D5FAE,#22A06B,#F4C531,#F28A26,#E2452B);opacity:.85;
@@ -65,17 +66,29 @@
 .hs__link span{display:inline-block;transition:transform .3s}
 .hs__link:hover{border-color:#F4C531}
 .hs__link:hover span{transform:translateX(4px)}
-.hs__brands{margin-top:58px}
+.hs__brands{margin-top:40px}
 .hs__brands p{margin:0 0 14px;font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#98A2B3}
 .hs__brands ul{margin:0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:10px 30px}
 .hs__brands a{font:800 21px/1 var(--lab);letter-spacing:-.03em;color:#B3BAC5;transition:color .3s}
 .hs__brands a:hover{color:var(--ink)}
 
+/* ── SORTIE au défilement (--out : 0 → 1) ── */
+.hs__copy{
+  opacity:calc(1 - var(--out) * 1.5);
+  transform:translateY(calc(var(--out) * -70px));
+  filter:blur(calc(var(--out) * 6px))
+}
+.hs__art{
+  opacity:calc(1 - var(--out) * 1.2);
+  transform:scale(calc(1 - var(--out) * .12)) rotate(calc(var(--out) * -3deg))
+}
+
 /* ── composition ── */
 .hs__art{position:relative;width:100%;max-width:640px;aspect-ratio:1;margin-left:auto;container-type:inline-size}
 .hs__layer{
   position:absolute;
-  translate:calc(var(--mx) * var(--z,1) * -14px) calc(var(--my) * var(--z,1) * -14px);
+  /* parallaxe souris + écartement en profondeur à la sortie */
+  translate:calc(var(--mx) * var(--z,1) * -14px) calc(var(--my) * var(--z,1) * -14px + var(--out) * var(--z,1) * -60px);
   transition:translate .5s cubic-bezier(.2,.8,.2,1)
 }
 .hs__pop{animation:hsPop .9s cubic-bezier(.3,1.5,.5,1) both,hsFloat 7s ease-in-out infinite;animation-delay:var(--d,0s),calc(var(--d,0s) + 1s)}
@@ -186,12 +199,12 @@
 .hs__chip-ping::after{content:"";position:absolute;inset:-.8cqw;border-radius:50%;border:.4cqw solid #F28A26;animation:hsPing 2s ease-out infinite}
 
 @media (max-width:980px){
-  .hs__in{grid-template-columns:1fr;min-height:0;padding-top:calc(var(--hdr) + 30px);gap:30px}
+  .hs__in{grid-template-columns:1fr;padding-top:calc(var(--hdr) + 24px);gap:28px}
   .hs__art{margin:0 auto}
   .hs__brands{margin-top:40px}
 }
 @media (max-width:700px){
-  .hs__in{padding:calc(var(--hdr) + 20px) var(--pad) 56px}
+  .hs__in{padding:calc(var(--hdr) + 16px) var(--pad) 40px}
   .hs__sparkle{right:-.75em}
   .hs__cta{gap:16px}
   .hs__btn{width:100%;justify-content:center}
@@ -205,4 +218,5 @@
   .hs__mark::after{animation:none;transform:none}
   .hs__wire{animation:none;stroke-dashoffset:0}
   .hs__layer{translate:none;transition:none}
+  .hs__copy,.hs__art{opacity:1;transform:none;filter:none}
 }

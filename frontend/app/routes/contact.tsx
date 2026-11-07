@@ -67,7 +67,7 @@ export default function ContactPage() {
             <div className="cpanel__cta">
               <p>Besoin d’un parcours guidé en 5 étapes&nbsp;?</p>
               {' '}
-              <Link to="/demarrer-un-projet" className="btn btn--out">
+              <Link viewTransition to="/demarrer-un-projet" className="btn btn--out">
                 Démarrer un projet{' '}
                 <i className="arw"></i>
               </Link>

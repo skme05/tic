@@ -4,7 +4,7 @@
    d'origine : l'ordre compte (le responsive vient après les composants). */
 @import './base/tokens-base.css';
 @import './base/atoms.css';
-@import './components/intro-video.css';
+@import './components/site-loader.css';
 @import './layout/header.css';
 @import './sections/hero-studio.css';
 @import './base/section-titles.css';

@@ -42,61 +42,61 @@ export default function SolutionsPage() {
           <p>Chaque plateforme a sa propre page : fonctionnalités, périmètre et prochaines étapes.</p>
         </div>
         <div className="related" style={{ gridTemplateColumns: "repeat(auto-fit,minmax(240px,1fr))" }}>
-          <Link to="/solutions/odoo">
+          <Link viewTransition to="/solutions/odoo">
             <i>ERP</i>
             <b>Odoo</b>
             <span>Intégration, personnalisation et hébergement de l'ERP open source.</span>
           </Link>
           {' '}
-          <Link to="/solutions/paie">
+          <Link viewTransition to="/solutions/paie">
             <i>RH</i>
             <b>Paie</b>
             <span>Bulletins, CNPS et déclarations conformes à la réglementation ivoirienne.</span>
           </Link>
           {' '}
-          <Link to="/solutions/fne">
+          <Link viewTransition to="/solutions/fne">
             <i>FNE</i>
             <b>Facture Normalisée</b>
             <span>Facturation électronique conforme aux exigences de la DGI.</span>
           </Link>
           {' '}
-          <Link to="/solutions/hr">
+          <Link viewTransition to="/solutions/hr">
             <i>HR</i>
             <b>HR Suite</b>
             <span>Dossiers du personnel, entretiens, compétences et organigramme.</span>
           </Link>
           {' '}
-          <Link to="/solutions/school-manager">
+          <Link viewTransition to="/solutions/school-manager">
             <i>EDU</i>
             <b>School Manager</b>
             <span>Inscriptions, notes, bulletins et espace parents.</span>
           </Link>
           {' '}
-          <Link to="/solutions/e-clinique">
+          <Link viewTransition to="/solutions/e-clinique">
             <i>MED</i>
             <b>E-clinique</b>
             <span>Dossier patient, rendez-vous et facturation médicale.</span>
           </Link>
           {' '}
-          <Link to="/solutions/e-garage">
+          <Link viewTransition to="/solutions/e-garage">
             <i>AUTO</i>
             <b>E-garage</b>
             <span>Atelier, devis, pièces et suivi de parc automobile.</span>
           </Link>
           {' '}
-          <Link to="/solutions/e-connaissance">
+          <Link viewTransition to="/solutions/e-connaissance">
             <i>LMS</i>
             <b>E-Connaissance</b>
             <span>Formation interne, quiz, certificats et suivi de progression.</span>
           </Link>
           {' '}
-          <Link to="/solutions/e-emploi">
+          <Link viewTransition to="/solutions/e-emploi">
             <i>JOB</i>
             <b>E-emploi</b>
             <span>Offres, candidatures, présélection et suivi des entretiens.</span>
           </Link>
           {' '}
-          <Link to="/solutions/scraper-pro">
+          <Link viewTransition to="/solutions/scraper-pro">
             <i>DATA</i>
             <b>Scraper Pro</b>
             <span>Collecte, nettoyage et structuration de données à grande échelle.</span>

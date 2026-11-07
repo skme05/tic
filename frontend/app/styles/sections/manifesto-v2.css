@@ -2,14 +2,16 @@
    « Notre manifeste » (accueil) — composant Manifesto
    Section épinglée : 260vh de défilement pour une scène de 100vh.
    ========================================================================== */
-.mf{position:relative;height:260vh;background:#fff}
+.mf{position:relative;height:250vh;background:#FBFBFD}
 .mf__stage{
   position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;
-  display:flex;align-items:center;
+  /* contenu calé en haut, sous l'en-tête : pas de grand vide après le hero */
+  display:flex;align-items:flex-start;padding-top:calc(var(--hdr) + 36px);box-sizing:border-box;
+  /* même fond que le bas du hero : la transition entre les deux est invisible */
   background:
-    radial-gradient(40% 50% at 12% 20%,rgba(29,95,174,.07),transparent 70%),
-    radial-gradient(40% 50% at 90% 85%,rgba(226,69,43,.06),transparent 70%),
-    linear-gradient(160deg,#fff 0%,#f7f9fc 100%)
+    radial-gradient(40% 50% at 12% 30%,rgba(29,95,174,.06),transparent 70%),
+    radial-gradient(40% 50% at 90% 85%,rgba(226,69,43,.05),transparent 70%),
+    #FBFBFD
 }
 
 /* ∞ dessiné au défilement */
