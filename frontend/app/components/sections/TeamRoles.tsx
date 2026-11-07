@@ -89,7 +89,7 @@ export function TeamRoles() {
           <h2 id="team-title">
             Qui ouvre les <em>portes</em>
           </h2>
-          <p>Nos métiers, réunis dans un même atelier à Cocody. Chaque projet mobilise ceux dont il a besoin, autour d'un chef de projet dédié.</p>
+          <p>Une équipe pluridisciplinaire qui conjugue conseil, design, technologie et accompagnement. Chaque projet réunit les expertises dont il a besoin, avec la même exigence de professionnalisme, de la première rencontre à la mise en production.</p>
         </header>
         <ul className="team__grid">
           {ROLES.map((r, i) => (
