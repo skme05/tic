@@ -63,7 +63,7 @@
     linear-gradient(0deg,color-mix(in srgb,var(--c) 26%,transparent) 1.5px,transparent 1.5px) 0 0/100% 34px;
   transform:rotateX(68deg);transform-origin:50% 100%;
   -webkit-mask:linear-gradient(to top,#000 10%,transparent 85%);mask:linear-gradient(to top,#000 10%,transparent 85%);
-  animation:phWalk 3.5s linear infinite;opacity:.55
+  animation:phWalk 3.5s linear infinite;opacity:.3
 }
 @keyframes phWalk{to{background-position:50% 0,0 34px}}
 .ph__vanish{ /* la lumière au bout du couloir */
@@ -84,7 +84,7 @@
   background:linear-gradient(180deg,#1D5FAE,#22A06B,#F4C531,#F28A26,#E2452B) border-box;
   -webkit-mask:linear-gradient(#000 0 0) padding-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;
   mask:linear-gradient(#000 0 0) padding-box exclude,linear-gradient(#000 0 0);
-  opacity:calc(.95 - var(--i) * .2);transform-origin:50% 100%;
+  opacity:calc(.6 - var(--i) * .14);transform-origin:50% 100%;
   transform:
     translate(calc(var(--i) * 24% + var(--mx) * var(--i) * -6px),calc(var(--i) * -10% + var(--my) * var(--i) * -4px))
     scale(var(--s));
@@ -238,8 +238,8 @@
 .ph__print img{width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(1) contrast(1.15) brightness(1.1);mix-blend-mode:multiply;opacity:.75;
   animation:phZoom 1.8s cubic-bezier(.2,.8,.2,1) .2s both}
 .ph__print::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(160deg,rgba(29,95,174,.15),rgba(10,24,48,.55))}
-.ph__trace{position:absolute;inset:0;z-index:2;width:100%;height:100%;color:#DCEBFF;pointer-events:none}
-.ph__trace :is(path,line,rect,circle){fill:none;stroke:currentColor;stroke-width:1.2;stroke-dasharray:1;stroke-dashoffset:1;
+.ph__trace{position:absolute;inset:0;z-index:2;width:100%;height:100%;color:#DCEBFF;opacity:.6;pointer-events:none}
+.ph__trace :is(path,line,rect,circle){fill:none;stroke:currentColor;stroke-width:.8;stroke-dasharray:1;stroke-dashoffset:1;
   animation:phDraw 1.4s cubic-bezier(.6,0,.2,1) forwards;animation-delay:calc(.6s + var(--k,0) * 70ms)}
 .ph__trace .svc__axis{stroke-dasharray:4 4;stroke-dashoffset:0;opacity:0;animation:phFade .6s 1.6s forwards}
 .ph__trace .svc__vp{fill:#F4C531;stroke:none;opacity:0;animation:phFade .4s 2s forwards}
@@ -261,7 +261,7 @@
   animation:phTunnel 14s linear infinite;animation-delay:calc(var(--i) * -2s);opacity:0}
 .ph__tunnel i:nth-child(5n+1){--tc:#1D5FAE}.ph__tunnel i:nth-child(5n+2){--tc:#22A06B}.ph__tunnel i:nth-child(5n+3){--tc:#F4C531}
 .ph__tunnel i:nth-child(5n+4){--tc:#F28A26}.ph__tunnel i:nth-child(5n){--tc:#E2452B}
-@keyframes phTunnel{0%{scale:.12;opacity:0}15%{opacity:.75}100%{scale:1.15;opacity:0}}
+@keyframes phTunnel{0%{scale:.12;opacity:0}15%{opacity:.45}100%{scale:1.15;opacity:0}}
 .ph--tunnel .ph__aura{-webkit-mask:radial-gradient(ellipse 50% 60% at 50% 50%,#000,transparent 75%);mask:radial-gradient(ellipse 50% 60% at 50% 50%,#000,transparent 75%)}
 .ph__tunnel-badge{display:flex;align-items:center;gap:0;margin-top:30px}
 .ph__avatar{position:relative;z-index:1;width:58px;height:58px;border-radius:50%;overflow:hidden;border:3px solid #fff;box-shadow:0 8px 20px rgba(15,17,21,.15)}

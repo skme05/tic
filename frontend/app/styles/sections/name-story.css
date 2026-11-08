@@ -28,7 +28,7 @@
 .story__art::before{content:"";position:absolute;inset:0;pointer-events:none;
   background:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px) 0 0/40px 40px,linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px) 0 0/40px 40px}
 .story__svg{position:absolute;inset:0 0 50px;width:100%;height:calc(100% - 50px)}
-.story__lines :is(line,rect,path){fill:none;stroke:#7FA8E8;stroke-width:1.2;stroke-dasharray:1;stroke-dashoffset:1;opacity:.85}
+.story__lines :is(line,rect,path){fill:none;stroke:#7FA8E8;stroke-width:.8;stroke-dasharray:1;stroke-dashoffset:1;opacity:.55}
 .story__art.in .story__lines :is(line,rect,path){animation:storyDraw 1s cubic-bezier(.6,0,.2,1) forwards;animation-delay:calc(var(--k) * 70ms)}
 @keyframes storyDraw{to{stroke-dashoffset:0}}
 .story__axis{stroke:#7FA8E8;stroke-width:1;stroke-dasharray:5 5;opacity:0;transition:opacity .8s 1.4s}
@@ -43,7 +43,7 @@
 /* les portes s'allument une à une */
 .story__door{fill:var(--c);opacity:0;filter:drop-shadow(0 0 6px var(--c))}
 .story__art.in .story__door{animation:storyDoor .6s ease-out forwards;animation-delay:calc(2s + var(--i) * .35s)}
-@keyframes storyDoor{to{opacity:.55}}
+@keyframes storyDoor{to{opacity:.35}}
 .story__cote line{stroke:#F4C531;stroke-width:1;opacity:.8}
 .story__cote text{fill:#DCE6F5;font:600 9.5px/1 var(--sans);letter-spacing:.16em}
 .story__cote{opacity:0;transition:opacity .8s 1.6s}

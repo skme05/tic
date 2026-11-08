@@ -14,7 +14,7 @@ const GRID = 14; // pas de la grille de routage (px)
 const GAP = 3; // demi-écart entre les deux rails (px)
 const LIFE = 1100; // durée de vie d'un tracé (ms)
 const DRAW = 160; // durée du tracé d'un tronçon (ms)
-const ALPHA = 0.4; // opacité maximale
+const ALPHA = 0.22; // opacité maximale
 const DOOR_EVERY = 84; // une arche tous les N px de piste
 const AXIS_EVERY = 210; // un axe pointillé tous les N px de piste
 const SPAN = 520; // px de piste pour parcourir le dégradé TIC
@@ -147,7 +147,7 @@ export function CursorCorridor() {
           const ny = ((it.x2 - it.x1) / len) * GAP;
           const ex = it.x1 + (it.x2 - it.x1) * prog;
           const ey = it.y1 + (it.y2 - it.y1) * prog;
-          ctx.lineWidth = 0.8;
+          ctx.lineWidth = 0.6;
           ctx.beginPath();
           ctx.moveTo(it.x1 + nx, it.y1 + ny);
           ctx.lineTo(ex + nx, ey + ny);
@@ -156,7 +156,7 @@ export function CursorCorridor() {
           ctx.stroke();
         } else if (it.kind === 'via') {
           /* pastille de soudure : anneau + point */
-          ctx.lineWidth = 0.8;
+          ctx.lineWidth = 0.6;
           ctx.beginPath();
           ctx.arc(it.x, it.y, 2 + 3 * prog, 0, Math.PI * 2);
           ctx.stroke();
@@ -173,7 +173,7 @@ export function CursorCorridor() {
           const ly = by - it.ty * w;
           const rx = bx + it.tx * w;
           const ry = by + it.ty * w;
-          ctx.lineWidth = 0.7;
+          ctx.lineWidth = 0.55;
           ctx.beginPath();
           ctx.moveTo(lx, ly);
           ctx.lineTo(lx + it.nx * h, ly + it.ny * h);
