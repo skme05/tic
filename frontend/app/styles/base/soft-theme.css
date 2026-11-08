@@ -1,0 +1,106 @@
+/* ==========================================================================
+   VERSION SOFT — moins de couleurs dans le contenu (chargée en tout dernier)
+   Principe :
+   - les 5 couleurs du logo restent réservées aux endroits stratégiques :
+     logo, loader, filet du menu, en-têtes des pages (hero), page 404,
+     liste des services (une couleur par porte), inscription du pied de page ;
+   - dans le contenu, un seul accent : le bleu TIC, avec des gris neutres ;
+   - les boutons principaux passent en encre (noir bleuté), bleu au survol.
+   Pour revenir à la version colorée : retirer l'import de ce fichier.
+   ========================================================================== */
+:root{
+  --soft-accent:#1D5FAE;
+  --soft-accent-2:#3E7FD8;
+  --soft-accent-light:#8FBCF6;
+  --soft-tint:#EEF4FC;
+  --soft-line:#D6E2F1;
+  --soft-grad:linear-gradient(90deg,#1D5FAE,#4F8FE0);
+  --soft-grad-v:linear-gradient(180deg,#1D5FAE,#4F8FE0);
+  /* les dégradés « spectre » du contenu deviennent bleus */
+  /* spectre d'origine, conservé pour les endroits stratégiques */
+  --tic-brand-spectrum:linear-gradient(90deg,#1D5FAE,#1E8F5E 30%,#B88A00 52%,#D9631A 74%,#C9361C);
+  --tic-spectrum:var(--soft-grad);
+  --tic-spectrum-light:linear-gradient(90deg,#8FBCF6,#C9DDF8);
+}
+
+/* ── 1. mot mis en avant dans les titres : bleu uni ── */
+:is(h1,h2,h3,blockquote,.ph__title) em,
+.story .story__quote em,
+.svc .svc__title em,
+.plog__brand h1 em{
+  background:none!important;-webkit-background-clip:border-box!important;background-clip:border-box!important;
+  color:var(--soft-accent)!important;-webkit-text-fill-color:currentColor
+}
+:is(.corridor,.vpanel,.cta,.cmo__card,.sec__hd--w,.ftr,.mnav) :is(h1,h2,h3) em{color:var(--soft-accent-light)!important}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .svc .svc__title em{color:var(--soft-accent-light)!important}}
+:root[data-theme="dark"] .svc .svc__title em{color:var(--soft-accent-light)!important}
+
+/* ── 2. couleurs par élément (services, solutions, pôles, métiers…) : toutes bleues ── */
+[style*="--c:"]:not(.ph,.nf *,.svc__card),[style*="--c :"]:not(.ph,.svc__card){--c:var(--soft-accent)!important}
+[style*="--tc:"]{--tc:var(--soft-accent)!important}
+[style*="--c2:"]{--c2:var(--soft-accent)!important}
+.lab__bench,.pl,.team__item,.terr__pairs li,.ctf__chip,.nf__links a{--c:var(--soft-accent)}
+
+/* ── 3. liserés des cartes : fin et neutre, bleu au survol ── */
+:is(.sol,.solcase,.solstat,.solstep,.solfeat__c,.related > a,.pole,.st,.hist__card,.pstat,.q,.mtl__card){
+  --tic-bar:var(--soft-line)!important;border-top-width:3px
+}
+:is(.sol,.related > a,.pole,.mtl__card,.q):hover{--tic-bar:var(--soft-accent)!important}
+.why__bar{background:var(--soft-line)!important}
+
+/* ── 4. boutons ── */
+.btn--red{background:var(--ink);box-shadow:0 12px 26px rgba(15,17,21,.18)}
+.btn--red:hover{background:var(--soft-accent);box-shadow:0 16px 34px rgba(29,95,174,.28)}
+
+/* ── 5. dégradés décoratifs du contenu → bleu ── */
+
+.ctad__frame{background:var(--soft-grad-v) border-box!important}
+.ctad__leaf i{background:#8FBCF6!important;box-shadow:0 0 10px #8FBCF6!important}
+.terr__visual::before{background:var(--soft-grad) border-box!important;opacity:.35}
+.ctad__room{background:linear-gradient(180deg,#F4F8FE,#C9DDF8 55%,#8FBCF6)!important}
+.ctad__spill{background:linear-gradient(to bottom,rgba(143,188,246,.5),transparent)!important}
+.ctad__glow{background:radial-gradient(ellipse at center,rgba(220,232,250,.5),rgba(143,188,246,.18) 45%,transparent 70%)!important}
+
+.terr__stat b{background:none!important;-webkit-text-fill-color:#fff;color:#fff}
+.tf__card::after,.ctf__progress span,.ctf__send::before,.story__quote::before,.mfx__track i,.lab__bar,.mnav__l.is-on::before{background:var(--soft-grad-v)!important}
+.ctf__progress span{background:var(--soft-grad)!important}
+.mfx__mark::after{background:var(--soft-grad)!important;opacity:.35!important}
+.mfx__sign span{background:var(--soft-accent)!important}
+.mnav__l.is-on .mnav__lbl{background:none!important;color:var(--soft-accent)!important;-webkit-text-fill-color:currentColor}
+.story__beats li:nth-child(3) .story__n{background:var(--soft-accent)!important}
+.story__beats li:nth-child(2) .story__n{color:var(--soft-accent)!important}
+.story__door{fill:#8FBCF6!important;filter:drop-shadow(0 0 6px rgba(143,188,246,.8))!important}
+.story__sun stop{stop-color:#DCE8F8}
+.team__badge::before{background:var(--soft-accent)!important}
+.lab__steps li::before{color:var(--soft-accent)}
+.svc{--svc-spectrum:var(--soft-grad)!important}
+
+/* ── 6. halos et teintes de fond : un seul ton ── */
+.plog__glow{background:radial-gradient(30% 40% at 25% 40%,rgba(29,95,174,.12),transparent 70%),radial-gradient(30% 40% at 80% 60%,rgba(29,95,174,.08),transparent 70%)!important}
+.tf__preview{background:linear-gradient(155deg,#2B78CF,#1D5FAE 55%,#164B8A)!important}
+.why,.mfx{--soft:1}
+
+/* ── 7. étoiles des témoignages : dorées mais discrètes ── */
+.tf .tf__stars button:is(.on,.is-hov) svg{fill:#E8B23A}
+
+/* ── 8. derniers accents multicolores du contenu ── */
+.txt-spectrum,.txt-spectrum-dk{background:none!important;-webkit-background-clip:border-box!important;background-clip:border-box!important;color:var(--soft-accent)!important;-webkit-text-fill-color:currentColor}
+.mtl__n[style]{color:var(--soft-accent)!important}
+.mtl__duo span[style]:nth-child(2){background:var(--soft-accent-light)!important}
+.mtl__walker{animation-name:mtlWalkSoft!important;background:var(--soft-accent)!important;box-shadow:0 0 14px 3px rgba(29,95,174,.35)!important}
+@keyframes mtlWalkSoft{0%{left:0}100%{left:calc(100% - 12px)}}
+
+/* ── 9. le rouge décoratif du contenu devient bleu (les erreurs gardent leur rouge, codé en dur) ── */
+:root{--red:#1D5FAE;--red-l:#3E7FD8;--red-d:#164B8A;--red-bg:#EEF4FC;--red-bg2:#DCE8F8;--sh-red:0 12px 30px rgba(29,95,174,.22)}
+.ctd__pin{background:var(--soft-accent)!important;box-shadow:0 0 0 4px rgba(29,95,174,.25)!important}
+.ctd__pin::after{border-color:var(--soft-accent)!important}
+
+/* ── 10. endroits stratégiques : on garde les couleurs du logo ── */
+/* en-têtes des pages (hero), accueil compris, et page 404 */
+:is(.ph,.hs,.nf) :is(h1,h2) em,
+.ph .ph__title em{
+  background:var(--tic-brand-spectrum)!important;-webkit-background-clip:text!important;background-clip:text!important;
+  color:transparent!important;-webkit-text-fill-color:transparent!important
+}
+.ph .btn--red,.nf .btn--red{background:#B91C1C;box-shadow:0 12px 30px rgba(185,28,28,.26)}
+.ph .btn--red:hover,.nf .btn--red:hover{background:#8F1414;box-shadow:0 18px 38px rgba(185,28,28,.32)}
