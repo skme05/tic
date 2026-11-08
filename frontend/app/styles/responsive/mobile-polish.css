@@ -1,0 +1,50 @@
+/* ==========================================================================
+   Finitions mobile (chargé en dernier dans chaque bundle)
+   Interlignes, tailles minimales, zones tactiles et rythme vertical, pour
+   tous les composants à la fois.
+   ========================================================================== */
+@media (max-width:640px){
+  /* ── rythme et lisibilité des textes ── */
+  body{-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility}
+  :is(h1,h2){line-height:1.14!important;letter-spacing:-.022em!important;text-wrap:balance}
+  h3{line-height:1.25!important;text-wrap:balance}
+  main :is(p,li,blockquote,figcaption,dd){line-height:1.68}
+  main :is(p,li){text-wrap:pretty}
+  /* titres un peu plus petits pour éviter les mots isolés et les coupures */
+  :is(.ph__title,.hs__title){font-size:clamp(31px,8.6vw,38px)!important}
+  main h2{font-size:clamp(27px,7.4vw,34px)}
+  /* espace entre un titre et son texte */
+  main :is(h1,h2) + p{margin-top:12px}
+
+  /* petits libellés (étiquettes, sur-titres) : jamais sous 11,5 px */
+  :is(.tag,.tf__pk,.lab__tab small,.lab__live,.lab__blip,.story__origin-k,.mui__pill,.svc__eyebrow,.team__top,.ph__eyebrow,.band__hd p,.svc__k,.pl__k,.team__k,.terr__k,.story__k,.lab__cmd){
+    font-size:11.5px!important;line-height:1.4!important}
+  :is(.svc__eyebrow,.tf__pk,.ph__eyebrow){padding-block:8px}
+
+  /* ── zones tactiles : 44 px minimum ── */
+  :is(.hs__link,.ctad__link,.pole__more,.svc__more,.ftr__more,.pl__go,.nf__links a,.solnav a,.solnav__cta,.lab__tab,.ctd__copy){
+    min-height:44px;display:inline-flex;align-items:center}
+  .ftr__col{gap:2px}
+  .ftr__col :is(a,span){min-height:40px;display:inline-flex;align-items:center;padding-block:6px;line-height:1.4}
+  .ftr__col h2{margin-bottom:6px}
+  .ftr__bar a{display:inline-flex;align-items:center;min-height:40px}
+  .hdr__act .btn{min-height:42px}
+  .plog__eye{width:44px;height:44px}
+  .ctd__copy{padding-inline:14px}
+
+  /* ── rythme vertical des sections ── */
+  :is(.sec,.svc__in,.lab,.team,.terr,.story,.pl,.ctd,.why,.mtl,.cmo,.mfx,.ndoors){padding-top:64px;padding-bottom:64px}
+  :is(.sec__hd,.svc__head,.team__hd,.pl__hd){margin-bottom:28px}
+
+  /* ── cartes : un peu plus d'air à l'intérieur ── */
+  :is(.svc__card,.pl__offers :is(a,div),.terr__pairs li,.team__badge){padding:22px 20px}
+  .svc__card ul{gap:14px}
+
+  /* ── boutons pleine largeur dans les blocs d'action ── */
+  :is(.ph__actions,.nf__actions,.svc__act) > :is(a,button){flex:1 1 100%;justify-content:center}
+}
+@media (max-width:640px){
+  :is(.ctad__t small,.ctd__t small,.ctad__badge){font-size:11.5px}
+  .ctd__live{line-height:1.45}
+  .ctd__steps li{line-height:1.5}
+}
